@@ -1,0 +1,26 @@
+@{ Layout = "~/Views/Shared/_lightLayout.cshtml"; }
+
+@model Competition.Web.Models.IndexViewModel 
+@{ 
+    ViewBag.Title = "Manage"; 
+} 
+ 
+<p>@ViewBag.StatusMessage</p>
+<div class="accountHeader">
+    <h2>修改账户设置</h2>
+</div>
+<ul>
+    <li>
+        密码:
+ 
+        [
+        @if (Model.HasPassword) { 
+            @Html.ActionLink("更改密码", "ChangePassword", "Account") 
+        } else { 
+            @Html.ActionLink("Create", "SetPassword") 
+        } 
+        ]
+ 
+    </li>
+  
+</ul>

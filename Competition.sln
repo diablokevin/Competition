@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Competition.EF", "Competition.EF\Competition.EF.csproj", "{A2DF1A9F-28C9-4F2A-AF1A-256AC48CA353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Competition.Web", "Competition.Web\Competition.Web.csproj", "{8C7B02AF-8096-4158-ACD5-81B853A6A77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2DF1A9F-28C9-4F2A-AF1A-256AC48CA353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DF1A9F-28C9-4F2A-AF1A-256AC48CA353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DF1A9F-28C9-4F2A-AF1A-256AC48CA353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DF1A9F-28C9-4F2A-AF1A-256AC48CA353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7B02AF-8096-4158-ACD5-81B853A6A77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7B02AF-8096-4158-ACD5-81B853A6A77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7B02AF-8096-4158-ACD5-81B853A6A77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7B02AF-8096-4158-ACD5-81B853A6A77D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CFA4166-E561-4BA5-86B5-1E13025A0A36}
+	EndGlobalSection
+EndGlobal

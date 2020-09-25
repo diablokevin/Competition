@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_lightLayout.cshtml";
+}
+
+<script>
+    function OnSelectedCompanyChanged(s, e) {
+        var s = ASPxClientControl.GetControlCollection().GetByName("CompetitorId");
+        s.PerformCallback();
+
+    }
+
+    function CompetitorComboBox_BeginCallback(s, e) {
+        e.customArgs["id"] = ASPxClientControl.GetControlCollection().GetByName("CompanyId").GetValue();
+    }
+</script>
+
+@if (HttpContext.Current.User.IsInRole("管理员"))
+{
+    @Html.Action("ScoreGridViewPartial")
+}
+
+@if (HttpContext.Current.User.IsInRole("考官"))
+{
+    <h2>待评分</h2>
+    @Html.Action("ScheduleJudgeGridViewPartial","Schedule")
+    <p></p>
+    <h2>已完成</h2>
+    @Html.Action("ScoreFinishGridViewPartial", "Score")
+
+}
+
+@if (HttpContext.Current.User.IsInRole("选手"))
+{
+
+
+    @Html.Action("ScoreCompetitorGridViewPartial")
+
+}
+
+
+

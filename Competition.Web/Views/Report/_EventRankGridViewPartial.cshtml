@@ -1,0 +1,48 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "EventRankGridView";
+        settings.CallbackRouteValues = new { Controller = "Report", Action = "EventRankGridViewPartial" };
+
+
+        settings.KeyFieldName = "Rank";
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 100;
+        settings.Settings.ShowGroupPanel = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        string eventname = ViewBag.EventName;
+        string pro = ViewBag.Pro;
+        settings.SettingsExport.FileName = eventname+pro ;
+
+
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
+            t.Items.Add(GridViewToolbarCommand.ExportToXls);
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
+            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
+
+        });
+
+        settings.ClientSideEvents.BeginCallback = "EventRankGridView_BeginCallback";
+        settings.Columns.Add("Rank","排名");
+        settings.Columns.Add("EventName","项目");
+        settings.Columns.Add("Competitor_Name","姓名");
+        settings.Columns.Add("Competitor_Company", "公司");
+        settings.Columns.Add("Competitor_Staffid", "员工号");
+        settings.Columns.Add("Competitor_Pro", "专业");
+
+        settings.Columns.Add("Score", "分数");
+    });
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,51 @@
+@{ Layout = "~/Views/Shared/_lightLayout.cshtml"; }
+@model Competition.Web.Models.LoginModel
+<div class="accountHeader">
+    <h2>登录</h2>
+    <p>
+        请输入用户名和密码.
+       @* 如果没有账户请 @Html.ActionLink("注册", "Register").*@
+    </p>
+    <p style="color:red">@ViewBag.ErrorMessage</p>
+</div>
+@using(Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    @Html.DevExpress().TextBoxFor(m => m.UserName, tb => {
+        tb.Properties.Caption = "用户名";
+        tb.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+        tb.ShowModelErrors = true;
+        tb.Properties.ValidationSettings.Display = Display.Dynamic;
+        tb.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+        tb.Properties.ValidationSettings.ErrorTextPosition = ErrorTextPosition.Bottom;
+    }).GetHtml()
+    
+
+    @Html.DevExpress().TextBoxFor(m => m.Password, tb => {
+        tb.Properties.Caption = "密码";
+        tb.Properties.Password = true;
+        tb.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+        tb.ShowModelErrors = true;
+        tb.Properties.ValidationSettings.Display = Display.Dynamic;
+        tb.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+        tb.Properties.ValidationSettings.ErrorTextPosition = ErrorTextPosition.Bottom;
+    }).GetHtml()
+    
+    @Html.DevExpress().CheckBox(cb => {
+        cb.Name = "RememberMe";
+        cb.Text = "记住用户名?";
+    }).GetHtml()
+    <br />
+    @Html.DevExpress().Button(b => {
+        b.Name = "Button";
+        b.Text = "登录";
+        b.UseSubmitBehavior = true;
+    }).GetHtml()
+}
+ 
+@* Enable this once you have account confirmation enabled for password reset functionality
+<br />
+@Html.ActionLink("Forgot your password?", "ForgotPassword")
+*@
+<br />
+@*@Html.Partial("_ExternalLoginsListPartial", new ScoringSystem.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@

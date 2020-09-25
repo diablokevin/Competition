@@ -1,0 +1,167 @@
+@{
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "ScoreGridView";
+        settings.CallbackRouteValues = new
+        {
+            Controller = "Score",
+            Action = "ScoreGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsPager.PageSize = 50;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.AdaptivePriority = 3;
+        settings.CommandColumn.MinWidth = 100;
+
+
+        settings.CommandColumn.Width = Unit.Percentage(18);
+
+
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+
+        settings.Columns.Add(c=> {
+            c.FieldName = "Schedule.Event.Name";
+            c.Caption = "项目";
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "Schedule.Competitor.Name";
+            c.Caption = "选手";
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "Schedule.Competitor.Company.Name";
+            c.Caption = "公司";
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "TimeConsume";
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "Mark";
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "Judge.Name";
+            c.Caption = "裁判";
+            c.AdaptivePriority = 4;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "JudgeTime";
+            c.AdaptivePriority = 4;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "ModifyTime";
+            c.AdaptivePriority = 4;
+        });
+
+
+        ////settings.Columns.Add(c =>
+        ////{
+        ////    c.FieldName = "TimeConsume";
+        ////    c.EditorProperties().TimeEdit(p =>
+        ////    {
+        ////        //p.AllowUserInput = true;
+        ////        //p.AllowNull = true;
+        ////        p.EditFormatString = "hh:mm:ss";
+
+        ////        p.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+        ////        //p.ValidationSettings.Display = Display.Static;
+        ////    });
+
+
+        ////});
+        //settings.Columns.Add(c =>
+        //{
+        //    c.FieldName = "TimeConsume_minute";
+        //    c.AdaptivePriority = 1;
+        //    c.MinWidth = 200;
+
+        //    // c.Width = Unit.Percentage(30);
+        //    c.EditorProperties().SpinEdit(p =>
+        //    {
+        //        p.NumberType = SpinEditNumberType.Integer;
+        //        p.MinValue = 0;
+        //        p.MaxValue = 59;
+        //    });
+        //});
+        //settings.Columns.Add(c =>
+        //{
+        //    c.FieldName = "TimeConsume_second";
+        //    c.AdaptivePriority = 2;
+        //    c.MinWidth = 200;
+
+        //    // c.Width = Unit.Percentage(30);
+        //    c.EditorProperties().SpinEdit(p =>
+        //    {
+        //        p.NumberType = SpinEditNumberType.Integer;
+        //        p.MinValue = 0;
+        //        p.MaxValue = 59;
+        //    });
+        //});
+        //settings.Columns.Add(c =>
+        //{
+        //    c.FieldName = "Score";
+        //    //   c.AdaptivePriority = 3;
+        //    //c.MinWidth = 1000;
+        //    // c.Width = Unit.Percentage(30);
+        //    c.EditorProperties().SpinEdit(p =>
+        //    {
+        //        p.NumberType = SpinEditNumberType.Integer;
+        //        p.MinValue = 0;
+        //        p.MaxValue = 100;
+
+        //    });
+
+
+        //});
+
+        settings.SetEditFormTemplateContent(c =>
+        {
+            Html.RenderAction("ScoreEditFormPartial", new { Id = c.KeyValue });
+        });
+
+
+
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

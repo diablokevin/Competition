@@ -1,0 +1,42 @@
+@model List<Competition.Web.Models.Schedule>
+
+<h5>
+
+    <span>@Model.FirstOrDefault().Competitor.Race_num</span>
+    <span> | </span>
+    <span>@Model.FirstOrDefault().Competitor.Name</span>
+    <span> | </span>
+    <span>@Model.FirstOrDefault().Competitor.StaffId</span>
+</h5>
+<p>各项成绩将在项目完成后4小时后公布</p>
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "ScoreCompetitorGridView";
+        settings.CallbackRouteValues = new { Controller = "Score", Action = "ScoreCompetitorGridViewPartial" };
+
+        
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+
+        settings.Columns.Add("Event.Name");
+        settings.Columns.Add("PlanBeginTime");
+        settings.Columns.Add("PlanEndTime");
+        settings.Columns.Add("TimeCosumeAVG");
+        settings.Columns.Add("MarkAVG");
+
+
+
+    });
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,92 @@
+<div class="leftPanel">
+    @* DXCOMMENT: Configure the left panel's menu *@
+    @Html.DevExpress().NavBar(settings => {
+    settings.Name = "LeftNavBar";
+
+    settings.AutoCollapse = true;
+    settings.EnableAnimation = false;
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.ControlStyle.Border.BorderWidth = System.Web.UI.WebControls.Unit.Pixel(0);
+    settings.ControlStyle.Paddings.Padding = System.Web.UI.WebControls.Unit.Pixel(0);
+    settings.ClientSideEvents.ItemClick = "function(s,e){ GotoPage(s,e);}";
+    settings.AllowSelectItem = true;
+
+    string pagename = ViewBag.PageName;
+    switch (pagename)
+    {
+        case "Main":
+
+            settings.Groups.Add(group =>
+            {
+                group.Text = "我是裁判";
+                group.Items.Add("评分");
+                group.Items.Add("Item 2");
+                group.Items.Add("Item 3");
+                group.Items.Add("Item 4");
+                group.Items.Add("Item 5");
+            });
+            settings.Groups.Add(group =>
+            {
+                group.Text = "我是选手";
+                group.Items.Add("查看个人赛程");
+                group.Items.Add("查看个人成绩");
+
+            });
+            break;
+        case "Report":
+            settings.Groups.Add(group =>
+            {
+                group.Text = "公司成绩";
+                group.Items.Add("公司总成绩排名","report/companyrank");
+               
+
+            });
+            settings.Groups.Add(group =>
+            {
+                group.Text = "个人成绩";
+                group.Items.Add("个人排名(ME)","report/personalMERank");
+                group.Items.Add("个人排名(AV)", "report/personalAVRank");
+
+            });
+            settings.Groups.Add(group =>
+            {
+                group.Text = "项目成绩";
+                group.Items.Add("单项排名(ME)", "report/EventRank_ME");
+                group.Items.Add("单项排名(AV)", "report/EventRank_AV");
+
+            });
+            break;
+        case "Setting":
+            settings.Groups.Add(group =>
+            {
+                group.Text = "用户设置";
+                group.Name = "userSetting";
+                group.Items.Add("角色","role");
+                group.Items.Add("用户","account");
+
+            });
+            settings.Groups.Add(group =>
+            {
+                group.Text = "赛事设置";
+                group.Name = "eventSetting";
+                group.Items.Add("考核项目","event");
+                group.Items.Add("项目赛程", "schedule");
+                group.Items.Add("评估细则", "eventcriterias");
+
+            });
+            settings.Groups.Add(group =>
+            {
+                group.Text = "人员设置";
+                group.Name = "peopleSetting";
+                group.Items.Add("公司","company");
+                group.Items.Add("选手","competitor");
+                group.Items.Add("裁判","judge");
+            });
+            break;
+        default:
+            break;
+    }
+
+}).GetHtml()
+</div>
+
