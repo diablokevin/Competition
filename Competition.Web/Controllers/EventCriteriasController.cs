@@ -101,5 +101,11 @@ namespace Competition.Web.Controllers
             }
             return PartialView("_EventCriteriasGridViewPartial", model.ToList());
         }
+
+        public ActionResult EventCriteriaEditForm(int EventId)
+        {
+            var model = db.EventCriterias.Where(c=>c.EventId==EventId);          
+            return View("EventCriteriaEditForm", model.ToList());
+        }
     }
 }

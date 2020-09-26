@@ -298,7 +298,7 @@ namespace Competition.EF.Models
 
         public virtual Judge Judge { get; set; }
         public virtual Schedule Schedule { get; set; }
-        [Required]
+      
         public virtual ICollection<ScoreDetail> ScoreDetail { get; set; }
     }
     public class EventCriteria

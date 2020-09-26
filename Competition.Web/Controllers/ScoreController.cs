@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Competition.EF.Models;
+using Competition.Web.Models;
 using DevExpress.Web.Mvc;
 
 namespace Competition.Web.Controllers
@@ -252,13 +253,24 @@ namespace Competition.Web.Controllers
 
             if (ScheduleId != null)
             {
-                var model = new Score();
-                model.ScheduleId = ScheduleId.Value;
-                model.Schedule = db.Schedules.Find(ScheduleId);
-
-                return PartialView("_ScoreJudgeEditFormPartial", model ?? new Score());
+                var model = new ScoreDetailViewModel();
+                model.Score = new Score();
+                model.ScoreDetails = new List<ScoreDetail>();
+                var schedule = db.Schedules.Find(ScheduleId);
+                model.Score.ScheduleId = ScheduleId.Value;
+                model.Score.Schedule = schedule;
+                var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
+                foreach(EventCriteria criteria in criterias)
+                {
+                    ScoreDetail detail = new ScoreDetail();
+                    detail.EventCriteriaId = criteria.Id;
+                    detail.EventCriteria = criteria;
+                    model.ScoreDetails.Add(detail);
+                   
+                }
+                return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
             }
-            return PartialView("_ScoreJudgeEditFormPartial", new Score());
+            return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
 
         }
         [ValidateInput(false)]

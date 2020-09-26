@@ -1,15 +1,38 @@
-﻿@model Competition.EF.Models.Score
+﻿@model Competition.Web.Models.ScoreDetailViewModel
 @{
     Layout = "~/Views/Shared/_lightLayout.cshtml";
 }
 
-<h3>
-    <span> @Model.Schedule.Competitor.Name</span>
-    <span> | </span>
-    <span> @Model.Schedule.Competitor.Company.Name</span>
-</h3>
-<p>项目：@Model.Schedule.Event.Name</p>
+    <h3>
+        <span> @Model.Score.Schedule.Competitor.Race_num</span>
+        <span> @Model.Score.Schedule.Competitor.Name</span>
+        <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
 
+        <span> | </span>
+        <span> @Model.Score.Schedule.Competitor.Company.Name</span>
+    </h3>
+<p>项目：@Model.Score.Schedule.Event.Name</p>
+<h4>
+    <span>得分：</span>
+    <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s=>s.Mark) </span>
+</h4>
+<script>
+    function showscore(e) {
+       
+        
+    }
+    function reCalScore() {
+        var len =@Model.ScoreDetails.Count;
+        var sum =Number(0);
+        //js中定义用字符串拼接起来的变量名的变量  https://www.cnblogs.com/vlone/p/4602072.html
+        for (i = 0; i < len; i++) {
+            sum += Number(window["ScoreDetails" + i].lastValue);
+        }
+        $("#ScoreSum").text(sum);
+        
+    }
+
+</script>
 @using (Html.BeginForm("ScoreJudgeEditFormPartial", "Score", FormMethod.Post, new { @class = "edit_form" }))
 {
     @Html.Hidden("ScheduleId")
@@ -20,58 +43,14 @@
     flSettings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
     flSettings.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 700;
     flSettings.ColCount = 1;
-    //flSettings.Items.Add(i =>
-    //{
-    //    i.FieldName = "EventId";
-
-    //    i.NestedExtension().ComboBox(s =>
-    //    {
-    //        s.Properties.TextField = "Name";
-    //        s.Properties.ValueField = "Id";
-    //        s.Properties.ValueType = typeof(int);
-    //        s.Properties.DataSource = ViewBag.Eventlist;
-
-    //    });
-    //});
-
-    //flSettings.Items.Add(i => i.Competitor.CompanyId, c => {
-
-
-    //    c.NestedExtension().ComboBox(s => {
-    //        s.Name = "CompanyId";
-    //        s.Properties.TextField = "Name";
-    //        s.Properties.ValueField = "Id";
-    //        s.Properties.ValueType = typeof(int);
-    //        s.Properties.DataSource = ViewBag.Companylist;
-    //        s.Properties.ClientSideEvents.SelectedIndexChanged = "OnSelectedCompanyChanged";
-    //    });
-    //});
-
-    //flSettings.Items.Add(i =>i.CompetitorId, c =>
-    //{
-
-    //    c.NestedExtension().ComboBox(s =>
-    //    {
-    //        s.Name  = "CompetitorId";
-    //        s.Properties.TextField = "Name";
-    //        s.Properties.ValueField = "Id";
-    //        s.Properties.ValueType = typeof(int);
-
-    //        s.CallbackRouteValues = new { Controller = "Competitor", Action = "GetCompetitorsByCompanyId"};
-    //        s.Properties.ClientSideEvents.BeginCallback = "CompetitorComboBox_BeginCallback";
-    //    });
-    //});
-
-
-    //flSettings.Items.AddEmptyItem();
     flSettings.Items.AddGroupItem(g => {
 
-        g.ColCount = 1;
-
+        g.ColCount = 2;
+        g.Width = Unit.Percentage(50);
         //g.GroupBoxDecoration = GroupBoxDecoration.Box;
         g.Caption = "用时";
         // g.ShowCaption = DefaultBoolean.True;
-        g.Items.Add(i => i.TimeConsume_minute, c => {
+        g.Items.Add(i => i.Score.TimeConsume_minute, c => {
             c.Caption = "分";
             c.NestedExtension().SpinEdit(s =>
             {
@@ -80,7 +59,7 @@
                 s.Properties.MaxValue = 59;
             });
         });
-        g.Items.Add(i => i.TimeConsume_second, c =>
+        g.Items.Add(i => i.Score.TimeConsume_second, c =>
         {
             c.Caption = "秒";
             c.NestedExtension().SpinEdit(s =>
@@ -92,38 +71,106 @@
         });
     });
 
-    //flSettings.Items.Add(i => i.TimeConsume_minute, c => {
-    //    c.Caption = "分";
-    //    c.ColSpan = 1;
 
-    //    c.NestedExtension().SpinEdit(s => {
-    //        s.Properties.NumberType = SpinEditNumberType.Integer;
-    //        s.Properties.MinValue = 0;
-    //        s.Properties.MaxValue = 59;
-    //    });
-    //});
 
-    //flSettings.Items.Add(i => i.TimeConsume_second, c =>
+    //把分数放到页面最上面
+    //flSettings.Items.Add(i => i.Score.Mark, c =>
     //{
-    //    c.Caption = "秒";
+
     //    c.NestedExtension().SpinEdit(s =>
     //    {
-    //        s.Properties.NumberType = SpinEditNumberType.Integer;
+    //        s.Properties.NumberType = SpinEditNumberType.Float;
     //        s.Properties.MinValue = 0;
-    //        s.Properties.MaxValue = 59;
+    //        s.Properties.MaxValue = 100;
     //    });
     //});
 
-    flSettings.Items.Add(i => i.Mark, c =>
+    flSettings.Items.AddGroupItem(g =>
     {
-
-        c.NestedExtension().SpinEdit(s =>
+        g.ColCount = 3;
+        g.Caption = "评分细则";
+        
+        g.Items.Add(c =>
         {
-            s.Properties.NumberType = SpinEditNumberType.Float;
-            s.Properties.MinValue = 0;
-            s.Properties.MaxValue = 100;
+            c.Width = Unit.Percentage(70);
+            c.ShowCaption = DefaultBoolean.False;
+            c.NestedExtension().Label(l => l.Text = "评分标准");
         });
+        g.Items.Add(c =>
+        {
+            c.Width = Unit.Percentage(10);
+            c.ShowCaption = DefaultBoolean.False;
+            c.NestedExtension().Label(l => l.Text = "权重");
+        });
+        g.Items.Add(c =>
+        {
+            c.Width = Unit.Percentage(20);
+            c.ShowCaption = DefaultBoolean.False;
+            c.NestedExtension().Label(l => l.Text = "得分");
+        });
+
+
+        int n = 0;
+        foreach (Competition.EF.Models.ScoreDetail detail in Model.ScoreDetails)
+        {
+
+            g.Items.Add(c =>
+            {
+                c.Width = Unit.Percentage(70);
+                c.Name = string.Format("label{0}", n);
+                c.NestedExtension().Label(l =>
+                {
+                    l.Text = detail.EventCriteria.Title;
+                });
+                c.ShowCaption = DefaultBoolean.False;
+            });
+
+            g.Items.Add(c =>
+            {
+                c.Width = Unit.Percentage(10);
+                c.Name = string.Format("MaxScoreLabel{0}", n);
+                c.NestedExtension().Label(l =>
+                {
+                    l.Text = detail.EventCriteria.MaxScore.ToString();
+                });
+                c.ShowCaption = DefaultBoolean.False;
+            });
+
+            g.Items.Add(c=> {
+                c.Name =string.Format( "ScoreDetails{0}",n);
+                c.FieldName=string.Format( "ScoreDetails[{0}].Mark",n);
+                c.ShowCaption = DefaultBoolean.False;
+                c.Width = Unit.Percentage(20);
+
+                c.NestedExtension().SpinEdit(s =>
+                {
+                    s.Properties.NumberType = SpinEditNumberType.Integer;
+                    s.Properties.MinValue = 0;
+                    s.Properties.MaxValue = detail.EventCriteria.MaxScore;
+                    s.Width = Unit.Pixel(100);
+                    s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
+
+                });
+            });
+
+
+            //g.Items.Add(i => i.ScoreDetails[n].Mark, c =>
+            //{
+            //    c.Caption = detail.EventCriteria.Title;
+            //    c.NestedExtension().SpinEdit(s =>
+            //    {
+            //        s.Properties.NumberType = SpinEditNumberType.Integer;
+            //        s.Properties.MinValue = 0;
+            //        s.Properties.MaxValue = detail.EventCriteria.MaxScore;
+            //    });
+            //});
+
+            n++;
+        }
+
     });
+
+
 
 
 

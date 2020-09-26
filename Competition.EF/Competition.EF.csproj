@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202009250710023_addids.designer.cs">
       <DependentUpon>202009250710023_addids.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009251503547_RemoveScoreIdRequired.cs" />
+    <Compile Include="Migrations\202009251503547_RemoveScoreIdRequired.designer.cs">
+      <DependentUpon>202009251503547_RemoveScoreIdRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009250710023_addids.resx">
       <DependentUpon>202009250710023_addids.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009251503547_RemoveScoreIdRequired.resx">
+      <DependentUpon>202009251503547_RemoveScoreIdRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

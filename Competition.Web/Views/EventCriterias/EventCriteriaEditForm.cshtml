@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+@model IEnumerable<Competition.EF.Models.EventCriteria>
+
+@Html.DevExpress().GridView(settings =>
+{
+    settings.Name = "EventCriteriasEditForm";
+    settings.Name = "gridView";
+    settings.KeyFieldName = "ProductID";
+    settings.Width = Unit.Percentage(100);
+    settings.CallbackRouteValues = new
+    {
+        Controller = "Editing",
+        Action = "BatchEditingPartial"
+    };
+    //暂时先不搞了随着eventID而编辑评分细则了，整不明白20200925
+    settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasBatchEditingUpdateModel" };
+
+    settings.SettingsEditing.Mode = GridViewEditingMode.Batch;
+    settings.SettingsPager.Mode = GridViewPagerMode.ShowPager ;
+    settings.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell;
+    settings.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.DblClick;
+    settings.SettingsEditing.BatchEditSettings.HighlightDeletedRows = true;
+    settings.SettingsEditing.BatchEditSettings.KeepChangesOnCallbacks = DefaultBoolean.Default;
+    settings.Settings.VerticalScrollableHeight = 594;
+
+    settings.CommandColumn.Visible = true;
+    settings.CommandColumn.ShowCancelButton = true;
+    settings.CommandColumn.ShowDeleteButton = true;
+    settings.CommandColumn.ShowNewButtonInHeader = true;
+    settings.CommandColumn.ShowCancelButton = true;
+    settings.CommandColumn.Width = Unit.Pixel(150);
+
+
+
+}).Bind(Model).GetHtml()

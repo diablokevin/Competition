@@ -1,0 +1,88 @@
+﻿@model Competition.EF.Models.Score
+@{
+    Layout = "~/Views/Shared/_lightLayout.cshtml";
+}
+
+<h3>
+    <span> @Model.Schedule.Competitor.Name</span>
+    <span> | </span>
+    <span> @Model.Schedule.Competitor.Company.Name</span>
+</h3>
+<p>项目：@Model.Schedule.Event.Name</p>
+
+@using (Html.BeginForm("ScoreJudgeEditFormPartial", "Score", FormMethod.Post, new { @class = "edit_form" }))
+{
+    @Html.Hidden("ScheduleId")
+    @Html.DevExpress().FormLayout(flSettings =>
+{
+    flSettings.Name = "ScoreEditForm";
+    flSettings.Width = Unit.Percentage(100);
+    flSettings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+    flSettings.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 700;
+    flSettings.ColCount = 1;   
+    flSettings.Items.AddGroupItem(g => {
+
+        g.ColCount = 2;
+
+        //g.GroupBoxDecoration = GroupBoxDecoration.Box;
+        g.Caption = "用时";
+        // g.ShowCaption = DefaultBoolean.True;
+        g.Items.Add(i => i.TimeConsume_minute, c => {
+            c.Caption = "分";
+            c.NestedExtension().SpinEdit(s =>
+            {
+                s.Properties.NumberType = SpinEditNumberType.Integer;
+                s.Properties.MinValue = 0;
+                s.Properties.MaxValue = 59;
+            });
+        });
+        g.Items.Add(i => i.TimeConsume_second, c =>
+        {
+            c.Caption = "秒";
+            c.NestedExtension().SpinEdit(s =>
+            {
+                s.Properties.NumberType = SpinEditNumberType.Integer;
+                s.Properties.MinValue = 0;
+                s.Properties.MaxValue = 59;
+            });
+        });
+    });
+
+  
+    flSettings.Items.Add(i => i.Mark, c =>
+    {
+
+        c.NestedExtension().SpinEdit(s =>
+        {
+            s.Properties.NumberType = SpinEditNumberType.Float;
+            s.Properties.MinValue = 0;
+            s.Properties.MaxValue = 100;
+        });
+    });
+    
+
+    flSettings.Items.Add(i =>
+    {
+        i.ShowCaption = DefaultBoolean.False;
+    }).SetNestedContent(() =>
+    {
+        ViewContext.Writer.Write("<div style='float:right'>");
+        Html.DevExpress().Button(btnSettings =>
+        {
+            btnSettings.Name = "btnUpdate";
+            btnSettings.Text = "提交";
+            btnSettings.UseSubmitBehavior = true;
+            // btnSettings.ClientSideEvents.Click = "function(s, e){ ScoreJudgeGridView.UpdateEdit(); }";
+        }).Render();
+        Html.DevExpress().Button(btnSettings =>
+        {
+            btnSettings.Name = "btnCancel";
+            btnSettings.Text = "取消";
+            btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
+            btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
+        }).Render();
+        ViewContext.Writer.Write("</div>");
+    });
+
+}).GetHtml()
+}

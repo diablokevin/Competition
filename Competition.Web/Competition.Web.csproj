@@ -428,7 +428,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\EventCriterias\Index.cshtml" />
     <Content Include="Views\EventCriterias\_EventCriteriasGridViewPartial.cshtml" />
-    <Content Include="Views\Event\_EventScoreDetailEditFormViewPartial.cshtml" />
+    <Content Include="Views\EventCriterias\EventCriteriaEditForm.cshtml" />
+    <Content Include="Views\Score\_ScoreJudgeEditFormPartial2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -455,6 +456,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ScoreController.cs" />
+    <Compile Include="Controllers\ScoreDetailsController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -465,11 +467,13 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\ReportViewModels.cs" />
+    <Compile Include="Models\ScoreDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ScoreDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

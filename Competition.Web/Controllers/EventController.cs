@@ -160,7 +160,9 @@ namespace Competition.Web.Controllers
         public ActionResult Multi(int? id)
         { return View(); }
 
-
+      
+     
+      
     }
 
 

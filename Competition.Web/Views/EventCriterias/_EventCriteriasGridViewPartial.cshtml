@@ -6,7 +6,7 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialDelete" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.Batch;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
         settings.SettingsBehavior.ConfirmDelete = true;
 
         settings.CommandColumn.Visible = true;
@@ -32,12 +32,12 @@
         settings.Columns.Add("MaxScore");
         settings.Columns.Add(c=> {
             c.FieldName = "EventId";
+            
             c.Caption = "ÏîÄ¿";
             c.EditorProperties().ComboBox(p =>
             {
                 p.TextField = "Name";
-                p.ValueField = "Id";
-                p.ValueType = typeof(int);
+                p.ValueField = "Id";             
                 p.DataSource = ViewBag.EventIds;
             });
         });
