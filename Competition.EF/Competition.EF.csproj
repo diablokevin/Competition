@@ -72,6 +72,22 @@
     <Compile Include="Migrations\202009251503547_RemoveScoreIdRequired.designer.cs">
       <DependentUpon>202009251503547_RemoveScoreIdRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009270236572_scoredetailMarkNotNull.cs" />
+    <Compile Include="Migrations\202009270236572_scoredetailMarkNotNull.designer.cs">
+      <DependentUpon>202009270236572_scoredetailMarkNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009270304212_scoredetailNote.cs" />
+    <Compile Include="Migrations\202009270304212_scoredetailNote.designer.cs">
+      <DependentUpon>202009270304212_scoredetailNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009270356466_scoreNote.cs" />
+    <Compile Include="Migrations\202009270356466_scoreNote.designer.cs">
+      <DependentUpon>202009270356466_scoreNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009270842181_scoreNoteMultiline.cs" />
+    <Compile Include="Migrations\202009270842181_scoreNoteMultiline.designer.cs">
+      <DependentUpon>202009270842181_scoreNoteMultiline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -94,6 +110,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009251503547_RemoveScoreIdRequired.resx">
       <DependentUpon>202009251503547_RemoveScoreIdRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270236572_scoredetailMarkNotNull.resx">
+      <DependentUpon>202009270236572_scoredetailMarkNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270304212_scoredetailNote.resx">
+      <DependentUpon>202009270304212_scoredetailNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270356466_scoreNote.resx">
+      <DependentUpon>202009270356466_scoreNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270842181_scoreNoteMultiline.resx">
+      <DependentUpon>202009270842181_scoreNoteMultiline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

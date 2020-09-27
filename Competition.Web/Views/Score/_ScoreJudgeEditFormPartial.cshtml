@@ -3,23 +3,39 @@
     Layout = "~/Views/Shared/_lightLayout.cshtml";
 }
 
-    <h3>
-        <span> @Model.Score.Schedule.Competitor.Race_num</span>
-        <span> @Model.Score.Schedule.Competitor.Name</span>
-        <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
+<div class="container">
+    <div class="row">
+        <div class="col-8 text-left">
+            <h3>
+                <span> @Model.Score.Schedule.Competitor.Race_num</span>
+                <span> @Model.Score.Schedule.Competitor.Name</span>
+                <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
+                <span> | </span>
+                <span> @Model.Score.Schedule.Competitor.Company.Name</span>
+            </h3>
+        </div>
+        <div class="col-4 text-left">
+            <h4>
+                <span>得分：</span>
+                <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s => s.Mark) </span>
+            </h4>
+        </div>
+    </div>
+    <div class="=row text-left">
+        <h5>
+            @Model.Score.Schedule.Event.Name
+        </h5>
+    </div>
+    <div class="row"><p> </p></div>
+</div>
 
-        <span> | </span>
-        <span> @Model.Score.Schedule.Competitor.Company.Name</span>
-    </h3>
-<p>项目：@Model.Score.Schedule.Event.Name</p>
-<h4>
-    <span>得分：</span>
-    <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s=>s.Mark) </span>
-</h4>
+
+
+
 <script>
     function showscore(e) {
-       
-        
+
+
     }
     function reCalScore() {
         var len =@Model.ScoreDetails.Count;
@@ -29,173 +45,154 @@
             sum += Number(window["ScoreDetails" + i].lastValue);
         }
         $("#ScoreSum").text(sum);
-        
+
     }
 
 </script>
-@using (Html.BeginForm("ScoreJudgeEditFormPartial", "Score", FormMethod.Post, new { @class = "edit_form" }))
-{
-    @Html.Hidden("ScheduleId")
-    @Html.DevExpress().FormLayout(flSettings =>
-{
-    flSettings.Name = "ScoreEditForm";
-    flSettings.Width = Unit.Percentage(100);
-    flSettings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
-    flSettings.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 700;
-    flSettings.ColCount = 1;
-    flSettings.Items.AddGroupItem(g => {
 
-        g.ColCount = 2;
-        g.Width = Unit.Percentage(50);
-        //g.GroupBoxDecoration = GroupBoxDecoration.Box;
-        g.Caption = "用时";
-        // g.ShowCaption = DefaultBoolean.True;
-        g.Items.Add(i => i.Score.TimeConsume_minute, c => {
-            c.Caption = "分";
-            c.NestedExtension().SpinEdit(s =>
-            {
+
+@using (Html.BeginForm())
+{
+
+    @Html.Hidden("Score.ScheduleId")
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+            <div class="m-auto">耗费时间</div>
+        </div>
+
+        <div class="col-md-3">
+            @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_minute, s =>
+        {
+
+                s.Properties.Caption = "分";
+       s.Properties.NumberType = SpinEditNumberType.Integer;
+       s.Properties.MinValue = 0;
+       s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
+
+        }).GetHtml()
+        </div>
+        <div class="col-md-3">
+
+            @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_second, s =>
+                {
+                s.Properties.Caption = "秒";
                 s.Properties.NumberType = SpinEditNumberType.Integer;
                 s.Properties.MinValue = 0;
                 s.Properties.MaxValue = 59;
-            });
-        });
-        g.Items.Add(i => i.Score.TimeConsume_second, c =>
+
+                }).GetHtml()
+        </div>
+    </div>
+    <div class="row"><p> </p></div>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="col-8 text-center">
+                    评分细则
+                </th>
+                <th class="col-1 text-center">
+                    权重
+                </th>
+                <th class="col-1 text-center">
+                    得分
+                </th>
+                <th class="col-2 text-center">
+                    备注
+                </th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.ScoreDetails.Count; i++)
         {
-            c.Caption = "秒";
-            c.NestedExtension().SpinEdit(s =>
-            {
-                s.Properties.NumberType = SpinEditNumberType.Integer;
-                s.Properties.MinValue = 0;
-                s.Properties.MaxValue = 59;
-            });
-        });
-    });
+            @Html.HiddenFor(d => d.ScoreDetails[i].Id)
+            @Html.HiddenFor(d => d.ScoreDetails[i].EventCriteriaId)
+            @Html.HiddenFor(d => d.ScoreDetails[i].ScoreId)
 
+            <tr>
+                <td>
+                    @Html.DevExpress().MemoFor(m => m.ScoreDetails[i].EventCriteria.Title, s =>
+                    {
 
+                   s.ReadOnly = true;
+                   s.Width = Unit.Percentage(100);
+                   s.Properties.Rows = Model.ScoreDetails[i].EventCriteria.Title.Split('\n').Length;
 
-    //把分数放到页面最上面
-    //flSettings.Items.Add(i => i.Score.Mark, c =>
-    //{
+               }).GetHtml()
 
-    //    c.NestedExtension().SpinEdit(s =>
-    //    {
-    //        s.Properties.NumberType = SpinEditNumberType.Float;
-    //        s.Properties.MinValue = 0;
-    //        s.Properties.MaxValue = 100;
-    //    });
-    //});
+                    @*@Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.Title)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
+                </td>
+                <td>
+                    @Html.DevExpress().SpinEditFor(m => m.ScoreDetails[i].Mark, s =>
+               {
+                   s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
+                   s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
 
-    flSettings.Items.AddGroupItem(g =>
-    {
-        g.ColCount = 3;
-        g.Caption = "评分细则";
-        
-        g.Items.Add(c =>
-        {
-            c.Width = Unit.Percentage(70);
-            c.ShowCaption = DefaultBoolean.False;
-            c.NestedExtension().Label(l => l.Text = "评分标准");
-        });
-        g.Items.Add(c =>
-        {
-            c.Width = Unit.Percentage(10);
-            c.ShowCaption = DefaultBoolean.False;
-            c.NestedExtension().Label(l => l.Text = "权重");
-        });
-        g.Items.Add(c =>
-        {
-            c.Width = Unit.Percentage(20);
-            c.ShowCaption = DefaultBoolean.False;
-            c.NestedExtension().Label(l => l.Text = "得分");
-        });
+                   s.Properties.MaxValue = Model.ScoreDetails[i].EventCriteria.MaxScore;
+                   s.Properties.Height = Unit.Pixel(10);
 
+               }).GetHtml()
+                    @* @Html.TextBoxFor(d => d.ScoreDetails[i].Mark)*@
+                </td>
+                <td>
+                    @Html.DevExpress().TextBoxFor(m => m.ScoreDetails[i].Note, s =>
+               {
 
-        int n = 0;
-        foreach (Competition.EF.Models.ScoreDetail detail in Model.ScoreDetails)
-        {
-
-            g.Items.Add(c =>
-            {
-                c.Width = Unit.Percentage(70);
-                c.Name = string.Format("label{0}", n);
-                c.NestedExtension().Label(l =>
-                {
-                    l.Text = detail.EventCriteria.Title;
-                });
-                c.ShowCaption = DefaultBoolean.False;
-            });
-
-            g.Items.Add(c =>
-            {
-                c.Width = Unit.Percentage(10);
-                c.Name = string.Format("MaxScoreLabel{0}", n);
-                c.NestedExtension().Label(l =>
-                {
-                    l.Text = detail.EventCriteria.MaxScore.ToString();
-                });
-                c.ShowCaption = DefaultBoolean.False;
-            });
-
-            g.Items.Add(c=> {
-                c.Name =string.Format( "ScoreDetails{0}",n);
-                c.FieldName=string.Format( "ScoreDetails[{0}].Mark",n);
-                c.ShowCaption = DefaultBoolean.False;
-                c.Width = Unit.Percentage(20);
-
-                c.NestedExtension().SpinEdit(s =>
-                {
-                    s.Properties.NumberType = SpinEditNumberType.Integer;
-                    s.Properties.MinValue = 0;
-                    s.Properties.MaxValue = detail.EventCriteria.MaxScore;
-                    s.Width = Unit.Pixel(100);
-                    s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
-
-                });
-            });
-
-
-            //g.Items.Add(i => i.ScoreDetails[n].Mark, c =>
-            //{
-            //    c.Caption = detail.EventCriteria.Title;
-            //    c.NestedExtension().SpinEdit(s =>
-            //    {
-            //        s.Properties.NumberType = SpinEditNumberType.Integer;
-            //        s.Properties.MinValue = 0;
-            //        s.Properties.MaxValue = detail.EventCriteria.MaxScore;
-            //    });
-            //});
-
-            n++;
+                    }).GetHtml()
+                </td>
+            </tr>
         }
 
-    });
+    </table>
+    <div class="row">
+        <div class="col-12">
+            @Html.DevExpress().MemoFor(m => m.Score.Note, s =>
+       {
+           s.Properties.Caption = "备注";
 
+           s.Width = Unit.Percentage(100);
+           s.Properties.Rows = 6;
+       }).GetHtml()
+        </div>
 
-
-
-
-    flSettings.Items.Add(i =>
-    {
-        i.ShowCaption = DefaultBoolean.False;
-    }).SetNestedContent(() =>
-    {
-        ViewContext.Writer.Write("<div style='float:right'>");
-        Html.DevExpress().Button(btnSettings =>
-        {
+    </div>
+    <div class="row float-right">
+        @Html.DevExpress().Button(btnSettings =>
+            {
             btnSettings.Name = "btnUpdate";
             btnSettings.Text = "提交";
             btnSettings.UseSubmitBehavior = true;
             // btnSettings.ClientSideEvents.Click = "function(s, e){ ScoreJudgeGridView.UpdateEdit(); }";
-        }).Render();
-        Html.DevExpress().Button(btnSettings =>
+            }).GetHtml()
+        @Html.DevExpress().Button(btnSettings =>
         {
-            btnSettings.Name = "btnCancel";
-            btnSettings.Text = "取消";
-            btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
-            btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
-        }).Render();
-        ViewContext.Writer.Write("</div>");
-    });
+        btnSettings.Name = "btnCancel";
+        btnSettings.Text = "取消";
+        btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
+        btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
+        }).GetHtml()
+    </div>
+</div>
+   
 
-}).GetHtml()
 }
+
+<div>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+</div>

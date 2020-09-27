@@ -48,12 +48,12 @@ function watermark(text) {
         watermark_cols: 20,//水印列数
         watermark_x_space: 100,//水印x轴间隔
         watermark_y_space: 50,//水印y轴间隔
-        watermark_color: '#aaa',//水印字体颜色
+        watermark_color: '#848484',//水印字体颜色
         watermark_alpha: 0.4,//水印透明度
-        watermark_fontsize: '60px',//水印字体大小
+        watermark_fontsize: '100px',//水印字体大小
         watermark_font: '微软雅黑',//水印字体
-        watermark_width: 210,//水印宽度
-        watermark_height: 80,//水印长度
+        watermark_width: 300,//水印宽度
+        watermark_height: 300,//水印长度
         watermark_angle: 15//水印倾斜度数
     };
     //Object.assign(defaultSettings, settings);
@@ -63,7 +63,7 @@ function watermark(text) {
     let cutWidth = p_width * 0.0150;
     let page_width = p_width - cutWidth;
     //获取页面最大高度
-    let page_height = Math.max(document.body.scrollHeight, document.body.clientHeight) + 450;
+    let page_height = Math.max(document.body.scrollHeight, document.body.clientHeight) -450;
     // let page_height = document.body.scrollHeight+document.body.scrollTop;
     //如果将水印列数设置为0，或水印列数设置过大，超过页面最大宽度，则重新计算水印列数和水印x轴间隔
     if (defaultSettings.watermark_cols === 0 || (parseInt(defaultSettings.watermark_x + defaultSettings.watermark_width * defaultSettings.watermark_cols + defaultSettings.watermark_x_space * (defaultSettings.watermark_cols - 1)) > page_width)) {

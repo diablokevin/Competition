@@ -8,8 +8,9 @@ namespace Competition.Web.Models
 {
     public class ScoreDetailViewModel
     {
-        public Score Score { get; set; }
 
-        public List<ScoreDetail> ScoreDetails { get; set; }
+        public Score Score { get; set; } = new Score();
+
+        public List<ScoreDetail> ScoreDetails { get; set; } = new List<ScoreDetail>();
     }
 }

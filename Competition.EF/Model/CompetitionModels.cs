@@ -295,7 +295,8 @@ namespace Competition.EF.Models
 
             }
         }
-
+        [DataType(DataType.MultilineText)]
+        public string Note { get; set; }
         public virtual Judge Judge { get; set; }
         public virtual Schedule Schedule { get; set; }
       
@@ -304,6 +305,7 @@ namespace Competition.EF.Models
     public class EventCriteria
     {
         public int Id { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Title { get; set; }
         public int MaxScore { get; set; }
         public int EventId { get; set; }
@@ -313,15 +315,16 @@ namespace Competition.EF.Models
     public class ScoreDetail
     {
         public int Id { get; set; }
-        public double? Mark { get; set; }
+        public double Mark { get; set; } = 0.0;
         
         public int EventCriteriaId { get; set; }
         [Required]
         public int ScoreId { get; set; }
+        public string Note { get; set; }
         public virtual EventCriteria EventCriteria { get; set; }
         public virtual Score Score { get; set; }
 
-
+            
 
     }
     public class Judge
