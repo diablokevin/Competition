@@ -307,6 +307,7 @@ namespace Competition.EF.Models
         public int Id { get; set; }
         [DataType(DataType.MultilineText)]
         public string Title { get; set; }
+        public int MinScore { get; set; } = 0;
         public int MaxScore { get; set; }
         public int EventId { get; set; }
         public virtual Event Event { get; set; }

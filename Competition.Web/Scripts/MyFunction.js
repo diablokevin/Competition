@@ -48,7 +48,8 @@ function watermark(text) {
         watermark_cols: 20,//水印列数
         watermark_x_space: 100,//水印x轴间隔
         watermark_y_space: 50,//水印y轴间隔
-        watermark_color: '#848484',//水印字体颜色
+        watermark_color: '#aaa',
+        //watermark_color: '#848484',//水印字体颜色
         watermark_alpha: 0.4,//水印透明度
         watermark_fontsize: '100px',//水印字体大小
         watermark_font: '微软雅黑',//水印字体

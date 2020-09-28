@@ -88,6 +88,10 @@
     <Compile Include="Migrations\202009270842181_scoreNoteMultiline.designer.cs">
       <DependentUpon>202009270842181_scoreNoteMultiline.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009280256366_minscore.cs" />
+    <Compile Include="Migrations\202009280256366_minscore.designer.cs">
+      <DependentUpon>202009280256366_minscore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009270842181_scoreNoteMultiline.resx">
       <DependentUpon>202009270842181_scoreNoteMultiline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280256366_minscore.resx">
+      <DependentUpon>202009280256366_minscore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

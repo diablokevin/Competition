@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Competition.EF.Models;
+using System.Text.RegularExpressions;
 
 namespace Competition.Web.Controllers
 {
@@ -107,5 +108,65 @@ namespace Competition.Web.Controllers
             var model = db.EventCriterias.Where(c=>c.EventId==EventId);          
             return View("EventCriteriaEditForm", model.ToList());
         }
+
+        public ActionResult Multi(int? id)
+        { return View(); }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Multi()
+        {
+            if (ModelState.IsValid)
+            {
+                string content = Request["List"];
+                //C#实现字符串按多个字符采用Split方法分割  https://www.cnblogs.com/codingsilence/archive/2010/09/29/2146603.html
+                List<string> t = Regex.Split(content, "#\r\n", RegexOptions.IgnoreCase).ToList();
+                ViewBag.Content = t;
+                ViewBag.Count = t.Count;
+                ViewBag.FaultCount = 0;
+                ViewBag.SuccessCount = 0;
+                //int order = 0;
+                //if (db.Events.Count() > 0)
+                //{
+                //    order = db.Events.Max(record => record.MenuOrder);
+                //}
+
+
+                foreach (string item in t)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        try
+                        {
+                            EventCriteria criteria = new EventCriteria();
+
+                            
+                            string eventName= item.Split('\t')[0];
+                            criteria.EventId = db.Events.Where(c => c.Name == eventName).First().Id;
+                            criteria.Title = item.Split('\t')[1];
+                            criteria.MinScore = Convert.ToInt32(item.Split('\t')[2]);
+                            criteria.MaxScore = Convert.ToInt32(item.Split('\t')[3]);
+                            db.EventCriterias.Add(criteria);
+
+                        }
+                        catch
+                        {
+                            ViewBag.FaultCount++;
+
+                        }
+
+
+                    }
+                }
+                ViewBag.SuccessCount = db.SaveChanges();
+                return View();
+            }
+
+
+            return View();
+        }
+
+   
     }
 }

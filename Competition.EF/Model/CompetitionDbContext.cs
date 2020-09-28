@@ -28,7 +28,7 @@ namespace Competition.EF.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ScoreDetail>().HasRequired(a => a.EventCriteria).WithMany(u => u.ScoreDetail).WillCascadeOnDelete(false);
-            modelBuilder.Entity<ScoreDetail>().HasRequired(a => a.Score).WithMany(u => u.ScoreDetail).WillCascadeOnDelete(false);
+            //modelBuilder.Entity<ScoreDetail>().HasRequired(a => a.Score).WithMany(u => u.ScoreDetail).WillCascadeOnDelete(false);
         }
     }
 
