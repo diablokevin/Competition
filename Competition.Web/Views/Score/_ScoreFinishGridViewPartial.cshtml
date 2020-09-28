@@ -18,6 +18,18 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
+        
+        settings.Columns.Add(c=>{
+            c.Caption = "#";
+            c.Width = Unit.Pixel(50);
+            c.AdaptivePriority = 1;
+            c.SetDataItemTemplateContent(tc=> {
+                ViewContext.Writer.Write(
+                  Html.ActionLink("²é¿´", "ScoreJudgeViewFormPartial", "Score", new { ScoreId=DataBinder.Eval(tc.DataItem,"Id") }, null)
+
+                        );
+            });
+        });
         settings.Columns.Add("Schedule.Event.Name");
         settings.Columns.Add("Schedule.Competitor.Name");
         settings.Columns.Add("Schedule.Competitor.Company.Name");

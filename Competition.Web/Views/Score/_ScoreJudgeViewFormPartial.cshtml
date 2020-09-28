@@ -58,32 +58,12 @@
     @Html.Hidden("Score.ScheduleId")
     <div class="container">
         <div class="row">
-            <div class="col-md-1">
-                <div class="m-auto">耗费时间</div>
+            <div class="h4">
+                <span class="m-auto">耗费时间: </span>
+                <span>@Html.DisplayFor(m => m.Score.TimeConsume)</span>
             </div>
 
-            <div class="col-md-3">
-                @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_minute, s =>
-            {
-
-                    s.Properties.Caption = "分";
-           s.Properties.NumberType = SpinEditNumberType.Integer;
-           s.Properties.MinValue = 0;
-           s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
-
-            }).GetHtml()
-            </div>
-            <div class="col-md-3">
-
-                @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_second, s =>
-                    {
-                    s.Properties.Caption = "秒";
-                    s.Properties.NumberType = SpinEditNumberType.Integer;
-                    s.Properties.MinValue = 0;
-                    s.Properties.MaxValue = 59;
-
-                    }).GetHtml()
-            </div>
+          
         </div>
         <div class="row"><p> </p></div>
         <table class="table table-striped table-bordered">
@@ -111,68 +91,40 @@
 
                 <tr>
                     <td>
-                       @foreach(string s in Model.ScoreDetails[i].EventCriteria.Title.Split('\n'))
-                       {
-                           <p>@s</p>
-                       }                                              
+                        @foreach (string s in Model.ScoreDetails[i].EventCriteria.Title.Split('\n'))
+                        {
+                            <p>@s</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
                     </td>
                     <td>
-                        @Html.DevExpress().SpinEditFor(m => m.ScoreDetails[i].Mark, s =>
-                   {
-                       s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
-                       s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
-
-                       s.Properties.MaxValue = Model.ScoreDetails[i].EventCriteria.MaxScore;
-                       s.Properties.Height = Unit.Pixel(10);
-
-                   }).GetHtml()
-                        @* @Html.TextBoxFor(d => d.ScoreDetails[i].Mark)*@
+                        @Html.DisplayFor(d => d.ScoreDetails[i].Mark)                      
+                     
                     </td>
                     <td>
-                        @Html.DevExpress().TextBoxFor(m => m.ScoreDetails[i].Note, s =>
-                   {
-
-                        }).GetHtml()
+                        @Html.DisplayFor(d => d.ScoreDetails[i].Note)
                     </td>
                 </tr>
             }
-            <tr>
-                <td>
-                    项目完成用时(每提前 30 秒得 0.5 分，不足30 秒不加分)
-                </td>
-                <td>
-
-                </td>
-            </tr>
 
         </table>
         <div class="row">
-            <div class="col-12">
-                @Html.DevExpress().MemoFor(m => m.Score.Note, s =>
-           {
-               s.Properties.Caption = "备注";
-
-               s.Width = Unit.Percentage(100);
-               s.Properties.Rows = 6;
-           }).GetHtml()
+            <div class=" col-1">
+              备注：
+            </div>
+            <div class="col-10">
+                @Html.DisplayFor(m => m.Score.Note)
             </div>
 
         </div>
         <div class="row float-right">
-            @Html.DevExpress().Button(btnSettings =>
-                {
-                btnSettings.Name = "btnUpdate";
-                btnSettings.Text = "提交";
-                btnSettings.UseSubmitBehavior = true;
-                // btnSettings.ClientSideEvents.Click = "function(s, e){ ScoreJudgeGridView.UpdateEdit(); }";
-                }).GetHtml()
+           
             @Html.DevExpress().Button(btnSettings =>
             {
             btnSettings.Name = "btnCancel";
-            btnSettings.Text = "取消";
+            btnSettings.Text = "返回";
             btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
             btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
             }).GetHtml()

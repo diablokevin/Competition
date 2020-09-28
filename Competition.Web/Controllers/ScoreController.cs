@@ -295,47 +295,45 @@ namespace Competition.Web.Controllers
                 item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
                 db.Scores.Add(item.Score);
                 db.SaveChanges();
-                //foreach(var detail in item.ScoreDetails)
-                //{
-                //    detail.ScoreId = item.Score.Id;
-                //    db.ScoreDetails.Add(detail);
-                //}
-                //db.SaveChanges();
+                foreach (var detail in item.ScoreDetails)
+                {
+                    detail.ScoreId = item.Score.Id;
+                    db.ScoreDetails.Add(detail);
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
 
         }
 
-        public ActionResult ScoreJudgeViewFormPartial(int? ScheduleId)
+        public ActionResult ScoreJudgeViewFormPartial(int? ScoreId)
         {
 
-            if (ScheduleId != null)
+            if (ScoreId != null)
             {
+                var item = db.Scores.FirstOrDefault(i => i.Id == ScoreId);
+                var schedule=db.Schedules.FirstOrDefault(i => i.Id == item.ScheduleId);
+                item.Schedule = schedule;
                 var model = new ScoreDetailViewModel();
-                //在属性里加了默认值，这里就不需要了
-                //model.Score = new Score();
-                //model.ScoreDetails = new List<ScoreDetail>();
-                var schedule = db.Schedules.Find(ScheduleId);
-                model.Score.ScheduleId = ScheduleId.Value;
-                model.Score.Schedule = schedule;
-                var judgeStaffid = User.Identity.Name;
-                var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
+                model.Score = item;
+                model.ScoreDetails = item.ScoreDetail.ToList();
 
-                model.Score.JudgeId = judge.Id;
-                model.Score.Judge = judge;
-                var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
-                foreach (EventCriteria criteria in criterias)
-                {
-                    ScoreDetail detail = new ScoreDetail();
-                    detail.EventCriteriaId = criteria.Id;
-                    detail.EventCriteria = criteria;
-                    model.ScoreDetails.Add(detail);
+                //这里需要EventCriterias与scoredetail leftjoin,暂时先只列出scoredetail
+              
+               
+                //var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
+                //foreach (EventCriteria criteria in criterias)
+                //{
+                //    ScoreDetail detail = new ScoreDetail();
+                //    detail.EventCriteriaId = criteria.Id;
+                //    detail.EventCriteria = criteria;
+                //    model.ScoreDetails.Add(detail);
 
-                }
-                return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
+                //}
+                return PartialView("_ScoreJudgeViewFormPartial", model ?? new ScoreDetailViewModel());
             }
-            return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
+            return PartialView("_ScoreJudgeViewFormPartial", new ScoreDetailViewModel());
 
         }
     }

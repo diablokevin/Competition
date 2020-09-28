@@ -430,6 +430,7 @@
     <Content Include="Views\EventCriterias\_EventCriteriasGridViewPartial.cshtml" />
     <Content Include="Views\EventCriterias\EventCriteriaEditForm.cshtml" />
     <Content Include="Views\Score\_ScoreJudgeEditFormPartial2.cshtml" />
+    <Content Include="Views\Score\_ScoreJudgeViewFormPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
