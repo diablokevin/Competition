@@ -19,9 +19,8 @@ namespace Competition.EF.Models
         public int MenuOrder { get; set; }
         [Display(Name = "限时")]
         public TimeSpan TimeLimit { get; set; }
+        public int Amount { get; set; } = 1;
         [Display(Name = "主板ID")]
-
-
         public virtual ICollection<Chip> Chips { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
 

@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using System.Data.Entity;
+using Competition.EF.Models;
 
 namespace Competition.TimerControl
 {
     public partial class EventEdit : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        Competition.TimerControl.TimerContext dbContext = new Competition.TimerControl.TimerContext();
+        CompetitionDbContext dbContext = new CompetitionDbContext();
         public EventEdit()
         {
             InitializeComponent();

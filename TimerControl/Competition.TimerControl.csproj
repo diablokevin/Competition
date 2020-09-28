@@ -99,18 +99,8 @@
     <Compile Include="main.Designer.cs">
       <DependentUpon>main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810161402528_InitialCreate.cs" />
-    <Compile Include="Migrations\201810161402528_InitialCreate.Designer.cs">
-      <DependentUpon>201810161402528_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810161407455_test.cs" />
-    <Compile Include="Migrations\201810161407455_test.Designer.cs">
-      <DependentUpon>201810161407455_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimerContext.cs" />
     <Compile Include="ViewModel.cs" />
     <EmbeddedResource Include="EventEdit.resx">
       <DependentUpon>EventEdit.cs</DependentUpon>
@@ -120,12 +110,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810161402528_InitialCreate.resx">
-      <DependentUpon>201810161402528_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810161407455_test.resx">
-      <DependentUpon>201810161407455_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -167,6 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\forcetesting_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Competition.EF\Competition.EF.csproj">
+      <Project>{a2df1a9f-28c9-4f2a-af1a-256ac48ca353}</Project>
+      <Name>Competition.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

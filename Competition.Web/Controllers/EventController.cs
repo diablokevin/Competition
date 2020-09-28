@@ -132,6 +132,7 @@ namespace Competition.Web.Controllers
                             @event.Name = item.Split('\t')[0];
                             @event.Pro = item.Split('\t')[1];
                             string[] timelimit = item.Split('\t')[2].Split(':');
+                            @event.Amount = Convert.ToInt32(item.Split('\t')[3]);
                             int hour = Convert.ToInt32(timelimit[0]);
                             int min = Convert.ToInt32(timelimit[1]);
                             int sec = Convert.ToInt32(timelimit[2]);

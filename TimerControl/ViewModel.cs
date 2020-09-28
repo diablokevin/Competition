@@ -1,9 +1,11 @@
-﻿using EpServerEngine.cs;
+﻿using Competition.EF.Models;
+using EpServerEngine.cs;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 
 namespace Competition.TimerControl
 {
@@ -56,7 +58,7 @@ namespace Competition.TimerControl
         public void ChangeEventRegister(int eventId, AllEventViews allEventViews)
         {
             UnBindToEventView();
-            EventView eventView= allEventViews.list.Find(t => t.Id == eventId);
+            EventView eventView= allEventViews.list.Find(t => t.EventId == eventId);
             eventView.RegisterChip(this.ChipId??0);
             BindToEventView(allEventViews);
 
@@ -136,8 +138,9 @@ namespace Competition.TimerControl
 
     public class EventView
     {
-
         public int Id { get; set; }
+        public int EventId { get; set; }
+       
         public string Name { get; set; }
         public int? ChipId { get; set; }
         public TimeSpan? Time_limit { get; set; }
@@ -178,18 +181,23 @@ namespace Competition.TimerControl
     {
         public List<EventView> list { get; set; }
 
-        public AllEventViews(TimerContext dbContext)
+        public AllEventViews(Competition.EF.Models.CompetitionDbContext dbContext)
         {
             list = new List<EventView>();
             foreach (Event item in dbContext.Events.ToList())
             {
-                EventView eventView = new EventView();
-                eventView.ChipId = item.ChipId;
-                eventView.Name = item.Name;
-                eventView.Time_limit = item.TimeLimit;
-                eventView.Id = item.Id;
+                foreach(Chip chip in item.Chips)
+                {
+                    EventView eventView = new EventView();
+                    eventView.ChipId = chip.Id;
+                    eventView.Name = item.Name;
+                    eventView.Time_limit = item.TimeLimit;
+                    eventView.EventId = item.Id;
 
-                list.Add(eventView);
+                    list.Add(eventView);
+                }
+
+          
 
             }
         }
@@ -219,11 +227,5 @@ namespace Competition.TimerControl
         }
     }
 
-    public class Competitor
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Race_num { get; set; }
-        public string Company { get; set; }
-    }
+   
 }

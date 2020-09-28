@@ -170,6 +170,7 @@
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
+            this.ribbon.SearchEditItem,
             this.ribbonbtn_serveAct_start,
             this.ribbonbtn_serveAct_stop,
             this.barButtonItem3,
@@ -198,7 +199,7 @@
             this.repositoryItemLookUpEdit2,
             this.repositoryItemPopupContainerEdit1,
             this.repositoryItemTextEdit2});
-            this.ribbon.Size = new System.Drawing.Size(1208, 147);
+            this.ribbon.Size = new System.Drawing.Size(1208, 160);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // ribbonbtn_serveAct_start
@@ -246,7 +247,7 @@
             this.serveStatus_start.Id = 10;
             this.serveStatus_start.ImageOptions.Image = global::Competition.TimerControl.Properties.Resources.play_32x32;
             this.serveStatus_start.Name = "serveStatus_start";
-            this.serveStatus_start.TextAlignment = System.Drawing.StringAlignment.Near;
+            this.serveStatus_start.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // serveStatus_stop
             // 
@@ -254,7 +255,7 @@
             this.serveStatus_stop.Id = 11;
             this.serveStatus_stop.ImageOptions.Image = global::Competition.TimerControl.Properties.Resources.cancel_32x32;
             this.serveStatus_stop.Name = "serveStatus_stop";
-            this.serveStatus_stop.TextAlignment = System.Drawing.StringAlignment.Near;
+            this.serveStatus_stop.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // ribbontxt_port
             // 
@@ -301,7 +302,6 @@
             this.barStatusTxt.Caption = "状态信息";
             this.barStatusTxt.Id = 17;
             this.barStatusTxt.Name = "barStatusTxt";
-            this.barStatusTxt.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barButtonItem7
             // 
@@ -438,10 +438,10 @@
             this.ribbonStatusBar.ItemLinks.Add(this.serveStatus_start);
             this.ribbonStatusBar.ItemLinks.Add(this.serveStatus_stop);
             this.ribbonStatusBar.ItemLinks.Add(this.barStatusTxt);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 508);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 515);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1208, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1208, 24);
             // 
             // layoutView1
             // 
@@ -507,20 +507,19 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(3, 40);
+            this.gridControl2.Location = new System.Drawing.Point(3, 39);
             this.gridControl2.MainView = this.cardView1;
             this.gridControl2.MenuManager = this.ribbon;
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(397, 318);
+            this.gridControl2.Size = new System.Drawing.Size(392, 313);
             this.gridControl2.TabIndex = 10;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.cardView1});
             // 
             // cardView1
             // 
-            this.cardView1.FocusedCardTopFieldIndex = 0;
             this.cardView1.GridControl = this.gridControl2;
             this.cardView1.Name = "cardView1";
             this.cardView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Auto;
@@ -534,7 +533,6 @@
             // 
             // barButtonItem6
             // 
-            this.barButtonItem6.Id = -1;
             this.barButtonItem6.Name = "barButtonItem6";
             // 
             // gridControl1
@@ -543,10 +541,11 @@
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.tileView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(800, 361);
+            this.gridControl1.Size = new System.Drawing.Size(800, 355);
             this.gridControl1.TabIndex = 9;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tileView1});
+      
             // 
             // tileView1
             // 
@@ -641,13 +640,13 @@
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 147);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 160);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.gridControl1);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1208, 361);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1208, 355);
             this.splitContainerControl1.SplitterPosition = 800;
             this.splitContainerControl1.TabIndex = 13;
             this.splitContainerControl1.Text = "splitContainerControl1";
@@ -664,7 +663,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.29412F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.70588F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(403, 361);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(398, 355);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // flowLayoutPanel1
@@ -674,7 +673,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(397, 31);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(392, 30);
             this.flowLayoutPanel1.TabIndex = 11;
             // 
             // lookUpEdit1

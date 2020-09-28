@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using System.Data.Entity;
 using EpServerEngine.cs;
+using Competition.EF.Models;
 
 namespace Competition.TimerControl
 {
@@ -22,7 +23,7 @@ namespace Competition.TimerControl
 
         public List<TimerView> TimerViews = new List<TimerView>();  //储存计时器状态的集合
         public List<EventView> EventViews = new List<EventView>();
-        Competition.TimerControl.TimerContext timerContext = new Competition.TimerControl.TimerContext();
+        CompetitionDbContext dbContext = new CompetitionDbContext();
         public main()
         {
 
@@ -34,17 +35,36 @@ namespace Competition.TimerControl
             ribbonbtn_serveAct_stop.Enabled = false;
             //ListTimerViews =  new AllTimerViews();
             //ListEventViews = new AllEventViews(timerContext);
-            foreach (Event item in timerContext.Events.ToList())
+            int id = 0;
+            foreach (Event item in dbContext.Events.ToList())
             {
-                EventView eventView = new EventView();
-                eventView.ChipId = item.ChipId;
-                eventView.Name = item.Name;
-                eventView.Time_limit = item.TimeLimit;
-                eventView.Id = item.Id;
-
-                EventViews.Add(eventView);
-
-
+                
+            
+                if(item.Amount>1)//项目的台子大于1时，生成多个eventview
+                {
+                    for(int i=1;i<=item.Amount;i++)
+                    {
+                        EventView eventView = new EventView();
+                        eventView.ChipId = item.Chips.Count()>=i? item.Chips.ToList()[i-1].Serial: 0;
+                        eventView.Name = item.Name+i.ToString();
+                        eventView.Time_limit = item.TimeLimit;
+                        eventView.EventId = item.Id;
+                        eventView.Id = id ;
+                        EventViews.Add(eventView);
+                        id++;
+                    }
+                }
+                else
+                { 
+                    EventView eventView = new EventView();
+                    eventView.ChipId = item.Chips.Count() >= 1 ? item.Chips.FirstOrDefault().Serial: 0;
+                    eventView.Name = item.Name;
+                    eventView.Time_limit = item.TimeLimit;
+                    eventView.EventId = item.Id;
+                    eventView.Id = id;
+                    EventViews.Add(eventView);
+                    id++;
+                }
             }
 
 
@@ -176,6 +196,7 @@ namespace Competition.TimerControl
             foreach (EventView eventView in EventViews.FindAll(t => t.ChipId == timerView.ChipId))
             {
                 eventView.Timer = null;
+                eventView.ChipId = 0;
             }
 
         }
@@ -350,13 +371,13 @@ namespace Competition.TimerControl
                         try
                         {
                             int chipid = Convert.ToInt32(cardView1.GetRowCellValue(rowhandle, "ChipId"));  //查找view里的chipid
-                            int eventid = Convert.ToInt32(lookUpEdit1.EditValue);  //查找对应的比赛项目id
-                            ChangeEventRegister(chipid, eventid);
+                            int item_id = Convert.ToInt32(lookUpEdit1.EditValue);  //查找对应的比赛项目id
+                            ChangeEventRegister(chipid, item_id);
 
                         }
                         catch (Exception ex)
                         {
-                            throw ex;
+                            MessageBox.Show( ex.Message);
                         }
 
 
@@ -371,36 +392,56 @@ namespace Competition.TimerControl
             
         }
 
-        private void ChangeEventRegister(int chipid, int eventid)
+        private void ChangeEventRegister(int chipid, int item_id)
         {
             TimerView timer = TimerViews.First(t => t.ChipId == chipid); //查找对应的timer对象
                                                                          //timer.ChangeEventRegister(eventid, ListEventViews);
             UnBindChip(timer);//先取消与此timer有关的eventView注册
-            UnRegisterChip(chipid);
+          
 
-            EventView eventView = EventViews.Find(t => t.Id == eventid);  //查找对应的eventView对象
+            EventView eventView = EventViews.Find(t => t.Id == item_id);  //查找对应的eventView对象
             eventView.ChipId = chipid;  //设置内存里EventView里的chipid
             BindChip(timer); //注册修改后的timer对象到eventView中
-            timerContext.Events.First(t => t.Id == eventid).ChipId = chipid;//修改数据库里的event的chipid
-            timerContext.SaveChanges();
+            try
+            {
+                Chip chip = dbContext.Chips.Where(c=>c.Serial==chipid).FirstOrDefault();
+                if (chip != null)
+                {
+                    chip.EventId=eventView.EventId;
+                }
+                else
+                {
+                    dbContext.Chips.Add(new Chip() { EventId= eventView.EventId, Serial= chipid});
+                }
+             
+                dbContext.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+                 
+            
+           // dbContext.Events.First(t => t.Id == eventid).ChipId = chipid;//修改数据库里的event的chipid
+           
         }
 
         private void UnRegisterChip(int chipid)
         {
-            foreach (EventView eventView in EventViews.FindAll(t => t.ChipId == chipid))
-            {
-                eventView.ChipId = null;
-                timerContext.Events.Find(eventView.Id).ChipId = null;
-            }
-            timerContext.SaveChanges();
+
+            dbContext.Chips.Remove( dbContext.Chips.Find(chipid));
+            //foreach (EventView eventView in EventViews.FindAll(t => t.ChipId == chipid))
+            //{
+            //    eventView.ChipId = null;
+            //    //dbContext.Events.Find(eventView.Id).ChipId = null;
+            //}
+            dbContext.SaveChanges();
   
         }
 
         private void tileView1_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
         {
            
-        
-      
 
 
                 if ((bool)tileView1.GetRowCellValue(e.RowHandle, timer_online))
@@ -478,8 +519,8 @@ namespace Competition.TimerControl
         {
             
             
-            int eventId = (int)tileView1.GetRowCellValue(e.Item.RowHandle, Id);
-            EventView eventView = EventViews.First(t => t.Id == eventId);
+            int item_id = (int)tileView1.GetRowCellValue(e.Item.RowHandle, Id);
+            EventView eventView = EventViews.First(t => t.Id == item_id);
             eventView.Checked = !eventView.Checked;
         }
 
@@ -490,6 +531,11 @@ namespace Competition.TimerControl
                 eventView.Checked = false;
 
             }
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
