@@ -3,6 +3,19 @@
         settings.Name = "EventGridView";
         settings.CallbackRouteValues = new { Controller = "Event", Action = "EventGridViewPartial" };
 
+         settings.Columns.Add(c => {
+        c.Caption = "ÆÀ·ÖÏ¸Ôò";
+        c.SetDataItemTemplateContent(tc => {
+            ViewContext.Writer.Write(
+                Html.ActionLink("±à¼­", "EventCriteriaEditForm","EventCriterias", new { EventId = DataBinder.Eval(tc.DataItem, "Id") },null)
+            );
+        });
+      
+        c.Settings.AllowDragDrop = DefaultBoolean.False;
+        c.Settings.AllowSort = DefaultBoolean.False;
+        c.Width = 70;
+    });
+
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Event", Action = "EventGridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Event", Action = "EventGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Event", Action = "EventGridViewPartialDelete" };
@@ -35,6 +48,7 @@
         settings.Columns.Add("Pro");
         settings.Columns.Add("MenuOrder");
         settings.Columns.Add("TimeLimit");
+        settings.Columns.Add("Amount");
         //settings.Columns.Add("ChipId");
     });
     if (ViewData["EditError"] != null){

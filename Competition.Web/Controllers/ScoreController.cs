@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Competition.EF.Models;
+using Competition.Web.Models;
 using DevExpress.Web.Mvc;
 
 namespace Competition.Web.Controllers
@@ -252,18 +253,35 @@ namespace Competition.Web.Controllers
 
             if (ScheduleId != null)
             {
-                var model = new Score();
-                model.ScheduleId = ScheduleId.Value;
-                model.Schedule = db.Schedules.Find(ScheduleId);
+                var model = new ScoreDetailViewModel();
+                //在属性里加了默认值，这里就不需要了
+                //model.Score = new Score();
+                //model.ScoreDetails = new List<ScoreDetail>();
+                var schedule = db.Schedules.Find(ScheduleId);
+                model.Score.ScheduleId = ScheduleId.Value;
+                model.Score.Schedule = schedule;
+                var judgeStaffid = User.Identity.Name;
+                var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
 
-                return PartialView("_ScoreJudgeEditFormPartial", model ?? new Score());
+                model.Score.JudgeId = judge.Id;
+                model.Score.Judge = judge;
+                var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
+                foreach(EventCriteria criteria in criterias)
+                {
+                    ScoreDetail detail = new ScoreDetail();
+                    detail.EventCriteriaId = criteria.Id;
+                    detail.EventCriteria = criteria;
+                    model.ScoreDetails.Add(detail);
+                   
+                }
+                return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
             }
-            return PartialView("_ScoreJudgeEditFormPartial", new Score());
+            return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
 
         }
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult ScoreJudgeEditFormPartial(Score item)
+        public ActionResult ScoreJudgeEditFormPartial(ScoreDetailViewModel item)
         {
 
             if (ModelState.IsValid)
@@ -271,15 +289,55 @@ namespace Competition.Web.Controllers
                 var judgeStaffid = User.Identity.Name;
                 var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
               
-                item.JudgeId = judge.Id;
-                item.JudgeTime = DateTime.Now;
-                item.ModifyTime = DateTime.Now;
-                db.Scores.Add(item);
+                item.Score.JudgeId = judge.Id;
+                item.Score.JudgeTime = DateTime.Now;
+                item.Score.ModifyTime = DateTime.Now;
+                item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
+                if (item.Score.Mark < 0)
+                {
+                    item.Score.Mark = 0;
+                }
+                db.Scores.Add(item.Score);
                 db.SaveChanges();
-
+                foreach (var detail in item.ScoreDetails)
+                {
+                    detail.ScoreId = item.Score.Id;
+                    db.ScoreDetails.Add(detail);
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return PartialView("_ScoreJudgeEditFormPartial", new Score());
+            return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
+
+        }
+
+        public ActionResult ScoreJudgeViewFormPartial(int? ScoreId)
+        {
+
+            if (ScoreId != null)
+            {
+                var item = db.Scores.FirstOrDefault(i => i.Id == ScoreId);
+                var schedule=db.Schedules.FirstOrDefault(i => i.Id == item.ScheduleId);
+                item.Schedule = schedule;
+                var model = new ScoreDetailViewModel();
+                model.Score = item;
+                model.ScoreDetails = item.ScoreDetail.ToList();
+
+                //这里需要EventCriterias与scoredetail leftjoin,暂时先只列出scoredetail
+              
+               
+                //var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
+                //foreach (EventCriteria criteria in criterias)
+                //{
+                //    ScoreDetail detail = new ScoreDetail();
+                //    detail.EventCriteriaId = criteria.Id;
+                //    detail.EventCriteria = criteria;
+                //    model.ScoreDetails.Add(detail);
+
+                //}
+                return PartialView("_ScoreJudgeViewFormPartial", model ?? new ScoreDetailViewModel());
+            }
+            return PartialView("_ScoreJudgeViewFormPartial", new ScoreDetailViewModel());
 
         }
     }

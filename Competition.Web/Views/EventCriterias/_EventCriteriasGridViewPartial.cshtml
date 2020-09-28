@@ -6,7 +6,7 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EventCriterias", Action = "EventCriteriasGridViewPartialDelete" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.Batch;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
         settings.SettingsBehavior.ConfirmDelete = true;
 
         settings.CommandColumn.Visible = true;
@@ -27,21 +27,28 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-
-        settings.Columns.Add("Title");
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "Title";
+            c.EditorProperties().Memo(m => {
+                m.Rows = 6;
+                
+            });
+        });
+        settings.Columns.Add("MinScore");
         settings.Columns.Add("MaxScore");
         settings.Columns.Add(c=> {
             c.FieldName = "EventId";
+
             c.Caption = "ÏîÄ¿";
             c.EditorProperties().ComboBox(p =>
             {
                 p.TextField = "Name";
                 p.ValueField = "Id";
-                p.ValueType = typeof(int);
                 p.DataSource = ViewBag.EventIds;
             });
         });
-       
+
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

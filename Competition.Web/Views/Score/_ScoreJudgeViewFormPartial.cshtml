@@ -1,0 +1,138 @@
+﻿@model Competition.Web.Models.ScoreDetailViewModel
+@{
+    Layout = "~/Views/Shared/_lightLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 text-left">
+            <h3>
+                <span> @Model.Score.Schedule.Competitor.Race_num</span>
+                <span> @Model.Score.Schedule.Competitor.Name</span>
+                <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
+                <span> | </span>
+                <span> @Model.Score.Schedule.Competitor.Company.Name</span>
+            </h3>
+        </div>
+        <div class="col-4 text-left">
+            <h4>
+                <span>得分：</span>
+                <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s => s.Mark) </span>
+            </h4>
+        </div>
+    </div>
+    <div class="=row text-left">
+        <h5>
+            @Model.Score.Schedule.Event.Name
+        </h5>
+    </div>
+    <div class="row"><p> </p></div>
+</div>
+
+
+
+
+<script>
+    function showscore(e) {
+
+
+    }
+    function reCalScore() {
+        var len =@Model.ScoreDetails.Count;
+        var sum =Number(0);
+        //js中定义用字符串拼接起来的变量名的变量  https://www.cnblogs.com/vlone/p/4602072.html
+        for (i = 0; i < len; i++) {
+            sum += Number(window["ScoreDetails" + i].lastValue);
+        }
+        $("#ScoreSum").text(sum);
+
+    }
+
+</script>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.Hidden("Score.ScheduleId")
+    <div class="container">
+        <div class="row">
+            <div class="h4">
+                <span class="m-auto">耗费时间: </span>
+                <span>@Html.DisplayFor(m => m.Score.TimeConsume)</span>
+            </div>
+
+          
+        </div>
+        <div class="row"><p> </p></div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-8 text-center">
+                        评分细则
+                    </th>
+                    <th class="col-1 text-center">
+                        权重
+                    </th>
+                    <th class="col-1 text-center">
+                        得分
+                    </th>
+                    <th class="col-2 text-center">
+                        备注
+                    </th>
+                </tr>
+            </thead>
+            @for (int i = 0; i < Model.ScoreDetails.Count; i++)
+            {
+                @Html.HiddenFor(d => d.ScoreDetails[i].Id)
+                @Html.HiddenFor(d => d.ScoreDetails[i].EventCriteriaId)
+                @Html.HiddenFor(d => d.ScoreDetails[i].ScoreId)
+
+                <tr>
+                    <td>
+                        @foreach (string s in Model.ScoreDetails[i].EventCriteria.Title.Split('\n'))
+                        {
+                            <p>@s</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(d => d.ScoreDetails[i].Mark)                      
+                     
+                    </td>
+                    <td>
+                        @Html.DisplayFor(d => d.ScoreDetails[i].Note)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="row">
+            <div class=" col-1">
+              备注：
+            </div>
+            <div class="col-10">
+                @Html.DisplayFor(m => m.Score.Note)
+            </div>
+
+        </div>
+        <div class="row float-right">
+           
+            @Html.DevExpress().Button(btnSettings =>
+            {
+            btnSettings.Name = "btnCancel";
+            btnSettings.Text = "返回";
+            btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
+            btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
+            }).GetHtml()
+        </div>
+    </div>
+
+
+}
+<script>
+    watermark("@User.Identity.Name")
+</script>

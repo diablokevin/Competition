@@ -19,9 +19,8 @@ namespace Competition.EF.Models
         public int MenuOrder { get; set; }
         [Display(Name = "限时")]
         public TimeSpan TimeLimit { get; set; }
+        public int Amount { get; set; } = 1;
         [Display(Name = "主板ID")]
-
-
         public virtual ICollection<Chip> Chips { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
 
@@ -295,16 +294,19 @@ namespace Competition.EF.Models
 
             }
         }
-
+        [DataType(DataType.MultilineText)]
+        public string Note { get; set; }
         public virtual Judge Judge { get; set; }
         public virtual Schedule Schedule { get; set; }
-        [Required]
+      
         public virtual ICollection<ScoreDetail> ScoreDetail { get; set; }
     }
     public class EventCriteria
     {
         public int Id { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Title { get; set; }
+        public int MinScore { get; set; } = 0;
         public int MaxScore { get; set; }
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
@@ -313,15 +315,16 @@ namespace Competition.EF.Models
     public class ScoreDetail
     {
         public int Id { get; set; }
-        public double? Mark { get; set; }
+        public double Mark { get; set; } = 0.0;
         
         public int EventCriteriaId { get; set; }
         [Required]
         public int ScoreId { get; set; }
+        public string Note { get; set; }
         public virtual EventCriteria EventCriteria { get; set; }
         public virtual Score Score { get; set; }
 
-
+            
 
     }
     public class Judge

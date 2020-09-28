@@ -21,12 +21,12 @@
                 </div>
             </a>
             @*<a href="@Url.Action("Index", "Schedule")">
-                <div class="myitem">
-                    <img src="~/Content/Icon/calendar.png" />
-                    <br />
-                    <p>相关赛程</p>
-                </div>
-            </a>*@
+                    <div class="myitem">
+                        <img src="~/Content/Icon/calendar.png" />
+                        <br />
+                        <p>相关赛程</p>
+                    </div>
+                </a>*@
             <div class="clear"></div>
         }
         if (HttpContext.Current.User.IsInRole("选手"))
@@ -42,12 +42,12 @@
             </a>
 
             @*<a href="@Url.Action("Index", "Schedule")">
-                <div class="myitem">
-                    <img src="~/Content/Icon/calendar.png" />
-                    <br />
-                    <p>相关赛程</p>
-                </div>
-            </a>*@
+                    <div class="myitem">
+                        <img src="~/Content/Icon/calendar.png" />
+                        <br />
+                        <p>相关赛程</p>
+                    </div>
+                </a>*@
             <div class="clear"></div>
         }
         if (HttpContext.Current.User.IsInRole("管理员"))
@@ -62,13 +62,13 @@
             </a>
 
             @*<a href="@Url.Action("Index", "Score")">
-                <div class="myitem">
+                    <div class="myitem">
 
-                    <img src="~/Content/Icon/table.png" />
-                    <br />
-                    <p>比赛成绩</p>
-                </div>
-            </a>*@
+                        <img src="~/Content/Icon/table.png" />
+                        <br />
+                        <p>比赛成绩</p>
+                    </div>
+                </a>*@
 
             <a href="@Url.Action("Index", "Schedule")">
                 <div class="myitem">
@@ -83,3 +83,10 @@
 
 }
 
+@{
+
+    //有用的教程 
+
+    //DevExpress MVC 控件使用 01 --- 基本使用方法 https://blog.csdn.net/weixin_34347651/article/details/91941901
+
+}
