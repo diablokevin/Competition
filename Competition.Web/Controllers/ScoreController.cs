@@ -293,6 +293,10 @@ namespace Competition.Web.Controllers
                 item.Score.JudgeTime = DateTime.Now;
                 item.Score.ModifyTime = DateTime.Now;
                 item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
+                if (item.Score.Mark < 0)
+                {
+                    item.Score.Mark = 0;
+                }
                 db.Scores.Add(item.Score);
                 db.SaveChanges();
                 foreach (var detail in item.ScoreDetails)

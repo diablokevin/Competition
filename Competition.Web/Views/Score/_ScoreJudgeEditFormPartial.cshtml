@@ -124,7 +124,7 @@
                    {
                        s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
                        s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
-
+                       s.Properties.MinValue = Model.ScoreDetails[i].EventCriteria.MinScore;
                        s.Properties.MaxValue = Model.ScoreDetails[i].EventCriteria.MaxScore;
                        s.Properties.Height = Unit.Pixel(10);
 
