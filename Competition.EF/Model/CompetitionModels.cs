@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+
 
 namespace Competition.EF.Models
 {
@@ -63,6 +65,19 @@ namespace Competition.EF.Models
         public virtual ICollection<Schedule> Schedules { get; set; }
     }
 
+    public enum SchedulStatus
+    {
+        [Description("等待中")]
+        Waiting,
+        [Description("已报到")]
+        Registered,
+        [Description("呼叫中")]
+        Calling,
+        [Description("进行中")]
+        Inprogress,
+        [Description("已完成")]
+        Complete
+    }
     public class Schedule
     {
         public int Id { get; set; }
@@ -197,6 +212,8 @@ namespace Competition.EF.Models
 
             }
         }
+
+        public SchedulStatus Status { get; set; } = SchedulStatus.Waiting;
         public virtual Competitor Competitor { get; set; }
         public virtual Event Event { get; set; }
 
@@ -342,4 +359,8 @@ namespace Competition.EF.Models
         public virtual Event Event { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
     }
+
+ 
+
+
 }

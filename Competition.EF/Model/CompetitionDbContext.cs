@@ -25,6 +25,8 @@ namespace Competition.EF.Models
         public System.Data.Entity.DbSet<Competition.EF.Models.EventCriteria> EventCriterias { get; set; }
         public DbSet<ScoreDetail> ScoreDetails { get; set; }
 
+      
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ScoreDetail>().HasRequired(a => a.EventCriteria).WithMany(u => u.ScoreDetail).WillCascadeOnDelete(false);

@@ -293,6 +293,7 @@ namespace Competition.Web.Controllers
                 item.Score.JudgeTime = DateTime.Now;
                 item.Score.ModifyTime = DateTime.Now;
                 item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
+                item.Score.Schedule.Status = SchedulStatus.Complete;
                 if (item.Score.Mark < 0)
                 {
                     item.Score.Mark = 0;

@@ -96,6 +96,10 @@
     <Compile Include="Migrations\202009280928055_addAmount.designer.cs">
       <DependentUpon>202009280928055_addAmount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009290412205_addkanban.cs" />
+    <Compile Include="Migrations\202009290412205_addkanban.designer.cs">
+      <DependentUpon>202009290412205_addkanban.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009280928055_addAmount.resx">
       <DependentUpon>202009280928055_addAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009290412205_addkanban.resx">
+      <DependentUpon>202009290412205_addkanban.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
