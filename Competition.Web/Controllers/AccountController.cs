@@ -791,5 +791,31 @@ namespace Competition.Web.Controllers {
 
             return View();
         }
+
+        public async Task<string> InitialAsync()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            if (db.Users.Where(u => u.UserName == "admin").Count()==0)
+            {
+                var user = new ApplicationUser { UserName = "admin", Email = "1@1.com", StaffId = "admin" };
+                var result = await UserManager.CreateAsync(user, "123456");
+                if (result.Succeeded)
+                {
+                    var result2= await UserManager.AddToRoleAsync(user.Id, "π‹¿Ì‘±");
+                    if(result2.Succeeded)
+                    {
+                        return "success";
+                    }
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+            return "donothing";
+           
+            
+           
+        }
     }
 }

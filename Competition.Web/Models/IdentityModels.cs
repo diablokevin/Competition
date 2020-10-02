@@ -1,4 +1,5 @@
 using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -48,6 +49,7 @@ namespace Competition.Web.Models
         {
             return new ApplicationDbContext();
         }
+ 
     }
 }
 

@@ -464,6 +464,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\IdentityHelper.cs" />
+    <Compile Include="Migrations\202009240908135_InitialCreate.cs" />
+    <Compile Include="Migrations\202009240908135_InitialCreate.designer.cs">
+      <DependentUpon>202009240908135_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -488,6 +493,11 @@
       <Project>{a2df1a9f-28c9-4f2a-af1a-256ac48ca353}</Project>
       <Name>Competition.EF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009240908135_InitialCreate.resx">
+      <DependentUpon>202009240908135_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

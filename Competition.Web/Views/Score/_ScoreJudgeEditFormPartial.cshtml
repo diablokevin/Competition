@@ -64,14 +64,14 @@
 
             <div class="col-md-3">
                 @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_minute, s =>
-            {
+           {
 
-                    s.Properties.Caption = "分";
-           s.Properties.NumberType = SpinEditNumberType.Integer;
-           s.Properties.MinValue = 0;
-           s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
-
-            }).GetHtml()
+               s.Properties.Caption = "分";
+               s.Properties.NumberType = SpinEditNumberType.Integer;
+               s.Properties.MinValue = 0;
+               s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
+              
+           }).GetHtml()
             </div>
             <div class="col-md-3">
 

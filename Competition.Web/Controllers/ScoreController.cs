@@ -288,12 +288,12 @@ namespace Competition.Web.Controllers
             {
                 var judgeStaffid = User.Identity.Name;
                 var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
-              
+                var schedule=db.Schedules.Find(item.Score.ScheduleId);
                 item.Score.JudgeId = judge.Id;
                 item.Score.JudgeTime = DateTime.Now;
                 item.Score.ModifyTime = DateTime.Now;
                 item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
-                item.Score.Schedule.Status = SchedulStatus.Complete;
+                schedule.Status = SchedulStatus.Complete;
                 if (item.Score.Mark < 0)
                 {
                     item.Score.Mark = 0;
