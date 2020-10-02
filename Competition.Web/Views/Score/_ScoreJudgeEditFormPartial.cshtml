@@ -18,7 +18,7 @@
         <div class="col-4 text-left">
             <h4>
                 <span>得分：</span>
-                <span id="ScoreSum" >@Model.ScoreDetails.Sum(s => s.Mark) </span>
+                <span id="ScoreSum">@Model.ScoreDetails.Sum(s => s.Mark) </span>
             </h4>
         </div>
     </div>
@@ -32,8 +32,8 @@
 
 
 
-
 <script>
+    
 
     function reCalScore() {
         var len =@Model.ScoreDetails.Count;
@@ -46,11 +46,14 @@
 
     }
 
+
 </script>
 
 
-@using (Html.BeginForm())
-{
+@*@using (Html.BeginForm())
+{*@
+<form method="post" onkeydown="if(event.keyCode==13){return false;}">
+
 
     @Html.Hidden("Score.ScheduleId")
     <div class="container">
@@ -67,7 +70,7 @@
                s.Properties.NumberType = SpinEditNumberType.Integer;
                s.Properties.MinValue = 0;
                s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
-              
+
            }).GetHtml()
             </div>
             <div class="col-md-3">
@@ -108,10 +111,10 @@
 
                 <tr>
                     <td>
-                       @foreach(string s in Model.ScoreDetails[i].EventCriteria.Title.Split('\n'))
-                       {
-                           <p>@s</p>
-                       }                                              
+                        @foreach (string s in Model.ScoreDetails[i].EventCriteria.Title.Split('\n'))
+                        {
+                            <p>@s</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
@@ -141,7 +144,6 @@
                     项目完成用时(每提前 30 秒得 0.5 分，不足30 秒不加分)
                 </td>
                 <td>
-
                 </td>
             </tr>
 
@@ -176,9 +178,10 @@
         </div>
     </div>
 
-
-}
+</form>
+@*}*@
 <script>
     watermark("@Model.Score.Judge.StaffId\n @Model.Score.Judge.Name")
-    //watermark("@User.Identity.Name")
+    //watermark("@User.Identity.Name")  
+ 
 </script>
