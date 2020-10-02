@@ -18,7 +18,7 @@
         <div class="col-4 text-left">
             <h4>
                 <span>得分：</span>
-                <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s => s.Mark) </span>
+                <span id="ScoreSum" >@Model.ScoreDetails.Sum(s => s.Mark) </span>
             </h4>
         </div>
     </div>
@@ -34,10 +34,7 @@
 
 
 <script>
-    function showscore(e) {
 
-
-    }
     function reCalScore() {
         var len =@Model.ScoreDetails.Count;
         var sum =Number(0);
