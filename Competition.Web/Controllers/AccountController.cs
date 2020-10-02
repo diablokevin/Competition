@@ -794,28 +794,54 @@ namespace Competition.Web.Controllers {
 
         public async Task<string> InitialAsync()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            if (db.Users.Where(u => u.UserName == "admin").Count()==0)
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var user = new ApplicationUser { UserName = "admin", Email = "1@1.com", StaffId = "admin" };
-                var result = await UserManager.CreateAsync(user, "123456");
-                if (result.Succeeded)
+                if(db.Roles.Where(r=>r.Name == "管理员").Count()==0)
                 {
-                    var result2= await UserManager.AddToRoleAsync(user.Id, "管理员");
-                    if(result2.Succeeded)
+                    var roles = new List<ApplicationRole>
+                        {
+                            new ApplicationRole{ Name = "考官"},
+                            new ApplicationRole{ Name = "管理员"}
+                        };
+                    roles.ForEach(s => db.Roles.Add(s));
+                    db.SaveChanges();
+                }
+              
+
+                if (db.Users.Where(u => u.UserName == "admin").Count() == 0)
+                {
+                    var user = new ApplicationUser { UserName = "admin",  StaffId = "admin" };
+                   
+                    var result = await UserManager.CreateAsync(user, "123456");
+                    if (result.Succeeded)
                     {
-                        return "success";
+                        var result2 = await UserManager.AddToRoleAsync(user.Id, "管理员");
+                        if (result2.Succeeded)
+                        {
+                            var user2 = new ApplicationUser { UserName = "611871", RealName = "都基瑛", StaffId = "611871" };
+                            var result3 = await UserManager.CreateAsync(user2, "123456");
+                            if(result3.Succeeded)
+                            {
+                                var result4 = await UserManager.AddToRoleAsync(user2.Id, "考官");
+                                if(result4.Succeeded)
+                                {
+                                    return "success";
+                                }
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        return "fail";
                     }
                 }
-                else
-                {
-                    return "fail";
-                }
+                return "donothing";
+
             }
-            return "donothing";
-           
-            
-           
+
+
+
         }
     }
 }
