@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_lightLayout.cshtml";
 }
 
-
+<div class="alert-danger">@ViewBag.Error</div>
 <div class="container">
     <div class="row">
         <div class="col-8 text-left">
@@ -45,7 +45,9 @@
         $("#ScoreSum").text(sum);
 
     }
-
+   
+      
+   
 
 </script>
 
@@ -61,7 +63,7 @@
             <div class="col-md-1">
                 <div class="m-auto">耗费时间</div>
             </div>
-            <input type="number">
+            <input type="number" pattern="^[0-9]+\.{0,1}[0-9]{0,2}$" max="9" min="0">
             <div class="col-md-3">
                 @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_minute, s =>
            {
