@@ -123,7 +123,7 @@
                     <th class="col-8 text-center">
                         评分细则
                     </th>
-                    <th class="col-1 text-center">
+                    <th class="col-2 text-center">
                         权重
                     </th>
                     <th class="col-1 text-center">
@@ -148,11 +148,22 @@
                         }
                     </td>
                     <td>
-                        @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
+                        @if (Model.ScoreDetails[i].EventCriteria.MaxScore != 0)
+                        {
+                            @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
+                        }
+                        else if (Model.ScoreDetails[i].EventCriteria.MinScore != 0)
+                        {
+                            @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MinScore)
+                        }
+
                     </td>
                     <td>
+                  
+
                         @Html.DevExpress().SpinEditFor(m => m.ScoreDetails[i].Mark, s =>
                    {
+                       s.ClientVisible = Model.ScoreDetails[i].EventCriteria.MinScore != 0 || Model.ScoreDetails[i].EventCriteria.MaxScore != 0;
                        s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
                        s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
                        s.Properties.MinValue = Model.ScoreDetails[i].EventCriteria.MinScore;
@@ -162,16 +173,17 @@
                        s.Properties.SpinButtons.ShowLargeIncrementButtons = true;
                        s.Properties.Increment = 0.5M;
                        s.Properties.LargeIncrement = 1;
-                       
-                       
+
+
 
                    }).GetHtml()
-                        @* @Html.TextBoxFor(d => d.ScoreDetails[i].Mark)*@
+                        
                     </td>
                     <td>
                         @Html.DevExpress().TextBoxFor(m => m.ScoreDetails[i].Note, s =>
                    {
-
+                       s.ClientVisible = Model.ScoreDetails[i].EventCriteria.MinScore != 0 || Model.ScoreDetails[i].EventCriteria.MaxScore != 0;
+                      
                         }).GetHtml()
                     </td>
                 </tr>
