@@ -326,7 +326,8 @@ namespace Competition.Web.Controllers
                 }
                 
             }
-            return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
+            ViewBag.Error = ModelState.Values;
+            return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId));
 
         }
 
