@@ -54,7 +54,7 @@ namespace Competition.Web.Controllers {
                 return _roleManager;
             }
         }
-
+      
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -521,25 +521,9 @@ namespace Competition.Web.Controllers {
             
             //转换users的模型
             List<AccountEditModel> accountEditModels = new List<AccountEditModel>();
-            foreach(var item in UserManager.Users)
-            {
-                //var accountEditModel = new AccountEditModel
-                //{
-                //    Id = item.Id,
-                //    UserName = item.UserName,
-                //    RealName = item.RealName,
-                //    StaffId = item.StaffId
-                //};
-                //List<string> list = new List<string>();
-                //foreach(var role in item.Roles)  //把rolesID转换到tokenbox中
-                //{
-                //    accountEditModel.RoleIds.Add(role.RoleId);
-                //    list.Add(RoleManager.FindById(role.RoleId).Name);
-                //}
-
-                ////把roleId转换为roleName字符串
-                //accountEditModel.Roles = string.Join(";", list.ToArray());
-                accountEditModels.Add(new AccountEditModel(item, RoleManager.Roles));
+            foreach(var item in UserManager.Users.ToList())
+            {             
+                accountEditModels.Add(new AccountEditModel(item, RoleManager.Roles.ToList()));
             }
             ViewBag.Roles = RoleManager.Roles.ToList();
             
@@ -555,7 +539,7 @@ namespace Competition.Web.Controllers {
             List<AccountEditModel> model = new List<AccountEditModel>();
             foreach (var applicationUser in UserManager.Users)
             {
-                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles));
+                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles.ToList()));
             }
 
             if (ModelState.IsValid)
@@ -594,7 +578,7 @@ namespace Competition.Web.Controllers {
             List<AccountEditModel> model = new List<AccountEditModel>();
             foreach (var applicationUser in UserManager.Users)
             {
-                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles));
+                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles.ToList()));
             }
             ApplicationUser user = await UserManager.FindByIdAsync(item.Id);
             if (ModelState.IsValid)
@@ -681,7 +665,7 @@ namespace Competition.Web.Controllers {
             List<AccountEditModel> model = new List<AccountEditModel>();
             foreach (var applicationUser in UserManager.Users)
             {
-                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles));
+                model.Add(new AccountEditModel(applicationUser, RoleManager.Roles.ToList()));
             }
             ApplicationUser user = await UserManager.FindByIdAsync(Id);
             if (user != null)
@@ -723,7 +707,7 @@ namespace Competition.Web.Controllers {
                     tokencol.Add(role.RoleId);
                 }
 
-                AccountEditModel model = new AccountEditModel(user, RoleManager.Roles);
+                AccountEditModel model = new AccountEditModel(user, RoleManager.Roles.ToList());
 
                 return PartialView("_AccountEditFormPartial", model ?? new AccountEditModel());
             }
@@ -794,51 +778,46 @@ namespace Competition.Web.Controllers {
 
         public async Task<string> InitialAsync()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            if(!RoleManager.RoleExists("管理员"))
             {
-                if(db.Roles.Where(r=>r.Name == "管理员").Count()==0)
+                IdentityResult role_result = await RoleManager.CreateAsync(new ApplicationRole("管理员"));
+                await RoleManager.CreateAsync(new ApplicationRole("考官"));
+                if (role_result.Succeeded)
                 {
-                    var roles = new List<ApplicationRole>
-                        {
-                            new ApplicationRole{ Name = "考官"},
-                            new ApplicationRole{ Name = "管理员"}
-                        };
-                    roles.ForEach(s => db.Roles.Add(s));
-                    db.SaveChanges();
-                }
-              
-
-                if (db.Users.Where(u => u.UserName == "admin").Count() == 0)
-                {
-                    var user = new ApplicationUser { UserName = "admin",  StaffId = "admin" };
-                   
-                    var result = await UserManager.CreateAsync(user, "123456");
-                    if (result.Succeeded)
+                   if( UserManager.Users.Where(u=>u.UserName=="admin").Count()==0)
                     {
-                        var result2 = await UserManager.AddToRoleAsync(user.Id, "管理员");
-                        if (result2.Succeeded)
+                        var user = new ApplicationUser { UserName = "admin", StaffId = "admin" };
+
+                        var result = await UserManager.CreateAsync(user, "123456");
+                        if (result.Succeeded)
                         {
-                            var user2 = new ApplicationUser { UserName = "611871", RealName = "都基瑛", StaffId = "611871" };
-                            var result3 = await UserManager.CreateAsync(user2, "123456");
-                            if(result3.Succeeded)
+                            var result2 = await UserManager.AddToRoleAsync(user.Id, "管理员");
+                            if (result2.Succeeded)
                             {
-                                var result4 = await UserManager.AddToRoleAsync(user2.Id, "考官");
-                                if(result4.Succeeded)
+                                var user2 = new ApplicationUser { UserName = "611871", RealName = "都基瑛", StaffId = "611871" };
+                                var result3 = await UserManager.CreateAsync(user2, "123456");
+                                if (result3.Succeeded)
                                 {
-                                    return "success";
+                                    var result4 = await UserManager.AddToRoleAsync(user2.Id, "考官");
+                                    if (result4.Succeeded)
+                                    {
+                                        return "success";
+                                    }
                                 }
+
                             }
-                            
+                        }
+                        else
+                        {
+                            return "fail";
                         }
                     }
-                    else
-                    {
-                        return "fail";
-                    }
                 }
+            }
+          
                 return "donothing";
 
-            }
+         
 
 
 

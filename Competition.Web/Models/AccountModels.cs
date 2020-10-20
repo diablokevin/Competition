@@ -158,7 +158,7 @@ namespace Competition.Web.Models
     {
         public AccountEditModel()
         { }
-        public AccountEditModel(ApplicationUser user,IQueryable<ApplicationRole> roles)
+        public AccountEditModel(ApplicationUser user,List<ApplicationRole> roles)
         {
            
             Id = user.Id;
@@ -167,9 +167,9 @@ namespace Competition.Web.Models
             StaffId = user.StaffId;
             List<string> list = new List<string>();
            
-            foreach (var role in user.Roles)  //把rolesID转换到tokenbox中
+            foreach (var role in user.Roles.ToList())  //把rolesID转换到tokenbox中
             {
-                this.RoleIds.Add(role.RoleId);
+                RoleIds.Add(role.RoleId);
                 list.Add(roles.FirstOrDefault(r=>r.Id==role.RoleId).Name);
             }
             //把roleId转换为roleName字符串
