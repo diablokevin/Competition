@@ -283,6 +283,17 @@ namespace Competition.Web.Controllers
                 model.ScoreDetails.Add(detail);
 
             }
+            if(model.Score.Schedule.Event.HasTimeScore)
+            {
+                ScoreDetail detail = new ScoreDetail();
+                EventCriteria criteria = new EventCriteria();
+                criteria.EventId = model.Score.Schedule.EventId;
+                criteria.Title = "项目完成用时\n(每提前30秒得0.5分，不足30秒不加分)";
+                criteria.MinScore =0;
+                criteria.MaxScore = 5;
+                detail.EventCriteria = criteria;
+                model.ScoreDetails.Add(detail);
+            }
 
             return model;
         }
