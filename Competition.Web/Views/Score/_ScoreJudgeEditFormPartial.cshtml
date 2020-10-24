@@ -34,27 +34,42 @@
 
 <script>
     
+    var timescore = 0.0;
 
     function reCalScore() {
         var len =@Model.ScoreDetails.Count;
         var sum =Number(0);
         //js中定义用字符串拼接起来的变量名的变量  https://www.cnblogs.com/vlone/p/4602072.html
         for (i = 0; i < len; i++) {
-            sum += Number(window["ScoreDetails" + i].lastValue);
+            sum += Number(window["ScoreDetails" + i].lastSuccessValue);
         }
+        sum += timescore;
+        if (sum < 0) { sum = 0 };
         $("#ScoreSum").text(sum);
 
     }
-   
+
+    function CalTimeScore() {
+        if (@(Model.Score.Schedule.Event.HasTimeScore?1:0)) {
+            var timelimit = @Model.Score.Schedule.Event.TimeLimit.TotalSeconds;
+            var min = TimeConsume_minute.lastSuccessValue;
+            var sec = TimeConsume_second.lastSuccessValue;
+            timescore = Math.floor((timelimit - 60 * min - sec) / 30) * 0.5;
+            if (timescore < 0) { timescore = 0 }
+            if (timescore > 5) { timescore=5 }
+            $("#timescore").text(timescore);
+            reCalScore();
+        }      
+    }
       
    
 
 </script>
 
 
-@*@using (Html.BeginForm())
-{*@
-<form method="post" onkeydown="if(event.keyCode==13){return false;}">
+@using (Html.BeginForm())
+{
+@*<form method="post" onkeydown="if(event.keyCode==13){return false;}">*@
 
 
     @Html.Hidden("Score.ScheduleId")
@@ -66,12 +81,14 @@
            @* <input type="number" pattern="^[0-9]+\.{0,1}[0-9]{0,2}$" max="9" min="0">*@
             <div class="col-3">
                 @Html.DevExpress().ComboBoxFor(m => m.Score.TimeConsume_minute, s =>
-                {
-               s.Properties.Caption = "分";             
+           {
+               s.Properties.Caption = "分";
                s.Properties.ValueType = typeof(int);
+               s.Properties.ClientInstanceName = "TimeConsume_minute";
+               s.Properties.ClientSideEvents.TextChanged = "function(s, e){ CalTimeScore()}";
                for (int i = 0; i <= Model.Score.Schedule.Event.TimeLimit.Minutes; i++)
                {
-                  s.Properties.Items.Add(i.ToString(), i);
+                   s.Properties.Items.Add(i.ToString(), i);
                }
 
 
@@ -80,12 +97,14 @@
             </div>
             <div class="col-3">
                 @Html.DevExpress().ComboBoxFor(m => m.Score.TimeConsume_second, s =>
-                {
-               s.Properties.Caption = "秒";              
+           {
+               s.Properties.Caption = "秒";
                s.Properties.ValueType = typeof(int);
+                s.Properties.ClientInstanceName = "TimeConsume_second";
+               s.Properties.ClientSideEvents.TextChanged = "function(s, e){ CalTimeScore()}";
                for (int i = 0; i < 60; i++)
                {
-                  s.Properties.Items.Add(i.ToString(), i);
+                   s.Properties.Items.Add(i.ToString(), i);
                }
 
 
@@ -159,44 +178,64 @@
 
                     </td>
                     <td>
-                  
+                  @Html.DevExpress().ComboBoxFor(m => m.ScoreDetails[i].Mark, s => {
+                 s.ClientVisible = Model.ScoreDetails[i].EventCriteria.MinScore != 0 || Model.ScoreDetails[i].EventCriteria.MaxScore != 0;
+                 s.Properties.ClientSideEvents.ValueChanged = "function(s, e){ reCalScore()}";
+                 s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
+                 s.Width = Unit.Pixel(80);
+                 if( Model.ScoreDetails[i].EventCriteria.MinScore<0)
+                 {
+                     for (double j = 0; j >= Model.ScoreDetails[i].EventCriteria.MinScore; j=j-0.5)
+                     {
+                         s.Properties.Items.Add(j.ToString(), j);
+                     }
+                 }
+                 else
+                 {
+                     for (double j = 0; j <= Model.ScoreDetails[i].EventCriteria.MaxScore; j=j+0.5)
+                     {
+                         s.Properties.Items.Add(j.ToString(), j);
+                     }
+                 }
 
-                        @Html.DevExpress().SpinEditFor(m => m.ScoreDetails[i].Mark, s =>
-                   {
-                       s.ClientVisible = Model.ScoreDetails[i].EventCriteria.MinScore != 0 || Model.ScoreDetails[i].EventCriteria.MaxScore != 0;
-                       s.Properties.ClientSideEvents.NumberChanged = "function(s, e){ reCalScore()}";
-                       s.Properties.ClientInstanceName = string.Format("ScoreDetails{0}", i);
-                       s.Properties.MinValue = Model.ScoreDetails[i].EventCriteria.MinScore;
-                       s.Properties.MaxValue = Model.ScoreDetails[i].EventCriteria.MaxScore;
-                       s.Properties.Height = Unit.Pixel(10);
-                       s.Properties.NumberType = SpinEditNumberType.Float;
-                       s.Properties.SpinButtons.ShowLargeIncrementButtons = true;
-                       s.Properties.Increment = 0.5M;
-                       s.Properties.LargeIncrement = 1;
+             }).GetHtml()
 
-
-
-                   }).GetHtml()
-                        
+                                            
                     </td>
                     <td>
-                        @Html.DevExpress().TextBoxFor(m => m.ScoreDetails[i].Note, s =>
+                        @Html.DevExpress().MemoFor(m => m.ScoreDetails[i].Note, s =>
                    {
                        s.ClientVisible = Model.ScoreDetails[i].EventCriteria.MinScore != 0 || Model.ScoreDetails[i].EventCriteria.MaxScore != 0;
-                      
-                        }).GetHtml()
+                       s.Width = Unit.Pixel(150);
+                        s.Properties.Rows = 4;
+                   }).GetHtml()
                     </td>
                 </tr>
             }
-        
+            @if(Model.Score.Schedule.Event.HasTimeScore)
+            {
+               <tr>
+                   <td>
+                       <p>项目完成用时</p>
+                       <p>(每提前30秒得0.5分，不足30秒不加分,填写时间后自动计算)</p>
+                   </td>
+                   <td>
+                       5
+                   </td>
+                   <td>
+                       <span id="timescore">0</span>
+                   </td>
+                   <td></td>
+               </tr>
+            }
 
         </table>
         <div class="row">
             <div class="col-12">
-                @Html.DevExpress().MemoFor(m => m.Score.Note, s =>
+           @Html.DevExpress().MemoFor(m => m.Score.Note, s =>
            {
                s.Properties.Caption = "备注";
-
+             
                s.Width = Unit.Percentage(100);
                s.Properties.Rows = 6;
            }).GetHtml()
@@ -221,8 +260,8 @@
         </div>
     </div>
 
-</form>
-@*}*@
+@*</form>*@
+}
 <script>
     watermark("@Model.Score.Judge.StaffId\n @Model.Score.Judge.Name")
     //watermark("@User.Identity.Name")  

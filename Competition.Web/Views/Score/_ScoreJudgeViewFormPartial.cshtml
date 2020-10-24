@@ -100,12 +100,42 @@
                         @Html.DisplayFor(d => d.ScoreDetails[i].EventCriteria.MaxScore)
                     </td>
                     <td>
-                        @Html.DisplayFor(d => d.ScoreDetails[i].Mark)                      
-                     
+                        @Html.DisplayFor(d => d.ScoreDetails[i].Mark)
+
                     </td>
                     <td>
-                        @Html.DisplayFor(d => d.ScoreDetails[i].Note)
+                        @if (!Model.ScoreDetails[i].Note.IsEmpty())
+                        {
+                            foreach (string s in Model.ScoreDetails[i].Note.Split('\n'))
+                            {
+                                <p>@s</p>
+                            }
+                        }
+
                     </td>
+                </tr>
+            }
+            @if (Model.Score.Schedule.Event.HasTimeScore)
+            {
+                <tr>
+                    <td>
+                        <p>项目完成用时</p>
+                        <p>(每提前30秒得0.5分，不足30秒不加分,填写时间后自动计算)</p>
+                    </td>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        @{
+                            int timelimit = Convert.ToInt32(Model.Score.Schedule.Event.TimeLimit.TotalSeconds);
+                            int min = Model.Score.TimeConsume_minute.Value;
+                            int sec = Model.Score.TimeConsume_second.Value;
+                            double timescore = Math.Floor((double)(timelimit - 60 * min - sec) / 30) * 0.5;
+                            <span id="timescore">@timescore</span>
+                        }
+
+                    </td>
+                    <td></td>
                 </tr>
             }
 
@@ -115,7 +145,15 @@
               备注：
             </div>
             <div class="col-10">
-                @Html.DisplayFor(m => m.Score.Note)
+                @if (!Model.Score.Note.IsEmpty())
+                {
+                    foreach (string s in Model.Score.Note.Split('\n'))
+                    {
+                        <p>@s</p>
+                    }
+                }
+
+
             </div>
 
         </div>
