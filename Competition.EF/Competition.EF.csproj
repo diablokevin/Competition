@@ -100,6 +100,10 @@
     <Compile Include="Migrations\202009290412205_addkanban.designer.cs">
       <DependentUpon>202009290412205_addkanban.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010200810117_hastimescore.cs" />
+    <Compile Include="Migrations\202010200810117_hastimescore.designer.cs">
+      <DependentUpon>202010200810117_hastimescore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009290412205_addkanban.resx">
       <DependentUpon>202009290412205_addkanban.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010200810117_hastimescore.resx">
+      <DependentUpon>202010200810117_hastimescore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -283,7 +283,7 @@ namespace Competition.Web.Controllers
                 model.ScoreDetails.Add(detail);
 
             }
-
+           
             return model;
         }
 
@@ -303,6 +303,11 @@ namespace Competition.Web.Controllers
                     item.Score.JudgeTime = DateTime.Now;
                     item.Score.ModifyTime = DateTime.Now;
                     item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
+                    int timelimit =Convert.ToInt32( item.Score.Schedule.Event.TimeLimit.TotalSeconds);
+                    int min = item.Score.TimeConsume_minute.Value;
+                    int sec = item.Score.TimeConsume_second.Value;
+                    double timescore= Math.Floor((double)(timelimit - 60 * min - sec) / 30) * 0.5;
+                    item.Score.Mark += timescore;
                     schedule.Status = SchedulStatus.Complete;
                     if (item.Score.Mark < 0)
                     {
