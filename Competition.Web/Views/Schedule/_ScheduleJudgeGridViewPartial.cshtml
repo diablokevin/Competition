@@ -35,7 +35,7 @@
             c.AdaptivePriority = 1;
             c.SetDataItemTemplateContent(tc=> {
                 ViewContext.Writer.Write(
-                  Html.ActionLink("ÆÀ·Ö", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId=DataBinder.Eval(tc.DataItem,"Id") }, null)
+                  Html.ActionLink("ÆÀ·Ö", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId=DataBinder.Eval(tc.DataItem,"Id"),setId=0 }, null)
 
                         );
             });

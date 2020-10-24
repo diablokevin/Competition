@@ -18,14 +18,24 @@
         <div class="col-4 text-left">
             <h4>
                 <span>得分：</span>
-                <span id="ScoreSum" onclick="showscore()">@Model.ScoreDetails.Sum(s => s.Mark) </span>
+                <span id="ScoreSum" onclick="showscore()">@Model.Score.Mark</span>
             </h4>
         </div>
     </div>
-    <div class="=row text-left">
-        <h5>
+    <div class="row text-left h5">
+        <div class="col-4">
             @Model.Score.Schedule.Event.Name
-        </h5>
+        </div>
+        <div class="col-4">
+            @if (Model.Score.Schedule.Event.MultiScoreDetailSet)
+            {
+                <span>评分单编号：@Model.SetId</span>
+            }
+        </div>
+        <div class="col-4">
+            <span>耗费时间: </span>
+            <span>@Html.DisplayFor(m => m.Score.TimeConsume)</span>
+        </div>
     </div>
     <div class="row"><p> </p></div>
 </div>
@@ -34,10 +44,7 @@
 
 
 <script>
-    function showscore(e) {
 
-
-    }
     function reCalScore() {
         var len =@Model.ScoreDetails.Count;
         var sum =Number(0);
@@ -58,10 +65,7 @@
     @Html.Hidden("Score.ScheduleId")
     <div class="container">
         <div class="row">
-            <div class="h4">
-                <span class="m-auto">耗费时间: </span>
-                <span>@Html.DisplayFor(m => m.Score.TimeConsume)</span>
-            </div>
+          
 
           
         </div>
@@ -108,7 +112,8 @@
                         {
                             foreach (string s in Model.ScoreDetails[i].Note.Split('\n'))
                             {
-                                <p>@s</p>
+                                @s
+                                <br />
                             }
                         }
 
@@ -149,7 +154,8 @@
                 {
                     foreach (string s in Model.Score.Note.Split('\n'))
                     {
-                        <p>@s</p>
+                        @s
+                        <br />
                     }
                 }
 

@@ -2,38 +2,8 @@
 @{
     Layout = "~/Views/Shared/_lightLayout.cshtml";
 }
+    <script>
 
-<div class="alert-danger">@ViewBag.Error</div>
-<div class="container">
-    <div class="row">
-        <div class="col-8 text-left">
-            <h3>
-                <span> @Model.Score.Schedule.Competitor.Race_num</span>
-                <span> @Model.Score.Schedule.Competitor.Name</span>
-                <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
-                <span> | </span>
-                <span> @Model.Score.Schedule.Competitor.Company.Name</span>
-            </h3>
-        </div>
-        <div class="col-4 text-left">
-            <h4>
-                <span>得分：</span>
-                <span id="ScoreSum">@Model.ScoreDetails.Sum(s => s.Mark) </span>
-            </h4>
-        </div>
-    </div>
-    <div class="=row text-left">
-        <h5>
-            @Model.Score.Schedule.Event.Name
-        </h5>
-    </div>
-    <div class="row"><p> </p></div>
-</div>
-
-
-
-<script>
-    
     var timescore = 0.0;
 
     function reCalScore() {
@@ -59,12 +29,64 @@
             if (timescore > 5) { timescore=5 }
             $("#timescore").text(timescore);
             reCalScore();
-        }      
+        }
     }
-      
-   
 
-</script>
+        function ChangeSetId() {
+            window.location = "@Url.Action("ScoreJudgeEditFormPartial","Score",new { ScheduleId=Model.Score.ScheduleId})&setId=" + SetId.lastSuccessValue
+               
+        }
+
+
+    </script>
+<div class="alert-danger">@ViewBag.Error</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8 text-left">
+            <h3>
+                <span> @Model.Score.Schedule.Competitor.Race_num</span>
+                <span> @Model.Score.Schedule.Competitor.Name</span>
+                <span>(@Model.Score.Schedule.Competitor.StaffId)</span>
+                <span> | </span>
+                <span> @Model.Score.Schedule.Competitor.Company.Name</span>
+            </h3>
+        </div>
+        <div class="col-4 text-left">
+            <h4>
+                <span>得分：</span>
+                <span id="ScoreSum">@Model.ScoreDetails.Sum(s => s.Mark) </span>
+            </h4>
+        </div>
+    </div>
+    <div class="row text-left">
+        <h5 class="h5 col-4">
+            @Model.Score.Schedule.Event.Name
+        </h5>
+        <div class="col-4">
+            @if (Model.Score.Schedule.Event.MultiScoreDetailSet)
+            {
+                @Html.DevExpress().ComboBoxFor(m => m.SetId, s =>
+           {
+               s.Properties.Caption = "请选择评分单编号：";
+               s.Properties.ClientInstanceName = "SetId";
+               s.Properties.ClientSideEvents.ValueChanged = "function(s, e){ ChangeSetId()}"; ;
+               foreach (int id in ViewBag.setIdList)
+               {
+                   s.Properties.Items.Add(id.ToString(), id);
+               }
+
+           }).GetHtml()
+            }
+
+        </div>
+    </div>
+    
+    <div class="row"><p> </p></div>
+</div>
+
+
+
+
 
 
 @using (Html.BeginForm())

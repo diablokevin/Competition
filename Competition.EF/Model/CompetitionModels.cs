@@ -25,7 +25,7 @@ namespace Competition.EF.Models
         public int Amount { get; set; } = 1;
         [Display(Name = "时间分")]
         public bool HasTimeScore { get; set; } = true;
-
+        public bool MultiScoreDetailSet { get; set; } = false;
         [Display(Name = "主板ID")]
         public virtual ICollection<Chip> Chips { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
@@ -198,8 +198,7 @@ namespace Competition.EF.Models
         public double? MarkAVG
         {
             get
-            {
-
+            {              
                 double total = 0.0;
                 foreach (Score s in Scores)
                 {
@@ -241,6 +240,7 @@ namespace Competition.EF.Models
         [Display(Name = "裁判")]
         public int? JudgeId { get; set; }
 
+      
 
         [NotMapped]
         public int? TimeConsume_hour
@@ -325,6 +325,7 @@ namespace Competition.EF.Models
     public class EventCriteria
     {
         public int Id { get; set; }
+        public int SetId { get; set; } = 0;
         [DataType(DataType.MultilineText)]
         public string Title { get; set; }
         public int MinScore { get; set; } = 0;

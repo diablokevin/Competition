@@ -248,33 +248,47 @@ namespace Competition.Web.Controllers
             return PartialView("_ScoreCompetitorGridViewPartial", model.ToList());
         }
 
-        public ActionResult ScoreJudgeEditFormPartial(int? ScheduleId)
+        public ActionResult ScoreJudgeEditFormPartial(int? ScheduleId,int? SetId)
         {
 
             if (ScheduleId != null)
             {
-                ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId);
-                return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
+                if(SetId==null)
+                {
+                    ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId.Value,0);
+                    return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
+                }
+                else
+                {
+                    var schedule = db.Schedules.Find(ScheduleId);
+                    var setIdList = db.EventCriterias.Where(c => c.EventId == schedule.EventId).GroupBy(g=>g.SetId).Select(s=>s.Key);
+                    ViewBag.setIdList = setIdList;
+                    ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId.Value, SetId.Value);
+                    return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
+                }
+               
             }
             return PartialView("_ScoreJudgeEditFormPartial", new ScoreDetailViewModel());
 
         }
 
-        private ScoreDetailViewModel GetNewScoreDetailViewModel(int? ScheduleId)
+      
+
+        private ScoreDetailViewModel GetNewScoreDetailViewModel(int ScheduleId,int SetId)
         {
             var model = new ScoreDetailViewModel();
             //在属性里加了默认值，这里就不需要了
             //model.Score = new Score();
             //model.ScoreDetails = new List<ScoreDetail>();
             var schedule = db.Schedules.Find(ScheduleId);
-            model.Score.ScheduleId = ScheduleId.Value;
+            model.Score.ScheduleId = ScheduleId;
             model.Score.Schedule = schedule;
             var judgeStaffid = User.Identity.Name;
-            var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
-
+            var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();            
             model.Score.JudgeId = judge.Id;
             model.Score.Judge = judge;
-            var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId);
+            model.SetId = SetId;
+            var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId&&c.SetId==SetId);
             foreach (EventCriteria criteria in criterias)
             {
                 ScoreDetail detail = new ScoreDetail();
@@ -283,10 +297,9 @@ namespace Competition.Web.Controllers
                 model.ScoreDetails.Add(detail);
 
             }
-           
+
             return model;
         }
-
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult ScoreJudgeEditFormPartial(ScoreDetailViewModel item)
@@ -303,11 +316,17 @@ namespace Competition.Web.Controllers
                     item.Score.JudgeTime = DateTime.Now;
                     item.Score.ModifyTime = DateTime.Now;
                     item.Score.Mark = item.ScoreDetails.Sum(s => s.Mark);
-                    int timelimit =Convert.ToInt32( item.Score.Schedule.Event.TimeLimit.TotalSeconds);
+                    int timelimit =Convert.ToInt32(schedule.Event.TimeLimit.TotalSeconds);
                     int min = item.Score.TimeConsume_minute.Value;
                     int sec = item.Score.TimeConsume_second.Value;
-                    double timescore= Math.Floor((double)(timelimit - 60 * min - sec) / 30) * 0.5;
-                    item.Score.Mark += timescore;
+                    if(schedule.Event.HasTimeScore)
+                    {
+                        double timescore = Math.Floor((double)(timelimit - 60 * min - sec) / 30) * 0.5;
+                        if (timescore > 5) { timescore = 5; }
+                        if (timescore < 0) { timescore = 0; }
+                        item.Score.Mark += timescore;
+                    }
+                   
                     schedule.Status = SchedulStatus.Complete;
                     if (item.Score.Mark < 0)
                     {
@@ -327,12 +346,12 @@ namespace Competition.Web.Controllers
                 {
                     ViewBag.Error = "请勿重复提交";
                    
-                    return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId));
+                    return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,0));
                 }
                 
             }
             ViewBag.Error = ModelState.Values;
-            return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId));
+            return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,0));
 
         }
 

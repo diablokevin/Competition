@@ -48,7 +48,7 @@
                 p.DataSource = ViewBag.EventIds;
             });
         });
-
+         settings.Columns.Add("SetId");
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

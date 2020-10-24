@@ -147,6 +147,7 @@ namespace Competition.Web.Controllers
                             criteria.Title = item.Split('\t')[1];
                             criteria.MinScore = Convert.ToInt32(item.Split('\t')[2]);
                             criteria.MaxScore = Convert.ToInt32(item.Split('\t')[3]);
+                            criteria.SetId = Convert.ToInt32(item.Split('\t')[4]);
                             db.EventCriterias.Add(criteria);
 
                         }

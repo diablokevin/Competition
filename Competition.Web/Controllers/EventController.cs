@@ -136,9 +136,10 @@ namespace Competition.Web.Controllers
                             int hour = Convert.ToInt32(timelimit[0]);
                             int min = Convert.ToInt32(timelimit[1]);
                             int sec = Convert.ToInt32(timelimit[2]);
-                            bool hasTimeScore = Convert.ToBoolean(item.Split('\t')[4]);
+                            @event.HasTimeScore = Convert.ToBoolean(item.Split('\t')[4]);
+                            @event.MultiScoreDetailSet = Convert.ToBoolean(item.Split('\t')[5]);
                             @event.TimeLimit = new TimeSpan(hour, min, sec);
-                            @event.MenuOrder = ++order;
+                            @event.MenuOrder = ++order;                           
                             db.Events.Add(@event);
                             
                         }

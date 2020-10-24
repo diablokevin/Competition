@@ -24,7 +24,7 @@
          control.Height = 300;
          control.ControlStyle.VerticalAlign = VerticalAlign.Top;
 
-         control.Properties.NullText = "名称 专业 限时 数量";
+         control.Properties.NullText = "名称 专业 限时 数量 时间分 多套评分单";
 
 
      }).GetHtml()
@@ -53,6 +53,8 @@
                 <th>专业</th>
                 <th>限时</th>
                 <th>数量</th>
+                <th>时间分</th>
+                <th>多套评分单</th>
             </tr>
             @if (ViewBag.Content != null)
             {
@@ -73,6 +75,12 @@
             </td>
             <td>
                 @item.Split('\t')[3]
+            </td>
+            <td>
+                @item.Split('\t')[4]
+            </td>
+            <td>
+                @item.Split('\t')[5]
             </td>
         </tr>
                     }

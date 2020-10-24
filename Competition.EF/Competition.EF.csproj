@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202010200810117_hastimescore.designer.cs">
       <DependentUpon>202010200810117_hastimescore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010240845169_addmultiscoredetailset.cs" />
+    <Compile Include="Migrations\202010240845169_addmultiscoredetailset.designer.cs">
+      <DependentUpon>202010240845169_addmultiscoredetailset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010200810117_hastimescore.resx">
       <DependentUpon>202010200810117_hastimescore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010240845169_addmultiscoredetailset.resx">
+      <DependentUpon>202010240845169_addmultiscoredetailset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

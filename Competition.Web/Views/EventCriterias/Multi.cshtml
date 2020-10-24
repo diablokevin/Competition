@@ -15,20 +15,20 @@
 
 
     @Html.DevExpress().Memo(control =>
-     {
-         control.Name = "List";
-         control.Properties.Caption = "批量录入";
-         control.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
-         control.Width = Unit.Percentage(100);
+{
+    control.Name = "List";
+    control.Properties.Caption = "批量录入";
+    control.Properties.CaptionSettings.Position = EditorCaptionPosition.Top;
+    control.Width = Unit.Percentage(100);
 
-         control.Height = 500;
-         control.ControlStyle.VerticalAlign = VerticalAlign.Top;
+    control.Height = 500;
+    control.ControlStyle.VerticalAlign = VerticalAlign.Top;
 
-         control.Properties.NullText = "项目 内容 最小分值 最大分值";
+    control.Properties.NullText = "项目 内容 最小分值 最大分值 评分单编号";
 
 
-     }).GetHtml()
-    
+}).GetHtml()
+
     @Html.DevExpress().Button(control =>
 {
     control.Name = "submitbtn";
@@ -46,6 +46,7 @@
                 <th>内容</th>
                 <th>最小分值</th>
                 <th>最大分值</th>
+                <th>评分单编号</th>
             </tr>
             @if (ViewBag.Content != null)
             {
@@ -53,21 +54,24 @@
                 {
                     if (!string.IsNullOrEmpty(item))
                     {
-                        <tr>
+        <tr>
 
-                            <td>
-                                @item.Split('\t')[0]
-                            </td>
-                            <td>
-                                @item.Split('\t')[1]
-                            </td>
-                            <td>
-                                @item.Split('\t')[2]
-                            </td>
-                             <td>
-                                @item.Split('\t')[3]
-                            </td>
-                        </tr>
+            <td>
+                @item.Split('\t')[0]
+            </td>
+            <td>
+                @item.Split('\t')[1]
+            </td>
+            <td>
+                @item.Split('\t')[2]
+            </td>
+            <td>
+                @item.Split('\t')[3]
+            </td>
+            <td>
+                @item.Split('\t')[4]
+            </td>
+        </tr>
                     }
                 }
             }
