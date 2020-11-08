@@ -72,7 +72,9 @@ namespace Competition.Web.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult ScoreGridViewPartialUpdate(Score item)
         {
+     
             var model = db.Scores.Include(s => s.Schedule).OrderByDescending(s => s.JudgeTime);
+
             if (ModelState.IsValid)
             {
                 try
@@ -80,8 +82,21 @@ namespace Competition.Web.Controllers
                     var modelItem = model.FirstOrDefault(it => it.Id == item.Id);
                     if (modelItem != null)
                     {
+                       
                         modelItem.ModifyTime = DateTime.Now;
-                        this.UpdateModel(modelItem);
+                        modelItem.Mark = item.Mark;//是否根据detail和time自动算分，再考虑20201108
+                        modelItem.Note = item.Note;
+                        modelItem.TimeConsume = item.TimeConsume;
+                        foreach (var detail in item.ScoreDetail)
+                        {
+                            var detailitem = modelItem.ScoreDetail.FirstOrDefault(it => it.Id == detail.Id);
+                            if(detailitem!=null)
+                            {
+                                detailitem.Mark = detail.Mark;
+                                detailitem.Note = detail.Note;
+                            }
+
+                        }
                         db.SaveChanges();
                     }
                 }
@@ -294,6 +309,7 @@ namespace Competition.Web.Controllers
                 ScoreDetail detail = new ScoreDetail();
                 detail.EventCriteriaId = criteria.Id;
                 detail.EventCriteria = criteria;
+                detail.Note = criteria.Note;
                 model.ScoreDetails.Add(detail);
 
             }

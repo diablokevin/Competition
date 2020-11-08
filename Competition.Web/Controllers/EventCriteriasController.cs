@@ -120,6 +120,7 @@ namespace Competition.Web.Controllers
             if (ModelState.IsValid)
             {
                 string content = Request["List"];
+                content=content.Replace("\"", "");// 去掉excel导出时多余的双引号
                 //C#实现字符串按多个字符采用Split方法分割  https://www.cnblogs.com/codingsilence/archive/2010/09/29/2146603.html
                 List<string> t = Regex.Split(content, "#\r\n", RegexOptions.IgnoreCase).ToList();
                 ViewBag.Content = t;
@@ -147,7 +148,8 @@ namespace Competition.Web.Controllers
                             criteria.Title = item.Split('\t')[1];
                             criteria.MinScore = Convert.ToInt32(item.Split('\t')[2]);
                             criteria.MaxScore = Convert.ToInt32(item.Split('\t')[3]);
-                            criteria.SetId = Convert.ToInt32(item.Split('\t')[4]);
+                            criteria.Note= item.Split('\t')[4];
+                            criteria.SetId = Convert.ToInt32(item.Split('\t')[5]);
                             db.EventCriterias.Add(criteria);
 
                         }

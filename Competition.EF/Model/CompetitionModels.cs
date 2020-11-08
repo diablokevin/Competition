@@ -320,7 +320,7 @@ namespace Competition.EF.Models
         public virtual Judge Judge { get; set; }
         public virtual Schedule Schedule { get; set; }
       
-        public virtual ICollection<ScoreDetail> ScoreDetail { get; set; }
+        public virtual List<ScoreDetail> ScoreDetail { get; set; }
     }
     public class EventCriteria
     {
@@ -330,6 +330,7 @@ namespace Competition.EF.Models
         public string Title { get; set; }
         public int MinScore { get; set; } = 0;
         public int MaxScore { get; set; }
+        public string Note { get; set; }
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
         public virtual ICollection<ScoreDetail> ScoreDetail { get; set; }
@@ -340,7 +341,7 @@ namespace Competition.EF.Models
         public double Mark { get; set; } = 0.0;
         
         public int EventCriteriaId { get; set; }
-        [Required]
+        
         public int ScoreId { get; set; }
         public string Note { get; set; }
         public virtual EventCriteria EventCriteria { get; set; }

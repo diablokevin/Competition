@@ -14,7 +14,10 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Score", Action = "ScoreGridViewPartialDelete" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsPopup.EditForm.AllowResize=true;
+        settings.SettingsPopup.EditForm.ShowMaximizeButton = true;
+        settings.SettingsPopup.EditForm.Width = Unit.Pixel(1000);
         settings.SettingsBehavior.ConfirmDelete = true;
         settings.Width = Unit.Percentage(100);
         settings.SettingsPager.PageSize = 50;
@@ -45,6 +48,20 @@
         settings.Settings.ShowGroupPanel = true;
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Columns.Add(c =>
+        {
+            c.Caption = "#";
+            c.Width = Unit.Pixel(50);
+            c.AdaptivePriority = 1;
+            c.SetDataItemTemplateContent(tc =>
+            {
+                ViewContext.Writer.Write(
+                  Html.ActionLink("±à¼­", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id"), setId = 0 }, null)
+
+                        );
+            });
+        });
 
 
         settings.Columns.Add(c=> {
@@ -92,69 +109,10 @@
         });
 
 
-        ////settings.Columns.Add(c =>
-        ////{
-        ////    c.FieldName = "TimeConsume";
-        ////    c.EditorProperties().TimeEdit(p =>
-        ////    {
-        ////        //p.AllowUserInput = true;
-        ////        //p.AllowNull = true;
-        ////        p.EditFormatString = "hh:mm:ss";
-
-        ////        p.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-        ////        //p.ValidationSettings.Display = Display.Static;
-        ////    });
-
-
-        ////});
-        //settings.Columns.Add(c =>
-        //{
-        //    c.FieldName = "TimeConsume_minute";
-        //    c.AdaptivePriority = 1;
-        //    c.MinWidth = 200;
-
-        //    // c.Width = Unit.Percentage(30);
-        //    c.EditorProperties().SpinEdit(p =>
-        //    {
-        //        p.NumberType = SpinEditNumberType.Integer;
-        //        p.MinValue = 0;
-        //        p.MaxValue = 59;
-        //    });
-        //});
-        //settings.Columns.Add(c =>
-        //{
-        //    c.FieldName = "TimeConsume_second";
-        //    c.AdaptivePriority = 2;
-        //    c.MinWidth = 200;
-
-        //    // c.Width = Unit.Percentage(30);
-        //    c.EditorProperties().SpinEdit(p =>
-        //    {
-        //        p.NumberType = SpinEditNumberType.Integer;
-        //        p.MinValue = 0;
-        //        p.MaxValue = 59;
-        //    });
-        //});
-        //settings.Columns.Add(c =>
-        //{
-        //    c.FieldName = "Score";
-        //    //   c.AdaptivePriority = 3;
-        //    //c.MinWidth = 1000;
-        //    // c.Width = Unit.Percentage(30);
-        //    c.EditorProperties().SpinEdit(p =>
-        //    {
-        //        p.NumberType = SpinEditNumberType.Integer;
-        //        p.MinValue = 0;
-        //        p.MaxValue = 100;
-
-        //    });
-
-
-        //});
-
         settings.SetEditFormTemplateContent(c =>
         {
             Html.RenderAction("ScoreEditFormPartial", new { Id = c.KeyValue });
+
         });
 
 

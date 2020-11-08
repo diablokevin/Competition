@@ -32,7 +32,7 @@
             c.FieldName = "Title";
             c.EditorProperties().Memo(m => {
                 m.Rows = 6;
-                
+
             });
         });
         settings.Columns.Add("MinScore");
@@ -48,7 +48,8 @@
                 p.DataSource = ViewBag.EventIds;
             });
         });
-         settings.Columns.Add("SetId");
+        settings.Columns.Add("Note");
+        settings.Columns.Add("SetId");
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

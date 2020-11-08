@@ -24,7 +24,7 @@
     control.Height = 500;
     control.ControlStyle.VerticalAlign = VerticalAlign.Top;
 
-    control.Properties.NullText = "项目 内容 最小分值 最大分值 评分单编号";
+    control.Properties.NullText = "项目 内容 最小分值 最大分值 备注 评分单编号";
 
 
 }).GetHtml()
@@ -46,6 +46,7 @@
                 <th>内容</th>
                 <th>最小分值</th>
                 <th>最大分值</th>
+                <th>备注</th>
                 <th>评分单编号</th>
             </tr>
             @if (ViewBag.Content != null)
@@ -70,6 +71,9 @@
             </td>
             <td>
                 @item.Split('\t')[4]
+            </td>
+            <td>
+                @item.Split('\t')[5]
             </td>
         </tr>
                     }
