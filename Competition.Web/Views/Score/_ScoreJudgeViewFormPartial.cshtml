@@ -136,6 +136,8 @@
                             int min = Model.Score.TimeConsume_minute.Value;
                             int sec = Model.Score.TimeConsume_second.Value;
                             double timescore = Math.Floor((double)(timelimit - 60 * min - sec) / 30) * 0.5;
+                            if (timescore > 5) { timescore = 5; }
+                            if (timescore < 0) { timescore = 0; }
                             <span id="timescore">@timescore</span>
                         }
 
