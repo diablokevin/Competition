@@ -32,8 +32,8 @@
         }
     }
 
-        function ChangeSetId() {
-            window.location = "@Url.Action("ScoreJudgeEditFormPartial","Score",new { ScheduleId=Model.Score.ScheduleId})&setId=" + SetId.lastSuccessValue
+        function ChangeSetName() {
+            window.location = "@Url.Action("ScoreJudgeEditFormPartial","Score",new { ScheduleId=Model.Score.ScheduleId})&setName=" + SetName.lastSuccessValue
                
         }
 
@@ -65,14 +65,14 @@
         <div class="col-4">
             @if (Model.Score.Schedule.Event.MultiScoreDetailSet)
             {
-                @Html.DevExpress().ComboBoxFor(m => m.SetId, s =>
+                @Html.DevExpress().ComboBoxFor(m => m.SetName, s =>
            {
                s.Properties.Caption = "请选择评分单编号：";
-               s.Properties.ClientInstanceName = "SetId";
-               s.Properties.ClientSideEvents.ValueChanged = "function(s, e){ ChangeSetId()}"; ;
-               foreach (int id in ViewBag.setIdList)
+               s.Properties.ClientInstanceName = "SetName";
+               s.Properties.ClientSideEvents.ValueChanged = "function(s, e){ ChangeSetName()}"; ;
+               foreach (string name in ViewBag.setNameList)
                {
-                   s.Properties.Items.Add(id.ToString(), id);
+                   s.Properties.Items.Add(name);
                }
 
            }).GetHtml()

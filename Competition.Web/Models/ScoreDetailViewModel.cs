@@ -10,7 +10,7 @@ namespace Competition.Web.Models
     {
 
         public Score Score { get; set; } = new Score();
-        public int SetId { get; set; } = 0;
+        public string SetName { get; set; } 
         public List<ScoreDetail> ScoreDetails { get; set; } = new List<ScoreDetail>();
     }
 }

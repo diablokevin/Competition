@@ -263,22 +263,34 @@ namespace Competition.Web.Controllers
             return PartialView("_ScoreCompetitorGridViewPartial", model.ToList());
         }
 
-        public ActionResult ScoreJudgeEditFormPartial(int? ScheduleId,int? SetId)
+        public ActionResult ScoreJudgeEditFormPartial(int? ScheduleId,string SetName)
         {
 
             if (ScheduleId != null)
             {
-                if(SetId==null)
+                if(string.IsNullOrEmpty(SetName))
                 {
-                    ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId.Value,0);
+                    var schedule = db.Schedules.Find(ScheduleId);
+                    ScoreDetailViewModel model = new ScoreDetailViewModel();
+                    if (schedule.Event.MultiScoreDetailSet)
+                    {
+                        var setNameList = db.EventCriterias.Where(c => c.EventId == schedule.EventId).GroupBy(g => g.SetName).Select(s => s.Key);
+                        ViewBag.setNameList = setNameList;
+                        model = GetNewScoreDetailViewModel(ScheduleId.Value, schedule.Event.EventCriterias.FirstOrDefault().SetName);
+                    }
+                    else
+                    {
+                        model = GetNewScoreDetailViewModel(ScheduleId.Value, "");
+                    }
+                    
                     return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
                 }
                 else
                 {
                     var schedule = db.Schedules.Find(ScheduleId);
-                    var setIdList = db.EventCriterias.Where(c => c.EventId == schedule.EventId).GroupBy(g=>g.SetId).Select(s=>s.Key);
-                    ViewBag.setIdList = setIdList;
-                    ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId.Value, SetId.Value);
+                    var setNameList = db.EventCriterias.Where(c => c.EventId == schedule.EventId).GroupBy(g=>g.SetName).Select(s=>s.Key);
+                    ViewBag.setNameList = setNameList;
+                    ScoreDetailViewModel model = GetNewScoreDetailViewModel(ScheduleId.Value, SetName);
                     return PartialView("_ScoreJudgeEditFormPartial", model ?? new ScoreDetailViewModel());
                 }
                
@@ -289,7 +301,7 @@ namespace Competition.Web.Controllers
 
       
 
-        private ScoreDetailViewModel GetNewScoreDetailViewModel(int ScheduleId,int SetId)
+        private ScoreDetailViewModel GetNewScoreDetailViewModel(int ScheduleId,string SetName)
         {
             var model = new ScoreDetailViewModel();
             //在属性里加了默认值，这里就不需要了
@@ -302,8 +314,14 @@ namespace Competition.Web.Controllers
             var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();            
             model.Score.JudgeId = judge.Id;
             model.Score.Judge = judge;
-            model.SetId = SetId;
-            var criterias = db.EventCriterias.Where(c => c.EventId == schedule.EventId&&c.SetId==SetId);
+            model.SetName = SetName;
+            var criterias= db.EventCriterias.Where(c => c.EventId == schedule.EventId); ;
+            if (!string.IsNullOrEmpty(SetName))
+            {
+                 criterias = criterias.Where(c=>c.SetName == SetName);
+            }
+        
+         
             foreach (EventCriteria criteria in criterias)
             {
                 ScoreDetail detail = new ScoreDetail();
@@ -362,12 +380,12 @@ namespace Competition.Web.Controllers
                 {
                     ViewBag.Error = "请勿重复提交";
                    
-                    return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,0));
+                    return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,""));
                 }
                 
             }
             ViewBag.Error = ModelState.Values;
-            return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,0));
+            return PartialView("_ScoreJudgeEditFormPartial", GetNewScoreDetailViewModel(item.Score.ScheduleId,""));
 
         }
 

@@ -26,12 +26,12 @@
         <div class="col-4">
             @Model.Score.Schedule.Event.Name
         </div>
-        <div class="col-4">
+        @*<div class="col-4">  //暂时不在查看页面显示评分单编号了，否则需要改score的模型 20201111
             @if (Model.Score.Schedule.Event.MultiScoreDetailSet)
             {
-                <span>评分单编号：@Model.SetId</span>
+                <span>评分单编号：@Model.SetName</span>
             }
-        </div>
+        </div>*@
         <div class="col-4">
             <span>耗费时间: </span>
             <span>@Html.DisplayFor(m => m.Score.TimeConsume)</span>

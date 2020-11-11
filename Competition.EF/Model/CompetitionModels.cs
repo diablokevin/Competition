@@ -325,7 +325,7 @@ namespace Competition.EF.Models
     public class EventCriteria
     {
         public int Id { get; set; }
-        public int SetId { get; set; } = 0;
+        public string SetName { get; set; } 
         [DataType(DataType.MultilineText)]
         public string Title { get; set; }
         public int MinScore { get; set; } = 0;

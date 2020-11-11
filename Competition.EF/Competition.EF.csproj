@@ -112,6 +112,10 @@
     <Compile Include="Migrations\202011080621145_AddCriteriaNote.designer.cs">
       <DependentUpon>202011080621145_AddCriteriaNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011111336116_SetIdToSetName.cs" />
+    <Compile Include="Migrations\202011111336116_SetIdToSetName.designer.cs">
+      <DependentUpon>202011111336116_SetIdToSetName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CompetitionDbContext.cs" />
     <Compile Include="Model\CompetitionModels.cs" />
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011080621145_AddCriteriaNote.resx">
       <DependentUpon>202011080621145_AddCriteriaNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011111336116_SetIdToSetName.resx">
+      <DependentUpon>202011111336116_SetIdToSetName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
