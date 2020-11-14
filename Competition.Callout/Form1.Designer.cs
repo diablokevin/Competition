@@ -29,26 +29,47 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.lb_serve = new DevExpress.XtraBars.BarStaticItem();
             this.btn_Register = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Callout = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Register_Cancel = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Callout_Cancel = new DevExpress.XtraBars.BarButtonItem();
-            this.Combox_Status = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.lb_status = new DevExpress.XtraBars.BarStaticItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.Edit_ServeIP = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.controlpanel = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.lb_begin = new System.Windows.Forms.Label();
+            this.lb_company = new System.Windows.Forms.Label();
+            this.lb_name = new System.Windows.Forms.Label();
+            this.lb_racenum = new System.Windows.Forms.Label();
+            this.lb_eventname = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tip_RaceNum = new System.Windows.Forms.Label();
             this.txt_RaceNum = new System.Windows.Forms.TextBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EventName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CompetitorName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RaceNum = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,25 +77,22 @@
             this.BeginTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Status = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lb_status = new DevExpress.XtraBars.BarStaticItem();
-            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lb_eventname = new System.Windows.Forms.Label();
-            this.lb_racenum = new System.Windows.Forms.Label();
-            this.lb_name = new System.Windows.Forms.Label();
-            this.lb_company = new System.Windows.Forms.Label();
-            this.lb_begin = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
             // 
             // ribbonControl1
             // 
@@ -87,17 +105,25 @@
             this.btn_Callout,
             this.btn_Register_Cancel,
             this.btn_Callout_Cancel,
-            this.Combox_Status,
+            this.lb_status,
+            this.barButtonItem2,
+            this.barButtonItem3,
+            this.barButtonItem4,
+            this.barButtonItem5,
             this.barButtonItem1,
-            this.lb_status});
+            this.Edit_ServeIP,
+            this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 11;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonControl1.MaxItemId = 20;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.controlpanel});
+            this.controlpanel,
+            this.ribbonPage1});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemComboBox1});
-            this.ribbonControl1.Size = new System.Drawing.Size(911, 160);
+            this.repositoryItemComboBox1,
+            this.repositoryItemTextEdit1});
+            this.ribbonControl1.Size = new System.Drawing.Size(1041, 197);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // lb_serve
@@ -142,28 +168,79 @@
             this.btn_Callout_Cancel.Name = "btn_Callout_Cancel";
             this.btn_Callout_Cancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Callout_Cancel_ItemClick);
             // 
-            // Combox_Status
+            // lb_status
             // 
-            this.Combox_Status.Caption = "状态";
-            this.Combox_Status.Edit = this.repositoryItemComboBox1;
-            this.Combox_Status.Id = 7;
-            this.Combox_Status.Name = "Combox_Status";
+            this.lb_status.Caption = "barStaticItem1";
+            this.lb_status.Id = 10;
+            this.lb_status.Name = "lb_status";
             // 
-            // repositoryItemComboBox1
+            // barButtonItem2
             // 
-            this.repositoryItemComboBox1.AutoHeight = false;
-            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            this.barButtonItem2.Caption = "等待中";
+            this.barButtonItem2.Id = 12;
+            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "已报到";
+            this.barButtonItem3.Id = 13;
+            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "呼叫中";
+            this.barButtonItem4.Id = 14;
+            this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
+            this.barButtonItem4.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "进行中";
+            this.barButtonItem5.Id = 15;
+            this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
+            this.barButtonItem5.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.LargeImage")));
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 
             // barButtonItem1
             // 
-            this.barButtonItem1.Caption = "修改";
-            this.barButtonItem1.Id = 8;
+            this.barButtonItem1.Caption = "已完成";
+            this.barButtonItem1.Id = 16;
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
             this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick_1);
+            // 
+            // Edit_ServeIP
+            // 
+            this.Edit_ServeIP.Caption = "IP";
+            this.Edit_ServeIP.Edit = this.repositoryItemTextEdit1;
+            this.Edit_ServeIP.EditWidth = 150;
+            this.Edit_ServeIP.Id = 18;
+            this.Edit_ServeIP.Name = "Edit_ServeIP";
+            // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "修改";
+            this.barButtonItem6.Id = 19;
+            this.barButtonItem6.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.Image")));
+            this.barButtonItem6.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.LargeImage")));
+            this.barButtonItem6.Name = "barButtonItem6";
+            this.barButtonItem6.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
             // 
             // controlpanel
             // 
@@ -190,19 +267,44 @@
             // 
             // ribbonPageGroup3
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.Combox_Status);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem4);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem5);
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "强制修改赛程状态";
+            // 
+            // ribbonPage1
+            // 
+            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup4});
+            this.ribbonPage1.Name = "ribbonPage1";
+            this.ribbonPage1.Text = "设置";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.Edit_ServeIP);
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem6);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "服务器";
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.lb_serve);
             this.ribbonStatusBar1.ItemLinks.Add(this.lb_status);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 489);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 630);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(911, 24);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1041, 30);
             // 
             // groupControl1
             // 
@@ -220,16 +322,108 @@
             this.groupControl1.Controls.Add(this.tip_RaceNum);
             this.groupControl1.Controls.Add(this.txt_RaceNum);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupControl1.Location = new System.Drawing.Point(0, 160);
+            this.groupControl1.Location = new System.Drawing.Point(0, 197);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(200, 329);
+            this.groupControl1.Size = new System.Drawing.Size(229, 433);
             this.groupControl1.TabIndex = 2;
+            // 
+            // lb_begin
+            // 
+            this.lb_begin.AutoSize = true;
+            this.lb_begin.Location = new System.Drawing.Point(106, 369);
+            this.lb_begin.Name = "lb_begin";
+            this.lb_begin.Size = new System.Drawing.Size(23, 18);
+            this.lb_begin.TabIndex = 14;
+            this.lb_begin.Text = "...";
+            // 
+            // lb_company
+            // 
+            this.lb_company.AutoSize = true;
+            this.lb_company.Location = new System.Drawing.Point(106, 338);
+            this.lb_company.Name = "lb_company";
+            this.lb_company.Size = new System.Drawing.Size(23, 18);
+            this.lb_company.TabIndex = 13;
+            this.lb_company.Text = "...";
+            // 
+            // lb_name
+            // 
+            this.lb_name.AutoSize = true;
+            this.lb_name.Location = new System.Drawing.Point(106, 303);
+            this.lb_name.Name = "lb_name";
+            this.lb_name.Size = new System.Drawing.Size(23, 18);
+            this.lb_name.TabIndex = 12;
+            this.lb_name.Text = "...";
+            // 
+            // lb_racenum
+            // 
+            this.lb_racenum.AutoSize = true;
+            this.lb_racenum.Location = new System.Drawing.Point(106, 262);
+            this.lb_racenum.Name = "lb_racenum";
+            this.lb_racenum.Size = new System.Drawing.Size(23, 18);
+            this.lb_racenum.TabIndex = 11;
+            this.lb_racenum.Text = "...";
+            // 
+            // lb_eventname
+            // 
+            this.lb_eventname.AutoSize = true;
+            this.lb_eventname.Location = new System.Drawing.Point(106, 228);
+            this.lb_eventname.Name = "lb_eventname";
+            this.lb_eventname.Size = new System.Drawing.Size(23, 18);
+            this.lb_eventname.TabIndex = 10;
+            this.lb_eventname.Text = "...";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(30, 369);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 18);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "开始时间";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 338);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 18);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "选手单位";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(30, 303);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 18);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "选手姓名";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 262);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "选手编号";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 228);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "项目";
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(45, 120);
+            this.simpleButton1.Location = new System.Drawing.Point(51, 154);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(109, 29);
+            this.simpleButton1.Size = new System.Drawing.Size(125, 37);
             this.simpleButton1.TabIndex = 4;
             this.simpleButton1.Text = "签到";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -237,27 +431,31 @@
             // tip_RaceNum
             // 
             this.tip_RaceNum.AutoSize = true;
-            this.tip_RaceNum.Location = new System.Drawing.Point(26, 43);
+            this.tip_RaceNum.Location = new System.Drawing.Point(30, 55);
             this.tip_RaceNum.Name = "tip_RaceNum";
-            this.tip_RaceNum.Size = new System.Drawing.Size(139, 14);
+            this.tip_RaceNum.Size = new System.Drawing.Size(173, 18);
             this.tip_RaceNum.TabIndex = 4;
             this.tip_RaceNum.Text = "输入选手编号或扫条形码";
             // 
             // txt_RaceNum
             // 
-            this.txt_RaceNum.Location = new System.Drawing.Point(45, 70);
+            this.txt_RaceNum.Location = new System.Drawing.Point(51, 90);
+            this.txt_RaceNum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_RaceNum.Name = "txt_RaceNum";
-            this.txt_RaceNum.Size = new System.Drawing.Size(109, 22);
+            this.txt_RaceNum.Size = new System.Drawing.Size(124, 26);
             this.txt_RaceNum.TabIndex = 0;
+            this.txt_RaceNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_RaceNum_KeyDown);
             // 
             // gridControl1
             // 
             this.gridControl1.DataSource = typeof(Competition.EF.Models.Schedule);
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(200, 160);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Location = new System.Drawing.Point(229, 197);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(711, 329);
+            this.gridControl1.Size = new System.Drawing.Size(812, 433);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -273,47 +471,67 @@
             this.BeginTime,
             this.EndTime,
             this.Status});
+            this.gridView1.DetailHeight = 450;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupCount = 1;
             this.gridView1.Name = "gridView1";
             this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.EventName, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
+            // Id
+            // 
+            this.Id.Caption = "Id";
+            this.Id.FieldName = "Id";
+            this.Id.MinWidth = 23;
+            this.Id.Name = "Id";
+            this.Id.Visible = true;
+            this.Id.VisibleIndex = 6;
+            this.Id.Width = 86;
+            // 
             // EventName
             // 
             this.EventName.Caption = "项目名称";
             this.EventName.FieldName = "Event.Name";
+            this.EventName.MinWidth = 23;
             this.EventName.Name = "EventName";
             this.EventName.OptionsColumn.AllowEdit = false;
             this.EventName.Visible = true;
             this.EventName.VisibleIndex = 0;
+            this.EventName.Width = 86;
             // 
             // CompetitorName
             // 
             this.CompetitorName.Caption = "选手姓名";
             this.CompetitorName.FieldName = "Competitor.Name";
+            this.CompetitorName.MinWidth = 23;
             this.CompetitorName.Name = "CompetitorName";
             this.CompetitorName.OptionsColumn.AllowEdit = false;
             this.CompetitorName.Visible = true;
             this.CompetitorName.VisibleIndex = 1;
+            this.CompetitorName.Width = 86;
             // 
             // RaceNum
             // 
             this.RaceNum.Caption = "选手编号";
             this.RaceNum.FieldName = "Competitor.Race_num";
+            this.RaceNum.MinWidth = 23;
             this.RaceNum.Name = "RaceNum";
             this.RaceNum.OptionsColumn.AllowEdit = false;
             this.RaceNum.Visible = true;
             this.RaceNum.VisibleIndex = 0;
+            this.RaceNum.Width = 86;
             // 
             // Company
             // 
             this.Company.Caption = "选手单位";
             this.Company.FieldName = "Competitor.Company.Name";
+            this.Company.MinWidth = 23;
             this.Company.Name = "Company";
             this.Company.OptionsColumn.AllowEdit = false;
             this.Company.Visible = true;
             this.Company.VisibleIndex = 2;
+            this.Company.Width = 86;
             // 
             // BeginTime
             // 
@@ -321,10 +539,12 @@
             this.BeginTime.DisplayFormat.FormatString = "MM/dd HH:mm:ss";
             this.BeginTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.BeginTime.FieldName = "PlanBeginTime";
+            this.BeginTime.MinWidth = 23;
             this.BeginTime.Name = "BeginTime";
             this.BeginTime.OptionsColumn.AllowEdit = false;
             this.BeginTime.Visible = true;
             this.BeginTime.VisibleIndex = 3;
+            this.BeginTime.Width = 86;
             // 
             // EndTime
             // 
@@ -332,139 +552,42 @@
             this.EndTime.DisplayFormat.FormatString = "MM/dd HH:mm:ss";
             this.EndTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.EndTime.FieldName = "PlanEndTime";
+            this.EndTime.MinWidth = 23;
             this.EndTime.Name = "EndTime";
             this.EndTime.OptionsColumn.AllowEdit = false;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 4;
+            this.EndTime.Width = 86;
             // 
             // Status
             // 
             this.Status.Caption = "状态";
             this.Status.FieldName = "Status";
+            this.Status.MinWidth = 23;
             this.Status.Name = "Status";
             this.Status.OptionsColumn.AllowEdit = false;
             this.Status.Visible = true;
             this.Status.VisibleIndex = 5;
-            // 
-            // lb_status
-            // 
-            this.lb_status.Caption = "barStaticItem1";
-            this.lb_status.Id = 10;
-            this.lb_status.Name = "lb_status";
-            // 
-            // Id
-            // 
-            this.Id.Caption = "Id";
-            this.Id.FieldName = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = true;
-            this.Id.VisibleIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 177);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 14);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "项目";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 204);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 14);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "选手编号";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 236);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 14);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "选手姓名";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 263);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 14);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "选手单位";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 287);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 14);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "开始时间";
-            // 
-            // lb_eventname
-            // 
-            this.lb_eventname.AutoSize = true;
-            this.lb_eventname.Location = new System.Drawing.Point(93, 177);
-            this.lb_eventname.Name = "lb_eventname";
-            this.lb_eventname.Size = new System.Drawing.Size(19, 14);
-            this.lb_eventname.TabIndex = 10;
-            this.lb_eventname.Text = "...";
-            // 
-            // lb_racenum
-            // 
-            this.lb_racenum.AutoSize = true;
-            this.lb_racenum.Location = new System.Drawing.Point(93, 204);
-            this.lb_racenum.Name = "lb_racenum";
-            this.lb_racenum.Size = new System.Drawing.Size(19, 14);
-            this.lb_racenum.TabIndex = 11;
-            this.lb_racenum.Text = "...";
-            // 
-            // lb_name
-            // 
-            this.lb_name.AutoSize = true;
-            this.lb_name.Location = new System.Drawing.Point(93, 236);
-            this.lb_name.Name = "lb_name";
-            this.lb_name.Size = new System.Drawing.Size(19, 14);
-            this.lb_name.TabIndex = 12;
-            this.lb_name.Text = "...";
-            // 
-            // lb_company
-            // 
-            this.lb_company.AutoSize = true;
-            this.lb_company.Location = new System.Drawing.Point(93, 263);
-            this.lb_company.Name = "lb_company";
-            this.lb_company.Size = new System.Drawing.Size(19, 14);
-            this.lb_company.TabIndex = 13;
-            this.lb_company.Text = "...";
-            // 
-            // lb_begin
-            // 
-            this.lb_begin.AutoSize = true;
-            this.lb_begin.Location = new System.Drawing.Point(93, 287);
-            this.lb_begin.Name = "lb_begin";
-            this.lb_begin.Size = new System.Drawing.Size(19, 14);
-            this.lb_begin.TabIndex = 14;
-            this.lb_begin.Text = "...";
+            this.Status.Width = 86;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 513);
+            this.ClientSize = new System.Drawing.Size(1041, 660);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl1;
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -495,9 +618,7 @@
         private DevExpress.XtraBars.BarButtonItem btn_Callout_Cancel;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
-        private DevExpress.XtraBars.BarEditItem Combox_Status;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraGrid.Columns.GridColumn EventName;
         private DevExpress.XtraGrid.Columns.GridColumn CompetitorName;
         private DevExpress.XtraGrid.Columns.GridColumn RaceNum;
@@ -517,6 +638,17 @@
         private System.Windows.Forms.Label lb_begin;
         private System.Windows.Forms.Label lb_company;
         private System.Windows.Forms.Label lb_name;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraBars.BarEditItem Edit_ServeIP;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
     }
 }
 

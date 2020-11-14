@@ -418,5 +418,36 @@ namespace Competition.Web.Controllers
             return PartialView("_ScoreJudgeViewFormPartial", new ScoreDetailViewModel());
 
         }
+
+        public ActionResult JudgeCallCompetitor(int scheduleId,string cmd)
+        {
+            var schedule = db.Schedules.Find(scheduleId);
+            switch (cmd)
+            {
+                case "call":
+                    if (schedule.Status==SchedulStatus.Registered)
+                    {
+                        schedule.Status = SchedulStatus.Calling;
+                        db.SaveChanges();
+                    }
+                    break;
+                case "cancel":
+                    if (schedule.Status == SchedulStatus.Calling)
+                    {
+                        schedule.Status = SchedulStatus.Registered;
+                        db.SaveChanges();
+                    }
+                    break;
+                case "inposition":
+                    if (schedule.Status == SchedulStatus.Calling)
+                    {
+                        schedule.Status = SchedulStatus.Inprogress;
+                        db.SaveChanges();
+                    }
+                    break;
+            }
+
+            return View("Index");
+        }
     }
 }
