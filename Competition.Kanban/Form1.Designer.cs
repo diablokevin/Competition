@@ -70,12 +70,14 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.KanbanView;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(737, 299);
+            this.gridControl1.Size = new System.Drawing.Size(1697, 794);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.KanbanView});
@@ -84,7 +86,7 @@
             // 
             this.KanbanView.ActiveFilterEnabled = false;
             this.KanbanView.CardHorzInterval = 0;
-            this.KanbanView.CardMinSize = new System.Drawing.Size(176, 40);
+            this.KanbanView.CardMinSize = new System.Drawing.Size(377, 94);
             this.KanbanView.CardVertInterval = 0;
             this.KanbanView.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] {
             this.EventName,
@@ -92,6 +94,7 @@
             this.Registered,
             this.Calling,
             this.InProgress});
+            this.KanbanView.DetailHeight = 825;
             this.KanbanView.GridControl = this.gridControl1;
             this.KanbanView.Name = "KanbanView";
             this.KanbanView.OptionsBehavior.Editable = false;
@@ -109,21 +112,24 @@
             // EventName
             // 
             this.EventName.Caption = "项目名称";
+            this.EventName.ColumnEdit = this.repositoryItemMemoEdit1;
             this.EventName.CustomizationCaption = "项目名称";
             this.EventName.FieldName = "Event.Name";
             this.EventName.LayoutViewField = this.layoutViewField_EventName;
+            this.EventName.MinWidth = 43;
             this.EventName.Name = "EventName";
             this.EventName.OptionsColumn.ShowCaption = false;
+            this.EventName.OptionsEditForm.RowSpan = 2;
+            this.EventName.Width = 161;
             // 
             // layoutViewField_EventName
             // 
             this.layoutViewField_EventName.ContentHorzAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutViewField_EventName.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutViewField_EventName.EditorPreferredWidth = 98;
+            this.layoutViewField_EventName.EditorPreferredWidth = 210;
             this.layoutViewField_EventName.Location = new System.Drawing.Point(0, 0);
             this.layoutViewField_EventName.Name = "layoutViewField_EventName";
-            this.layoutViewField_EventName.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutViewField_EventName.Size = new System.Drawing.Size(100, 38);
+            this.layoutViewField_EventName.Size = new System.Drawing.Size(214, 81);
             this.layoutViewField_EventName.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_EventName.TextSize = new System.Drawing.Size(0, 0);
             this.layoutViewField_EventName.TextVisible = false;
@@ -134,9 +140,11 @@
             this.Waiting.ColumnEdit = this.repositoryItemMemoEdit1;
             this.Waiting.FieldName = "Waiting";
             this.Waiting.LayoutViewField = this.layoutViewField_Waiting;
+            this.Waiting.MinWidth = 43;
             this.Waiting.Name = "Waiting";
             this.Waiting.OptionsColumn.AllowEdit = false;
             this.Waiting.OptionsColumn.ShowCaption = false;
+            this.Waiting.Width = 161;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -145,11 +153,10 @@
             // layoutViewField_Waiting
             // 
             this.layoutViewField_Waiting.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutViewField_Waiting.EditorPreferredWidth = 126;
-            this.layoutViewField_Waiting.Location = new System.Drawing.Point(475, 16);
+            this.layoutViewField_Waiting.EditorPreferredWidth = 270;
+            this.layoutViewField_Waiting.Location = new System.Drawing.Point(1018, 37);
             this.layoutViewField_Waiting.Name = "layoutViewField_Waiting";
-            this.layoutViewField_Waiting.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutViewField_Waiting.Size = new System.Drawing.Size(128, 22);
+            this.layoutViewField_Waiting.Size = new System.Drawing.Size(274, 44);
             this.layoutViewField_Waiting.StartNewLine = true;
             this.layoutViewField_Waiting.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_Waiting.TextSize = new System.Drawing.Size(0, 0);
@@ -161,17 +168,18 @@
             this.Registered.ColumnEdit = this.repositoryItemMemoEdit1;
             this.Registered.FieldName = "Registered";
             this.Registered.LayoutViewField = this.layoutViewField_Registered;
+            this.Registered.MinWidth = 43;
             this.Registered.Name = "Registered";
             this.Registered.OptionsColumn.ShowCaption = false;
+            this.Registered.Width = 161;
             // 
             // layoutViewField_Registered
             // 
             this.layoutViewField_Registered.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutViewField_Registered.EditorPreferredWidth = 123;
-            this.layoutViewField_Registered.Location = new System.Drawing.Point(350, 16);
+            this.layoutViewField_Registered.EditorPreferredWidth = 264;
+            this.layoutViewField_Registered.Location = new System.Drawing.Point(750, 37);
             this.layoutViewField_Registered.Name = "layoutViewField_Registered";
-            this.layoutViewField_Registered.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutViewField_Registered.Size = new System.Drawing.Size(125, 22);
+            this.layoutViewField_Registered.Size = new System.Drawing.Size(268, 44);
             this.layoutViewField_Registered.StartNewLine = true;
             this.layoutViewField_Registered.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_Registered.TextSize = new System.Drawing.Size(0, 0);
@@ -183,17 +191,18 @@
             this.Calling.ColumnEdit = this.repositoryItemMemoEdit1;
             this.Calling.FieldName = "Calling";
             this.Calling.LayoutViewField = this.layoutViewField_Calling;
+            this.Calling.MinWidth = 43;
             this.Calling.Name = "Calling";
             this.Calling.OptionsColumn.ShowCaption = false;
+            this.Calling.Width = 161;
             // 
             // layoutViewField_Calling
             // 
             this.layoutViewField_Calling.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutViewField_Calling.EditorPreferredWidth = 123;
-            this.layoutViewField_Calling.Location = new System.Drawing.Point(225, 16);
+            this.layoutViewField_Calling.EditorPreferredWidth = 264;
+            this.layoutViewField_Calling.Location = new System.Drawing.Point(482, 37);
             this.layoutViewField_Calling.Name = "layoutViewField_Calling";
-            this.layoutViewField_Calling.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutViewField_Calling.Size = new System.Drawing.Size(125, 22);
+            this.layoutViewField_Calling.Size = new System.Drawing.Size(268, 44);
             this.layoutViewField_Calling.StartNewLine = true;
             this.layoutViewField_Calling.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_Calling.TextSize = new System.Drawing.Size(0, 0);
@@ -202,19 +211,21 @@
             // InProgress
             // 
             this.InProgress.Caption = "进行中";
+            this.InProgress.ColumnEdit = this.repositoryItemMemoEdit1;
             this.InProgress.FieldName = "InProgress";
             this.InProgress.LayoutViewField = this.layoutViewField_InProgress;
+            this.InProgress.MinWidth = 43;
             this.InProgress.Name = "InProgress";
             this.InProgress.OptionsColumn.ShowCaption = false;
+            this.InProgress.Width = 161;
             // 
             // layoutViewField_InProgress
             // 
             this.layoutViewField_InProgress.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutViewField_InProgress.EditorPreferredWidth = 123;
-            this.layoutViewField_InProgress.Location = new System.Drawing.Point(100, 16);
+            this.layoutViewField_InProgress.EditorPreferredWidth = 264;
+            this.layoutViewField_InProgress.Location = new System.Drawing.Point(214, 37);
             this.layoutViewField_InProgress.Name = "layoutViewField_InProgress";
-            this.layoutViewField_InProgress.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutViewField_InProgress.Size = new System.Drawing.Size(125, 22);
+            this.layoutViewField_InProgress.Size = new System.Drawing.Size(268, 44);
             this.layoutViewField_InProgress.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_InProgress.TextSize = new System.Drawing.Size(0, 0);
             this.layoutViewField_InProgress.TextVisible = false;
@@ -234,54 +245,50 @@
             this.layoutViewField_Registered,
             this.layoutViewField_Waiting,
             this.layoutViewField_Calling});
-            this.layoutViewCard1.Name = "layoutViewCard1";
+            this.layoutViewCard1.Name = "layoutViewTemplateCard";
             this.layoutViewCard1.OptionsItemText.TextToControlDistance = 6;
-            this.layoutViewCard1.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
+            this.layoutViewCard1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
             this.layoutViewCard1.Text = "TemplateCard";
             // 
             // item1
             // 
             this.item1.AllowHotTrack = false;
             this.item1.CustomizationFormText = "进行中";
-            this.item1.Location = new System.Drawing.Point(100, 0);
+            this.item1.Location = new System.Drawing.Point(214, 0);
             this.item1.Name = "item1";
-            this.item1.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.item1.Size = new System.Drawing.Size(125, 16);
+            this.item1.Size = new System.Drawing.Size(268, 37);
             this.item1.Text = "进行中";
-            this.item1.TextSize = new System.Drawing.Size(36, 14);
+            this.item1.TextSize = new System.Drawing.Size(81, 33);
             // 
             // item2
             // 
             this.item2.AllowHotTrack = false;
             this.item2.CustomizationFormText = "呼叫中";
-            this.item2.Location = new System.Drawing.Point(225, 0);
+            this.item2.Location = new System.Drawing.Point(482, 0);
             this.item2.Name = "item2";
-            this.item2.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.item2.Size = new System.Drawing.Size(125, 16);
+            this.item2.Size = new System.Drawing.Size(268, 37);
             this.item2.Text = "呼叫中";
-            this.item2.TextSize = new System.Drawing.Size(36, 14);
+            this.item2.TextSize = new System.Drawing.Size(81, 33);
             // 
             // item3
             // 
             this.item3.AllowHotTrack = false;
             this.item3.CustomizationFormText = "已报到";
-            this.item3.Location = new System.Drawing.Point(350, 0);
+            this.item3.Location = new System.Drawing.Point(750, 0);
             this.item3.Name = "item3";
-            this.item3.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.item3.Size = new System.Drawing.Size(125, 16);
+            this.item3.Size = new System.Drawing.Size(268, 37);
             this.item3.Text = "已报到";
-            this.item3.TextSize = new System.Drawing.Size(36, 14);
+            this.item3.TextSize = new System.Drawing.Size(81, 33);
             // 
             // item4
             // 
             this.item4.AllowHotTrack = false;
             this.item4.CustomizationFormText = "等待中";
-            this.item4.Location = new System.Drawing.Point(475, 0);
+            this.item4.Location = new System.Drawing.Point(1018, 0);
             this.item4.Name = "item4";
-            this.item4.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.item4.Size = new System.Drawing.Size(128, 16);
+            this.item4.Size = new System.Drawing.Size(274, 37);
             this.item4.Text = "等待中";
-            this.item4.TextSize = new System.Drawing.Size(36, 14);
+            this.item4.TextSize = new System.Drawing.Size(81, 33);
             // 
             // timer1
             // 
@@ -291,34 +298,37 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(36, 36);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LastRefressLabel,
             this.LastRefressTime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 277);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 748);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(737, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 30, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1697, 46);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // LastRefressLabel
             // 
             this.LastRefressLabel.Name = "LastRefressLabel";
-            this.LastRefressLabel.Size = new System.Drawing.Size(116, 17);
+            this.LastRefressLabel.Size = new System.Drawing.Size(258, 35);
             this.LastRefressLabel.Text = "数据最后刷新时间：";
             // 
             // LastRefressTime
             // 
             this.LastRefressTime.Name = "LastRefressTime";
-            this.LastRefressTime.Size = new System.Drawing.Size(56, 17);
+            this.LastRefressTime.Size = new System.Drawing.Size(125, 35);
             this.LastRefressTime.Text = "00:00:00";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 299);
+            this.ClientSize = new System.Drawing.Size(1697, 794);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gridControl1);
+            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

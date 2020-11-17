@@ -100,7 +100,7 @@
             <div class="col-md-1">
                 <div class="m-auto">耗费时间</div>
             </div>
-           @* <input type="number" pattern="^[0-9]+\.{0,1}[0-9]{0,2}$" max="9" min="0">*@
+            @* <input type="number" pattern="^[0-9]+\.{0,1}[0-9]{0,2}$" max="9" min="0">*@
             <div class="col-3">
                 @Html.DevExpress().ComboBoxFor(m => m.Score.TimeConsume_minute, s =>
            {
@@ -133,29 +133,22 @@
            }).GetHtml()
 
             </div>
-            @*<div class="col-md-3">
-            @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_minute, s =>
-        {
-
-            s.Properties.Caption = "分";
-            s.Properties.NumberType = SpinEditNumberType.Integer;
-            s.Properties.MinValue = 0;
-            s.Properties.MaxValue = Model.Score.Schedule.Event.TimeLimit.Minutes;
-
-
-        }).GetHtml()
-        </div>*@
-            @*<div class="col-md-3">
-
-            @Html.DevExpress().SpinEditFor(m => m.Score.TimeConsume_second, s =>
+            <div class="col-3 float-right">
+                @Html.DevExpress().Button(btnSettings =>
+                    {
+                    btnSettings.Name = "btnUpdate_top";
+                    btnSettings.Text = "提交";
+                    btnSettings.UseSubmitBehavior = true;
+                    // btnSettings.ClientSideEvents.Click = "function(s, e){ ScoreJudgeGridView.UpdateEdit(); }";
+                    }).GetHtml()
+                @Html.DevExpress().Button(btnSettings =>
                 {
-                s.Properties.Caption = "秒";
-                s.Properties.NumberType = SpinEditNumberType.Integer;
-                s.Properties.MinValue = 0;
-                s.Properties.MaxValue = 59;
-
+                btnSettings.Name = "btnCancel_top";
+                btnSettings.Text = "取消";
+                btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
+                btnSettings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Score", Action = "Index" }) + "'; }";
                 }).GetHtml()
-        </div>*@
+            </div>
         </div>
         <div class="row"><p> </p></div>
         <table class="table table-striped table-bordered">

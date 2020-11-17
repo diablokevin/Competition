@@ -5,7 +5,8 @@
         settings.CallbackRouteValues = new
         {
             Controller = "Schedule",
-            Action = "ScheduleJudgeGridViewPartial" };
+            Action = "ScheduleJudgeGridViewPartial"
+        };
 
         //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Schedule", Action = "ScheduleJudgeGridViewPartialAddNew" };
         //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Schedule", Action = "ScheduleJudgeGridViewPartialUpdate" };
@@ -49,20 +50,21 @@
                         break;
                     case Competition.EF.Models.SchedulStatus.Registered:
                         ViewContext.Writer.Write(
-              Html.ActionLink("呼叫", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id") ,cmd="call"}, new { @class = "btn btn-warning col-12" })
+              Html.ActionLink("呼叫", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id"), cmd = "call" }, new { @class = "btn btn-warning col-12", style = "color:white" })
 
                     );
                         break;
                     case Competition.EF.Models.SchedulStatus.Calling:
                         ViewContext.Writer.Write(
-              Html.ActionLink("取消", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id") ,cmd="cancel"}, new { @class = "btn btn-danger col-6" }));
+              Html.ActionLink("取消", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id"), cmd = "cancel" }, new { @class = "btn btn-danger col-6", style = "color:white" }));
                         //ViewContext.Writer.Write("<span>  </span>");
                         ViewContext.Writer.Write(
-           Html.ActionLink("开始", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id") ,cmd="inposition"}, new { @class = "btn btn-success col-6" }));
+                   Html.ActionLink("开始", "JudgeCallCompetitor", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id"), cmd = "inposition" }, new { @class = "btn btn-success col-6", style = "color:white" }));
                         break;
                     case Competition.EF.Models.SchedulStatus.Inprogress:
+                    case Competition.EF.Models.SchedulStatus.Complete:
                         ViewContext.Writer.Write(
-                Html.ActionLink("评分", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id") }, new { @class = "btn btn-primary col-12" })
+                Html.ActionLink("评分", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id") }, new { @class = "btn btn-primary col-12", style = "color:white" })
 
                       );
                         break;
@@ -124,7 +126,8 @@
 
 
     });
-    if (ViewData["EditError"] != null){
+    if (ViewData["EditError"] != null)
+    {
         grid.SetEditErrorText((string)ViewData["EditError"]);
     }
 }
