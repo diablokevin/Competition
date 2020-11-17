@@ -22,38 +22,45 @@ namespace Competition.Web.Models
         public int Count { get; set; }
         [Display(Name = "笔试")]
         public double? Bishi { get; set; }
+        [Display(Name = "部件拆装(ME)")]
+        public double? ReplaceME { get; set; }
+        [Display(Name = "部件拆装(AV)")]
+        public double? ReplaceAV { get; set; }
+      
+        [Display(Name = "气象雷达")]
+        public double? Radar { get; set; }
+        [Display(Name = "天线拆装")]
+        public double? Seal { get; set; }
+       
         [Display(Name = "保险")]
-        public double? Baoxian { get; set; }
+        public double? Lockwire { get; set; }
+       
+        [Display(Name = "量具紧固件")]
+        public double? Jingujian { get; set; }
+        [Display(Name = "飞行操纵")]
+        public double? Caozong { get; set; }
         [Display(Name = "标线综合")]
         public double? Biaoxian { get; set; }
-        [Display(Name = "涂胶")]
-        public double? Tujiao { get; set; }
-        [Display(Name = "APU拆装")]
-        public double? APU { get; set; }
-        [Display(Name = "管路施工")]
-        public double? Guanlu { get; set; }
-        [Display(Name = "大气数据")]
-        public double? Daqi { get; set; }
-        [Display(Name = "手册")]
+        [Display(Name = "技术资料")]
         public double? Shouce { get; set; }
-        [Display(Name = "翼尖灯")]
-        public double? Yijiandeng { get; set; }
         [Display(Name = "水平安定面")]
-        public double? Shuiping { get; set; }
-        [Display(Name = "电源")]
-        public double? Dianyuan { get; set; }
+        public double? THS { get; set; }
+        [Display(Name = "CVR")]
+        public double? CVR { get; set; }
+        [Display(Name = "呼叫系统")]
+        public double? Call { get; set; }
         [Display(Name = "总分")]
         public double? TotalScore {
             get
             {
                 if(Pro=="AV")
                 {
-                    double result = ((Bishi ?? 0) * 0.3 + (((Baoxian ?? 0) + (Biaoxian ?? 0) + (Tujiao ?? 0) + (Daqi ?? 0) + ((Shouce ?? 0) + (Yijiandeng ?? 0) + (Dianyuan ?? 0)) * 2 / 3) / 6 * 0.7));
+                    double result = ((Bishi ?? 0) * 0.3 + (((ReplaceAV ?? 0) + (Radar ?? 0) + (Seal ?? 0) + (Lockwire ?? 0) + (Biaoxian ?? 0) + ((Shouce ?? 0) + (CVR ?? 0) + (Call ?? 0))  / 3) / 6 * 0.7));
                     return Math.Round(result,3);
                 }
                 else if(Pro=="ME")
                 {
-                    double result = ((Bishi ?? 0) * 0.3 + ((Baoxian ?? 0) + (Biaoxian ?? 0) + (Tujiao ?? 0) + (Guanlu ?? 0) + (APU ?? 0) + ((Shouce ?? 0) + (Shuiping ?? 0) + (Dianyuan ?? 0)) * 2 / 3) / 7 * 0.7);
+                    double result = ((Bishi ?? 0) * 0.3 + ((ReplaceME ?? 0) + (Lockwire ?? 0) + (Jingujian ?? 0) + (Caozong ?? 0) + (Biaoxian ?? 0) + ((Shouce ?? 0) + (THS ?? 0) + (Call ?? 0)) / 3) / 6 * 0.7);
 
                     return Math.Round(result, 3);
                 }

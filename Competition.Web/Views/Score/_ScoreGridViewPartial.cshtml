@@ -49,20 +49,6 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.Width = Unit.Pixel(50);
-            c.AdaptivePriority = 1;
-            c.SetDataItemTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                  Html.ActionLink("±à¼­", "ScoreJudgeEditFormPartial", "Score", new { ScheduleId = DataBinder.Eval(tc.DataItem, "Id"), setId = 0 }, null)
-
-                        );
-            });
-        });
-
 
         settings.Columns.Add(c=> {
             c.FieldName = "Schedule.Event.Name";

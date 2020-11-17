@@ -65,14 +65,14 @@ namespace Competition.Web.Controllers
         {
             ViewBag.PageName = "Report";
             ViewBag.Pro = "ME";
-            ViewBag.EventList = db.Events.Where(t=>t.Pro.Contains("机电")).ToList();
+            ViewBag.EventList = db.Events.Where(t=>t.Pro.Contains("ME")).ToList();
             return View();
         }
         public ActionResult EventRank_AV()
         {
             ViewBag.PageName = "Report";
             ViewBag.Pro = "AV";
-            ViewBag.EventList = db.Events.Where(t => t.Pro.Contains("电子")).ToList();
+            ViewBag.EventList = db.Events.Where(t => t.Pro.Contains("AV")).ToList();
             return View();
         }
         [ValidateInput(false)]
@@ -176,18 +176,20 @@ namespace Competition.Web.Controllers
                             g.FirstOrDefault().Competitor.Name,
                             g.FirstOrDefault().Competitor.Pro,
                             g.FirstOrDefault().Competitor.StaffId,
-                            Bishi = g.FirstOrDefault(t => t.Event.Name == "笔试"),
-                            Baoxian = g.FirstOrDefault(t => t.Event.Name == "保险"),
-                            Biaoxian = g.FirstOrDefault(t => t.Event.Name == "标线综合"),
-                            Tujiao = g.FirstOrDefault(t => t.Event.Name == "涂胶"),
-                            APU = g.FirstOrDefault(t => t.Event.Name == "APU拆装"),
-                            Guanlu = g.FirstOrDefault(t => t.Event.Name == "管路施工"),
-                            Daqi = g.FirstOrDefault(t => t.Event.Name == "大气数据"),
-                            Shouce = g.FirstOrDefault(t => t.Event.Name == "手册"),
-                            Yijiandeng = g.FirstOrDefault(t => t.Event.Name == "翼尖灯"),
-                            Shuiping = g.FirstOrDefault(t => t.Event.Name == "水平安定面"),
-                            Dianyuan = g.FirstOrDefault(t => t.Event.Name == "电源")
-
+                            Bishi = g.FirstOrDefault(t => t.Event.Name == "笔试"),//总分200，转为总成绩的30分
+                            ReplaceME = g.FirstOrDefault(t => t.Event.Name == "部件拆装(ME)"),
+                            ReplaceAV = g.FirstOrDefault(t => t.Event.Name == "部件拆装(AV)"),
+                            THS = g.FirstOrDefault(t => t.Event.Name == "水平安定面自动配平系统排故"),
+                            Radar = g.FirstOrDefault(t => t.Event.Name == "气象雷达系统综合施工"),
+                            Seal = g.FirstOrDefault(t => t.Event.Name == "天线拆装和密封项目"),
+                            CVR = g.FirstOrDefault(t => t.Event.Name == "CVR系统测试和排故)"),
+                            Lockwire = g.FirstOrDefault(t => t.Event.Name == "保险综合项目"),
+                            Call = g.FirstOrDefault(t => t.Event.Name == "驾驶舱地面呼叫系统排故"),
+                            Jingujian = g.FirstOrDefault(t => t.Event.Name == "量具和紧固件拆装"),
+                            Caozong = g.FirstOrDefault(t => t.Event.Name == "飞行操纵系统维护"),                     
+                            Biaoxian = g.FirstOrDefault(t => t.Event.Name == "标线综合施工"),
+                            Shouce = g.FirstOrDefault(t => t.Event.Name == "技术资料综合运用")
+                          
                         };
             var table = data2.AsEnumerable().Select((score, Index) => new PersonalRank
             {
@@ -197,17 +199,18 @@ namespace Competition.Web.Controllers
                 Staffid = score.StaffId,
                 Count=score.Count,
                 Bishi = score.Bishi != null ? score.Bishi.MarkAVG : null,
-                Baoxian = score.Baoxian != null ? score.Baoxian.MarkAVG : null,
+                ReplaceME = score.ReplaceME != null ? score.ReplaceME.MarkAVG : null,
+                ReplaceAV = score.ReplaceAV != null ? score.ReplaceAV.MarkAVG : null,
+                THS = score.THS != null ? score.THS.MarkAVG : null,
+                Radar = score.Radar != null ? score.Radar.MarkAVG : null,
+                Seal = score.Seal != null ? score.Seal.MarkAVG : null,
+                CVR = score.CVR != null ? score.CVR.MarkAVG : null,               
+                Lockwire = score.Lockwire != null ? score.Lockwire.MarkAVG : null,
+                Call = score.Call != null ? score.Call.MarkAVG : null,
+                Jingujian = score.Jingujian != null ? score.Jingujian.MarkAVG : null,
+                Caozong = score.Caozong != null ? score.Caozong.MarkAVG : null,
                 Biaoxian = score.Biaoxian != null ? score.Biaoxian.MarkAVG : null,
-                Tujiao = score.Tujiao != null ? score.Tujiao.MarkAVG : null,
-                APU = score.APU != null ? score.APU.MarkAVG : null,
-                Guanlu = score.Guanlu != null ? score.Guanlu.MarkAVG : null,
-                Daqi = score.Daqi != null ? score.Daqi.MarkAVG : null,
-                Shouce = score.Shouce != null ? score.Shouce.MarkAVG : null,
-                Yijiandeng = score.Yijiandeng != null ? score.Yijiandeng.MarkAVG : null,
-                Shuiping = score.Shuiping != null ? score.Shuiping.MarkAVG : null,
-                Dianyuan = score.Dianyuan != null ? score.Dianyuan.MarkAVG : null,
-
+                Shouce = score.Shouce != null ? score.Shouce.MarkAVG : null
             });
             int i = 1;
             var list = table.OrderByDescending(s => s.TotalScore).ToList();
