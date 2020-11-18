@@ -360,8 +360,10 @@ namespace Competition.Web.Controllers
                         if (timescore < 0) { timescore = 0; }
                         item.Score.Mark += timescore;
                     }
-                   
-                    schedule.Status = SchedulStatus.Complete;
+                    if (db.Scores.Where(s => s.ScheduleId == item.Score.ScheduleId).Count() >=1)  //如果对应的赛程已经有一个以上的分数，那么再加上当前的分数，就表示有2个以上的裁判打分了，就把赛程设置为完成。
+                    {
+                        schedule.Status = SchedulStatus.Complete;
+                    }
                     if (item.Score.Mark < 0)
                     {
                         item.Score.Mark = 0;

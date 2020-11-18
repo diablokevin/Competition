@@ -89,7 +89,7 @@ namespace Competition.Web.Controllers
             var judgeStaffid = User.Identity.Name;
             var judge = db.Judges.Where(j => j.StaffId == judgeStaffid).FirstOrDefault();
             var eventId = judge.EventId;
-            var model = db.Schedules.Where(s => s.EventId == eventId).OrderBy(s => s.PlanBeginTime);
+            var model = db.Schedules.Where(s => s.EventId == eventId&&s.Status!=SchedulStatus.Complete).OrderBy(s => s.PlanBeginTime);  //调整逻辑，加入status的筛选逻辑，同时还需要与提交分数时，如何判断complete的逻辑相结合
             var test = from schedule in model
                        where  !(from score in schedule.Scores
                                where score.JudgeId == judge.Id
