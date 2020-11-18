@@ -435,6 +435,7 @@
     <Content Include="Views\Score\_ScoreJudgeViewFormPartial.cshtml" />
     <Content Include="Views\EventCriterias\Multi.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
+    <Content Include="Views\Schedule\BishiScoreMulti.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

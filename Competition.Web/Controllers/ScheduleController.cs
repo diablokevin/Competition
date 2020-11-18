@@ -80,6 +80,57 @@ namespace Competition.Web.Controllers
             return View();
         }
 
+        public ActionResult BishiScoreMulti(int? id)
+        { return View(); }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BishiScoreMulti()
+        {
+            if (ModelState.IsValid)
+            {
+                string content = Request["List"];
+                ViewBag.Content = content;
+
+                List<string> t = content.Split('\r', '\n').ToList();
+                ViewBag.Count = t.Count;
+                ViewBag.FaultCount = 0;
+                foreach (string item in t)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        
+                        try
+                        {
+                            string competitorNum = item.Split('\t')[0];
+                            double mark = Convert.ToDouble( item.Split('\t')[1]);
+                            int eventId = db.Events.Where(c => c.Name == "笔试").First().Id;                      
+                            int competitorsId = db.Competitors.Where(c => c.Race_num == competitorNum).FirstOrDefault().Id;
+                            var schedule = db.Schedules.Where(c => c.EventId == eventId && c.CompetitorId == competitorsId);
+                            Score score = new Score();
+                            score.Mark = mark;
+                            score.JudgeTime = DateTime.Now;
+                            score.ModifyTime = DateTime.Now;
+                            score.ScheduleId = schedule.FirstOrDefault().Id;                            
+                            db.Scores.Add(score);
+
+                        }
+                        catch (Exception e)
+                        {
+                            ViewData["EditError"] = e.Message;
+                            ViewBag.FaultCount++;
+                        }
+
+                    }
+                }
+                ViewBag.SuccessCount = db.SaveChanges();
+                return View();
+            }
+
+
+            return View();
+        }
+
 
 
 
