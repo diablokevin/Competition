@@ -50,8 +50,8 @@ function watermark(text) {
         watermark_y_space: 50,//水印y轴间隔
         watermark_color: '#aaa',
         //watermark_color: '#848484',//水印字体颜色
-        watermark_alpha: 0.4,//水印透明度
-        watermark_fontsize: '80px',//水印字体大小
+        watermark_alpha: 0.2,//水印透明度
+        watermark_fontsize: '70px',//水印字体大小
         watermark_font: '微软雅黑',//水印字体
         watermark_width: 300,//水印宽度
         watermark_height: 300,//水印长度

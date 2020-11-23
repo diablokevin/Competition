@@ -14,12 +14,7 @@ namespace Competition.Web.Controllers
             ViewBag.PageName = "Main";
             return View();
         }
-        public ActionResult test()
-        {
-            // DXCOMMENT: Pass a data model for GridView
-            
-            return View();
-        }
+      
     }
 }
 

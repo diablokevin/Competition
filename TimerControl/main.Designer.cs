@@ -61,6 +61,9 @@
             this.barButton_SelectedStop = new DevExpress.XtraBars.BarButtonItem();
             this.barButton_SelectedReset = new DevExpress.XtraBars.BarButtonItem();
             this.barButton_CheckClear = new DevExpress.XtraBars.BarButtonItem();
+            this.Edit_ServeIP2 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.动作 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -100,8 +103,11 @@
             this.mainBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Edit_ServeIP = new DevExpress.XtraBars.BarEditItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
@@ -128,42 +134,52 @@
             // 
             this.name.Caption = "项目名称";
             this.name.FieldName = "Name";
+            this.name.MinWidth = 43;
             this.name.Name = "name";
             this.name.Visible = true;
             this.name.VisibleIndex = 0;
+            this.name.Width = 161;
             // 
             // time_limit
             // 
             this.time_limit.Caption = "时间限制";
             this.time_limit.FieldName = "Time_limit";
+            this.time_limit.MinWidth = 43;
             this.time_limit.Name = "time_limit";
             this.time_limit.OptionsColumn.ShowCaption = true;
             this.time_limit.Visible = true;
             this.time_limit.VisibleIndex = 2;
+            this.time_limit.Width = 161;
             // 
             // timer_status
             // 
             this.timer_status.Caption = "状态";
             this.timer_status.FieldName = "Timer.Status";
+            this.timer_status.MinWidth = 43;
             this.timer_status.Name = "timer_status";
             this.timer_status.Visible = true;
             this.timer_status.VisibleIndex = 3;
+            this.timer_status.Width = 161;
             // 
             // timer_used
             // 
             this.timer_used.Caption = "当前用时";
             this.timer_used.FieldName = "Timer.Time_used";
+            this.timer_used.MinWidth = 43;
             this.timer_used.Name = "timer_used";
             this.timer_used.Visible = true;
             this.timer_used.VisibleIndex = 4;
+            this.timer_used.Width = 161;
             // 
             // checkColumn
             // 
             this.checkColumn.Caption = "checked";
             this.checkColumn.FieldName = "Checked";
+            this.checkColumn.MinWidth = 43;
             this.checkColumn.Name = "checkColumn";
             this.checkColumn.Visible = true;
             this.checkColumn.VisibleIndex = 7;
+            this.checkColumn.Width = 161;
             // 
             // ribbon
             // 
@@ -187,9 +203,12 @@
             this.barButton_SelectedStart,
             this.barButton_SelectedStop,
             this.barButton_SelectedReset,
-            this.barButton_CheckClear});
+            this.barButton_CheckClear,
+            this.Edit_ServeIP2,
+            this.barButtonItem8});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 30;
+            this.ribbon.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.ribbon.MaxItemId = 32;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -198,8 +217,9 @@
             this.repositoryItemTextEdit1,
             this.repositoryItemLookUpEdit2,
             this.repositoryItemPopupContainerEdit1,
-            this.repositoryItemTextEdit2});
-            this.ribbon.Size = new System.Drawing.Size(1208, 160);
+            this.repositoryItemTextEdit2,
+            this.repositoryItemTextEdit3});
+            this.ribbon.Size = new System.Drawing.Size(2589, 352);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // ribbonbtn_serveAct_start
@@ -354,6 +374,28 @@
             this.barButton_CheckClear.Name = "barButton_CheckClear";
             this.barButton_CheckClear.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButton_CheckClear_ItemClick);
             // 
+            // Edit_ServeIP2
+            // 
+            this.Edit_ServeIP2.Caption = "IP";
+            this.Edit_ServeIP2.Edit = this.repositoryItemTextEdit3;
+            this.Edit_ServeIP2.EditWidth = 150;
+            this.Edit_ServeIP2.Id = 30;
+            this.Edit_ServeIP2.Name = "Edit_ServeIP2";
+            // 
+            // repositoryItemTextEdit3
+            // 
+            this.repositoryItemTextEdit3.AutoHeight = false;
+            this.repositoryItemTextEdit3.Name = "repositoryItemTextEdit3";
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "修改";
+            this.barButtonItem8.Id = 31;
+            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
+            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -411,8 +453,10 @@
             // 
             // ribbonPageGroup5
             // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.Edit_ServeIP2);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem8);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
-            this.ribbonPageGroup5.Text = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "服务器";
             // 
             // repositoryItemLookUpEdit2
             // 
@@ -438,10 +482,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.serveStatus_start);
             this.ribbonStatusBar.ItemLinks.Add(this.serveStatus_stop);
             this.ribbonStatusBar.ItemLinks.Add(this.barStatusTxt);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 515);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1217);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1208, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2589, 54);
             // 
             // layoutView1
             // 
@@ -507,19 +552,23 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(3, 39);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl2.Location = new System.Drawing.Point(6, 96);
             this.gridControl2.MainView = this.cardView1;
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl2.MenuManager = this.ribbon;
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(392, 313);
+            this.gridControl2.Size = new System.Drawing.Size(841, 762);
             this.gridControl2.TabIndex = 10;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.cardView1});
             // 
             // cardView1
             // 
+            this.cardView1.CardWidth = 429;
+            this.cardView1.DetailHeight = 825;
             this.cardView1.GridControl = this.gridControl2;
             this.cardView1.Name = "cardView1";
             this.cardView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Auto;
@@ -538,14 +587,15 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.tileView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(800, 355);
+            this.gridControl1.Size = new System.Drawing.Size(1714, 865);
             this.gridControl1.TabIndex = 9;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tileView1});
-      
             // 
             // tileView1
             // 
@@ -561,11 +611,13 @@
             this.tileView1.ColumnSet.CheckedColumn = this.checkColumn;
             this.tileView1.ColumnSet.EnabledColumn = this.timer_online;
             this.tileView1.ColumnSet.GroupColumn = this.time_limit;
+            this.tileView1.DetailHeight = 825;
             this.tileView1.GridControl = this.gridControl1;
             this.tileView1.Name = "tileView1";
             this.tileView1.OptionsBehavior.ReadOnly = true;
             this.tileView1.OptionsDragDrop.AllowDrag = true;
             this.tileView1.OptionsTiles.ColumnCount = 4;
+            this.tileView1.OptionsTiles.ItemSize = new System.Drawing.Size(550, 240);
             this.tileView1.OptionsTiles.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tileView1.OptionsTiles.RowCount = 0;
             this.tileView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
@@ -617,37 +669,44 @@
             this.chip_id.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.chip_id.Caption = "主板序列号";
             this.chip_id.FieldName = "Timer.Chip_ID";
+            this.chip_id.MinWidth = 43;
             this.chip_id.Name = "chip_id";
             this.chip_id.Visible = true;
             this.chip_id.VisibleIndex = 1;
+            this.chip_id.Width = 161;
             // 
             // timer_online
             // 
             this.timer_online.Caption = "计时器在线状态";
             this.timer_online.FieldName = "TimerOnline";
+            this.timer_online.MinWidth = 43;
             this.timer_online.Name = "timer_online";
             this.timer_online.Visible = true;
             this.timer_online.VisibleIndex = 5;
+            this.timer_online.Width = 161;
             // 
             // Id
             // 
             this.Id.Caption = "Id";
             this.Id.FieldName = "Id";
+            this.Id.MinWidth = 43;
             this.Id.Name = "Id";
             this.Id.Visible = true;
             this.Id.VisibleIndex = 6;
+            this.Id.Width = 161;
             // 
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 160);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 352);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.gridControl1);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1208, 355);
-            this.splitContainerControl1.SplitterPosition = 800;
+            this.splitContainerControl1.Size = new System.Drawing.Size(2589, 865);
+            this.splitContainerControl1.SplitterPosition = 1714;
             this.splitContainerControl1.TabIndex = 13;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -659,11 +718,12 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.29412F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.70588F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(398, 355);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(853, 865);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // flowLayoutPanel1
@@ -671,28 +731,31 @@
             this.flowLayoutPanel1.Controls.Add(this.lookUpEdit1);
             this.flowLayoutPanel1.Controls.Add(this.simpleButton1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 7);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(392, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(841, 75);
             this.flowLayoutPanel1.TabIndex = 11;
             // 
             // lookUpEdit1
             // 
-            this.lookUpEdit1.Location = new System.Drawing.Point(3, 3);
+            this.lookUpEdit1.Location = new System.Drawing.Point(6, 7);
+            this.lookUpEdit1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.lookUpEdit1.MenuManager = this.ribbon;
             this.lookUpEdit1.Name = "lookUpEdit1";
             this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name")});
-            this.lookUpEdit1.Size = new System.Drawing.Size(100, 20);
+            this.lookUpEdit1.Size = new System.Drawing.Size(214, 48);
             this.lookUpEdit1.TabIndex = 0;
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(109, 3);
+            this.simpleButton1.Location = new System.Drawing.Point(232, 7);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(127, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(272, 54);
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "指派选定的计时器";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -715,20 +778,36 @@
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem6);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "服务器";
+            // 
+            // Edit_ServeIP
+            // 
+            this.Edit_ServeIP.Caption = "IP";
+            this.Edit_ServeIP.Edit = this.repositoryItemTextEdit1;
+            this.Edit_ServeIP.EditWidth = 150;
+            this.Edit_ServeIP.Id = 18;
+            this.Edit_ServeIP.Name = "Edit_ServeIP";
+            // 
             // main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 539);
+            this.ClientSize = new System.Drawing.Size(2589, 1271);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
+            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "main";
             this.Ribbon = this.ribbon;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "main";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
@@ -819,5 +898,10 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn Id;
         private DevExpress.XtraGrid.Columns.TileViewColumn checkColumn;
         private DevExpress.XtraBars.BarButtonItem barButton_CheckClear;
+        private DevExpress.XtraBars.BarEditItem Edit_ServeIP2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
+        private DevExpress.XtraBars.BarEditItem Edit_ServeIP;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
     }
 }

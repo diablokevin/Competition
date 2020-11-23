@@ -1,0 +1,374 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <title>DataV</title>
+
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/umd/datav.map.vue.js"></script>
+    <style>
+        html, body, #app {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .border-box-content {
+            color: rgb(66,185,131);
+            font-size: 40px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .header {
+            display: flex;
+        }
+
+        .innerbox {
+            width: 10%;
+        }
+
+        .myheader {
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #title {
+            font-size: 40px;
+            color: rgb(66,185,131);
+            text-align: center;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: row;
+            height: 89%;
+            width: 100%;
+        }
+
+        .center_box {
+            padding: 6px;
+            margin: 5px;
+            width: 25%;
+            height: 98%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid #96c2f1;
+            /*background: #eff7ff ;*/
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        .left_box {
+            margin: 5px;
+            padding: 6px;
+            border: solid;
+            width: 40%;
+            height: 98%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #96c2f1;
+            /*background: #eff7ff;*/
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        .right_box {
+            margin: 5px;
+            padding: 6px;
+            border: solid;
+            width: 40%;
+            height: 98%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border: 2px solid #96c2f1;
+            /*background: #eff7ff;*/
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        .personalrank {
+            height: 40%;
+            width: 100%;
+        }
+
+        .box-title {
+            color: white;
+            width: 100%;
+            text-align: center;
+        }
+
+        .eventrank {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .eventrank_item {
+            margin: 5px;
+            width: 45%;
+            height: 28%;
+        }
+    </style>
+
+
+
+
+
+</head>
+<body>
+    <div id="app">
+        <dv-full-screen-container style="background-image: url('../../Content/bg.jpg');background-repeat:no-repeat;">
+
+            <div class="myheader">
+                <div style="width:30%;color:white;height:100%;font-size:small">数据刷新时间：@DateTime.Now.ToShortDateString() @DateTime.Now.ToShortTimeString()</div>
+                <div id="title" style="width:40%">成绩快报</div>
+                <div style="width:30%;display:flex;flex-direction:column;align-items:flex-end">
+                    <div style="color:mediumturquoise">共 @ViewBag.schedule_count 项，已完成 @ViewBag.schedule_complete 项，剩余 @ViewBag.schedule_uncomplete 项</div>
+                    <dv-percent-pond :config="percent_config" style="width:200px;height:55px;" />
+
+                </div>
+               
+            </div>
+            <div class="content-box">
+                <div class="left_box">
+                    <div class="box-title">机电专业</div>
+                    <div class="personalrank">
+                        <dv-scroll-board :config="merank_config" />
+                    </div>
+                    <div class="eventrank">
+                        <div class="eventrank_item">
+                            <div class="box-title">部件拆装</div>
+                            <dv-scroll-board :config="ReplaceMEList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">保险综合</div>
+                            <dv-scroll-board :config="LockwireMEList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">标线综合</div>
+                            <dv-scroll-board :config="BiaoxianMEList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">量具和紧固件</div>
+                            <dv-scroll-board :config="JingujianList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">飞行操纵</div>
+                            <dv-scroll-board :config="CaozongList" />
+                        </div>
+
+                        <div class="eventrank_item">
+                            <div class="box-title">综合排故</div>
+                            <dv-scroll-board :config="PaiguMEList" />
+                        </div>
+                    </div>
+                </div>
+                <div class="center_box">
+                    <dv-scroll-board :config="companyrank_config" />
+                </div>
+                <div class="right_box">
+                    <div class="box-title">电子专业</div>
+                    <div class="personalrank">
+
+                        <dv-scroll-board :config="avrank_config" />
+                    </div>
+                    <div class="eventrank">
+                        <div class="eventrank_item">
+                            <div class="box-title">部件拆装</div>
+                            <dv-scroll-board :config="ReplaceAVList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">保险综合</div>
+                            <dv-scroll-board :config="LockwireAVList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">标线综合</div>
+                            <dv-scroll-board :config="BiaoxianAVList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">气象雷达系统综合施工</div>
+                            <dv-scroll-board :config="RadarList" />
+                        </div>
+                        <div class="eventrank_item">
+                            <div class="box-title">天线拆装和密封项目</div>
+                            <dv-scroll-board :config="SealList" />
+                        </div>
+
+                        <div class="eventrank_item">
+                            <div class="box-title">综合排故</div>
+                            <dv-scroll-board :config="PaiguAVList" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </dv-full-screen-container>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                percent_config: {
+                    value: @ViewBag.schedule_progress,
+                },
+                companyrank_config: {
+                    header: ['公司', '总分', '进度'],
+                    data:@Html.Raw(ViewBag.companyRanksList),
+                    index: true,
+                    columnWidth: [50,100],
+                    align: ['center'],
+                    rowNum: [24],
+                    hoverPause: false,
+                },
+                avrank_config: {
+                    header: ['姓名', '公司', '进度','总分'],
+                    data:@Html.Raw(ViewBag.AVRanksList),
+                    index: true,
+                    columnWidth: [50,80],
+                    align: ['center'],
+                    rowNum: [8],
+                    hoverPause: false,
+                },
+                merank_config: {
+                    header: ['姓名', '公司', '进度', '总分'],
+                    data:@Html.Raw(ViewBag.MERanksList),
+                    index: true,
+                    columnWidth: [50,80],
+                    align: ['center'],
+                    rowNum: [8],
+                    hoverPause: false,
+                },
+                ReplaceMEList: {
+                     data:@Html.Raw(ViewBag.ReplaceMEList),
+                     index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                LockwireMEList: {
+                     data:@Html.Raw(ViewBag.LockwireMEList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                JingujianList: {
+                     data:@Html.Raw(ViewBag.JingujianList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                CaozongList: {
+                     data:@Html.Raw(ViewBag.CaozongList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                BiaoxianMEList: {
+                     data:@Html.Raw(ViewBag.BiaoxianMEList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                PaiguMEList: {
+                     data:@Html.Raw(ViewBag.PaiguMEList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+
+                ReplaceAVList: {
+                     data:@Html.Raw(ViewBag.ReplaceAVList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                RadarList: {
+                     data:@Html.Raw(ViewBag.RadarList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                SealList: {
+                     data:@Html.Raw(ViewBag.SealList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                LockwireAVList: {
+                     data:@Html.Raw(ViewBag.LockwireAVList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                BiaoxianAVList: {
+                     data:@Html.Raw(ViewBag.BiaoxianAVList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+                PaiguAVList: {
+                     data:@Html.Raw(ViewBag.PaiguAVList),
+                    index: true,
+                    columnWidth: [],
+                    align: ['center'],
+                    rowNum: [4],
+                    hoverPause: false,
+                },
+            },
+
+
+        })
+
+
+    </script>
+</body>
+</html>

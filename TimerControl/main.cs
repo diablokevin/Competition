@@ -11,6 +11,7 @@ using DevExpress.XtraBars;
 using System.Data.Entity;
 using EpServerEngine.cs;
 using Competition.EF.Models;
+using System.Configuration;
 
 namespace Competition.TimerControl
 {
@@ -54,7 +55,7 @@ namespace Competition.TimerControl
                         id++;
                     }
                 }
-                else
+                else if(item.Amount>0)
                 { 
                     EventView eventView = new EventView();
                     eventView.ChipId = item.Chips.Count() >= 1 ? item.Chips.FirstOrDefault().Serial: 0;
@@ -536,6 +537,24 @@ namespace Competition.TimerControl
         private void gridControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            string IP = Edit_ServeIP2.EditValue.ToString();
+
+            string conn = "Data Source=" + IP + ";Initial Catalog=CompetitonDbContext;Persist Security Info=True;User ID=sa;Password=sa@1234";
+
+
+            //WinForm教程（一）App.config等配置文件 https://blog.csdn.net/yangwenxue1989/article/details/81707619
+            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            config.ConnectionStrings.ConnectionStrings["CompetitionDbContext"].ConnectionString = conn;//修改 
+
+
+            config.Save(ConfigurationSaveMode.Modified);//只有加保存功能,*.vshost.exe.Config才会作改变
+
+            ConfigurationManager.RefreshSection("ConnectionStrings");
         }
     }
 }

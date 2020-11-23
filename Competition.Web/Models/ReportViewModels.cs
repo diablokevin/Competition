@@ -96,4 +96,11 @@ namespace Competition.Web.Models
         public double? Score { get ; set; }
     }
 
+    public class EventRankList //用于数据大屏使用
+    {
+        public string EventName { get; set; }
+        public string Pro { get; set; }
+        public string data { get; set; }
+    }
+
 }

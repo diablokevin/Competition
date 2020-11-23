@@ -114,7 +114,7 @@
             this.Edit_ServeIP,
             this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.ribbonControl1.MaxItemId = 20;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -123,7 +123,7 @@
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemTextEdit1});
-            this.ribbonControl1.Size = new System.Drawing.Size(1041, 197);
+            this.ribbonControl1.Size = new System.Drawing.Size(1952, 352);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             // 
             // lb_serve
@@ -300,11 +300,11 @@
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.lb_serve);
             this.ribbonStatusBar1.ItemLinks.Add(this.lb_status);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 630);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 1156);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1041, 30);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1952, 54);
             // 
             // groupControl1
             // 
@@ -322,108 +322,118 @@
             this.groupControl1.Controls.Add(this.tip_RaceNum);
             this.groupControl1.Controls.Add(this.txt_RaceNum);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupControl1.Location = new System.Drawing.Point(0, 197);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Location = new System.Drawing.Point(0, 352);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(229, 433);
+            this.groupControl1.Size = new System.Drawing.Size(429, 804);
             this.groupControl1.TabIndex = 2;
             // 
             // lb_begin
             // 
             this.lb_begin.AutoSize = true;
-            this.lb_begin.Location = new System.Drawing.Point(106, 369);
+            this.lb_begin.Location = new System.Drawing.Point(199, 677);
+            this.lb_begin.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lb_begin.Name = "lb_begin";
-            this.lb_begin.Size = new System.Drawing.Size(23, 18);
+            this.lb_begin.Size = new System.Drawing.Size(39, 33);
             this.lb_begin.TabIndex = 14;
             this.lb_begin.Text = "...";
             // 
             // lb_company
             // 
             this.lb_company.AutoSize = true;
-            this.lb_company.Location = new System.Drawing.Point(106, 338);
+            this.lb_company.Location = new System.Drawing.Point(199, 620);
+            this.lb_company.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lb_company.Name = "lb_company";
-            this.lb_company.Size = new System.Drawing.Size(23, 18);
+            this.lb_company.Size = new System.Drawing.Size(39, 33);
             this.lb_company.TabIndex = 13;
             this.lb_company.Text = "...";
             // 
             // lb_name
             // 
             this.lb_name.AutoSize = true;
-            this.lb_name.Location = new System.Drawing.Point(106, 303);
+            this.lb_name.Location = new System.Drawing.Point(199, 556);
+            this.lb_name.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lb_name.Name = "lb_name";
-            this.lb_name.Size = new System.Drawing.Size(23, 18);
+            this.lb_name.Size = new System.Drawing.Size(39, 33);
             this.lb_name.TabIndex = 12;
             this.lb_name.Text = "...";
             // 
             // lb_racenum
             // 
             this.lb_racenum.AutoSize = true;
-            this.lb_racenum.Location = new System.Drawing.Point(106, 262);
+            this.lb_racenum.Location = new System.Drawing.Point(199, 480);
+            this.lb_racenum.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lb_racenum.Name = "lb_racenum";
-            this.lb_racenum.Size = new System.Drawing.Size(23, 18);
+            this.lb_racenum.Size = new System.Drawing.Size(39, 33);
             this.lb_racenum.TabIndex = 11;
             this.lb_racenum.Text = "...";
             // 
             // lb_eventname
             // 
             this.lb_eventname.AutoSize = true;
-            this.lb_eventname.Location = new System.Drawing.Point(106, 228);
+            this.lb_eventname.Location = new System.Drawing.Point(199, 418);
+            this.lb_eventname.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lb_eventname.Name = "lb_eventname";
-            this.lb_eventname.Size = new System.Drawing.Size(23, 18);
+            this.lb_eventname.Size = new System.Drawing.Size(39, 33);
             this.lb_eventname.TabIndex = 10;
             this.lb_eventname.Text = "...";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 369);
+            this.label5.Location = new System.Drawing.Point(56, 677);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 18);
+            this.label5.Size = new System.Drawing.Size(123, 33);
             this.label5.TabIndex = 9;
             this.label5.Text = "开始时间";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 338);
+            this.label4.Location = new System.Drawing.Point(56, 620);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 18);
+            this.label4.Size = new System.Drawing.Size(123, 33);
             this.label4.TabIndex = 8;
             this.label4.Text = "选手单位";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 303);
+            this.label3.Location = new System.Drawing.Point(56, 556);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 18);
+            this.label3.Size = new System.Drawing.Size(123, 33);
             this.label3.TabIndex = 7;
             this.label3.Text = "选手姓名";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 262);
+            this.label2.Location = new System.Drawing.Point(56, 480);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 18);
+            this.label2.Size = new System.Drawing.Size(123, 33);
             this.label2.TabIndex = 6;
             this.label2.Text = "选手编号";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 228);
+            this.label1.Location = new System.Drawing.Point(56, 418);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 18);
+            this.label1.Size = new System.Drawing.Size(69, 33);
             this.label1.TabIndex = 5;
             this.label1.Text = "项目";
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(51, 154);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton1.Location = new System.Drawing.Point(96, 282);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(125, 37);
+            this.simpleButton1.Size = new System.Drawing.Size(234, 68);
             this.simpleButton1.TabIndex = 4;
             this.simpleButton1.Text = "签到";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -431,18 +441,19 @@
             // tip_RaceNum
             // 
             this.tip_RaceNum.AutoSize = true;
-            this.tip_RaceNum.Location = new System.Drawing.Point(30, 55);
+            this.tip_RaceNum.Location = new System.Drawing.Point(56, 101);
+            this.tip_RaceNum.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.tip_RaceNum.Name = "tip_RaceNum";
-            this.tip_RaceNum.Size = new System.Drawing.Size(173, 18);
+            this.tip_RaceNum.Size = new System.Drawing.Size(312, 33);
             this.tip_RaceNum.TabIndex = 4;
             this.tip_RaceNum.Text = "输入选手编号或扫条形码";
             // 
             // txt_RaceNum
             // 
-            this.txt_RaceNum.Location = new System.Drawing.Point(51, 90);
-            this.txt_RaceNum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_RaceNum.Location = new System.Drawing.Point(96, 165);
+            this.txt_RaceNum.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.txt_RaceNum.Name = "txt_RaceNum";
-            this.txt_RaceNum.Size = new System.Drawing.Size(124, 26);
+            this.txt_RaceNum.Size = new System.Drawing.Size(229, 40);
             this.txt_RaceNum.TabIndex = 0;
             this.txt_RaceNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_RaceNum_KeyDown);
             // 
@@ -450,12 +461,12 @@
             // 
             this.gridControl1.DataSource = typeof(Competition.EF.Models.Schedule);
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControl1.Location = new System.Drawing.Point(229, 197);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl1.Location = new System.Drawing.Point(429, 352);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(812, 433);
+            this.gridControl1.Size = new System.Drawing.Size(1523, 804);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -471,8 +482,8 @@
             this.BeginTime,
             this.EndTime,
             this.Status});
-            this.gridView1.DetailHeight = 450;
-            this.gridView1.FixedLineWidth = 3;
+            this.gridView1.DetailHeight = 825;
+            this.gridView1.FixedLineWidth = 5;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupCount = 1;
             this.gridView1.Name = "gridView1";
@@ -483,55 +494,55 @@
             // 
             this.Id.Caption = "Id";
             this.Id.FieldName = "Id";
-            this.Id.MinWidth = 23;
+            this.Id.MinWidth = 43;
             this.Id.Name = "Id";
             this.Id.Visible = true;
             this.Id.VisibleIndex = 6;
-            this.Id.Width = 86;
+            this.Id.Width = 161;
             // 
             // EventName
             // 
             this.EventName.Caption = "项目名称";
             this.EventName.FieldName = "Event.Name";
-            this.EventName.MinWidth = 23;
+            this.EventName.MinWidth = 43;
             this.EventName.Name = "EventName";
             this.EventName.OptionsColumn.AllowEdit = false;
             this.EventName.Visible = true;
             this.EventName.VisibleIndex = 0;
-            this.EventName.Width = 86;
+            this.EventName.Width = 161;
             // 
             // CompetitorName
             // 
             this.CompetitorName.Caption = "选手姓名";
             this.CompetitorName.FieldName = "Competitor.Name";
-            this.CompetitorName.MinWidth = 23;
+            this.CompetitorName.MinWidth = 43;
             this.CompetitorName.Name = "CompetitorName";
             this.CompetitorName.OptionsColumn.AllowEdit = false;
             this.CompetitorName.Visible = true;
             this.CompetitorName.VisibleIndex = 1;
-            this.CompetitorName.Width = 86;
+            this.CompetitorName.Width = 161;
             // 
             // RaceNum
             // 
             this.RaceNum.Caption = "选手编号";
             this.RaceNum.FieldName = "Competitor.Race_num";
-            this.RaceNum.MinWidth = 23;
+            this.RaceNum.MinWidth = 43;
             this.RaceNum.Name = "RaceNum";
             this.RaceNum.OptionsColumn.AllowEdit = false;
             this.RaceNum.Visible = true;
             this.RaceNum.VisibleIndex = 0;
-            this.RaceNum.Width = 86;
+            this.RaceNum.Width = 161;
             // 
             // Company
             // 
             this.Company.Caption = "选手单位";
             this.Company.FieldName = "Competitor.Company.Name";
-            this.Company.MinWidth = 23;
+            this.Company.MinWidth = 43;
             this.Company.Name = "Company";
             this.Company.OptionsColumn.AllowEdit = false;
             this.Company.Visible = true;
             this.Company.VisibleIndex = 2;
-            this.Company.Width = 86;
+            this.Company.Width = 161;
             // 
             // BeginTime
             // 
@@ -539,12 +550,12 @@
             this.BeginTime.DisplayFormat.FormatString = "MM/dd HH:mm:ss";
             this.BeginTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.BeginTime.FieldName = "PlanBeginTime";
-            this.BeginTime.MinWidth = 23;
+            this.BeginTime.MinWidth = 43;
             this.BeginTime.Name = "BeginTime";
             this.BeginTime.OptionsColumn.AllowEdit = false;
             this.BeginTime.Visible = true;
             this.BeginTime.VisibleIndex = 3;
-            this.BeginTime.Width = 86;
+            this.BeginTime.Width = 161;
             // 
             // EndTime
             // 
@@ -552,34 +563,34 @@
             this.EndTime.DisplayFormat.FormatString = "MM/dd HH:mm:ss";
             this.EndTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.EndTime.FieldName = "PlanEndTime";
-            this.EndTime.MinWidth = 23;
+            this.EndTime.MinWidth = 43;
             this.EndTime.Name = "EndTime";
             this.EndTime.OptionsColumn.AllowEdit = false;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 4;
-            this.EndTime.Width = 86;
+            this.EndTime.Width = 161;
             // 
             // Status
             // 
             this.Status.Caption = "状态";
             this.Status.FieldName = "Status";
-            this.Status.MinWidth = 23;
+            this.Status.MinWidth = 43;
             this.Status.Name = "Status";
             this.Status.OptionsColumn.AllowEdit = false;
             this.Status.Visible = true;
             this.Status.VisibleIndex = 5;
-            this.Status.Width = 86;
+            this.Status.Width = 161;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 660);
+            this.ClientSize = new System.Drawing.Size(1952, 1210);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl1;
             this.StatusBar = this.ribbonStatusBar1;
