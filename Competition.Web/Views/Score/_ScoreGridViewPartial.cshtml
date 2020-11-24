@@ -22,7 +22,7 @@
         settings.Width = Unit.Percentage(100);
         settings.SettingsPager.PageSize = 50;
 
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
         settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
         settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
@@ -85,7 +85,7 @@
         });
         settings.Columns.Add(c =>
         {
-            c.FieldName = "JudgeTime";
+            c.FieldName = "JudgeTime";            
             c.AdaptivePriority = 4;
         });
         settings.Columns.Add(c =>

@@ -238,6 +238,7 @@ namespace Competition.Web.Controllers
                         {
                             g.Key,
                             Count = g.Sum(c => c.Scores.Count),
+                            Count_schedule=g.Where(c=>c.Status==SchedulStatus.Complete).Count(),
                             Company = g.FirstOrDefault().Competitor.Company.Name,
                             g.FirstOrDefault().Competitor.Name,
                             g.FirstOrDefault().Competitor.Pro,
@@ -263,7 +264,8 @@ namespace Competition.Web.Controllers
                 Name = score.Name,
                 Pro = score.Pro,
                 Staffid = score.StaffId,
-                Count = score.Count,
+                //Count = score.Count,
+                Count=score.Count_schedule, //原来计算的是分数总计，应该改为完成赛程的数量
                 Bishi = score.Bishi != null ? score.Bishi.MarkAVG : null,
                 ReplaceME = score.ReplaceME != null ? score.ReplaceME.MarkAVG : null,
                 ReplaceAV = score.ReplaceAV != null ? score.ReplaceAV.MarkAVG : null,
