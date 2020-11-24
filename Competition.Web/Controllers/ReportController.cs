@@ -249,7 +249,7 @@ namespace Competition.Web.Controllers
                             THS = g.FirstOrDefault(t => t.Event.Name == "水平安定面自动配平系统排故"),
                             Radar = g.FirstOrDefault(t => t.Event.Name == "气象雷达系统综合施工"),
                             Seal = g.FirstOrDefault(t => t.Event.Name == "天线拆装和密封项目"),
-                            CVR = g.FirstOrDefault(t => t.Event.Name == "CVR系统测试和排故)"),
+                            CVR = g.FirstOrDefault(t => t.Event.Name == "CVR系统测试和排故"),
                             Lockwire = g.FirstOrDefault(t => t.Event.Name == "保险综合项目"),
                             Call = g.FirstOrDefault(t => t.Event.Name == "驾驶舱地面呼叫系统排故"),
                             Jingujian = g.FirstOrDefault(t => t.Event.Name == "量具和紧固件拆装"),
